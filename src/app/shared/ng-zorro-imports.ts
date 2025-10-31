@@ -22,7 +22,9 @@ import { NzSwitchModule } from "ng-zorro-antd/switch";
 import { NzTableModule } from "ng-zorro-antd/table";
 import { NzTabsModule } from "ng-zorro-antd/tabs";
 import { NzTagModule } from "ng-zorro-antd/tag";
-
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzFormModule } from 'ng-zorro-antd/form';
 export const SHARED_IMPORTS = [
   // Form controls
   NzInputModule,
@@ -31,6 +33,7 @@ export const SHARED_IMPORTS = [
   NzDatePickerModule,
   NzSwitchModule,
   FormsModule,
+  NzFormModule,
 
   // Layout & display
   NzGridModule,
@@ -42,6 +45,8 @@ export const SHARED_IMPORTS = [
   NzPopoverModule,
   NzEmptyModule,
   NzResultModule,
+  NzLayoutModule,
+  NzTypographyModule,
 
   // Data
   NzTableModule,

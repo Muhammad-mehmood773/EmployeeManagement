@@ -1,1 +1,41 @@
-<p>personal-information works!</p>
+<nz-card [nzBordered]="false" nzTitle="Personal Information">
+    <form nz-form nzLayout="vertical">
+        <div nz-row [nzGutter]="16">
+
+            <!-- First Name -->
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="8">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your first name!">
+                        <nz-form-label nzRequired nzFor="firstName">First
+                            Name</nz-form-label>
+                        <input nz-input id="firstName" name="firstName" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <!-- Last Name -->
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="8">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your last name!">
+                        <nz-form-label nzRequired nzFor="lastName">Last
+                            Name</nz-form-label>
+                        <input nz-input id="lastName" name="lastName" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <!-- Father Name -->
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        nzErrorTip="Please input your father name!">
+                        <nz-form-label nzRequired nzFor="fatherName">Father
+                            Name</nz-form-label>
+                        <input nz-input id="fatherName" name="fatherName" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+        </div>
+    </form>
+</nz-card>
