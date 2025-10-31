@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json.schemastore.org/schematics",
+  "schematics": {
+    "component": {
+      "description": "Custom component schematic with SHARED_IMPORTS",
+      "factory": "./component/index#component"
+    }
+  }
+}
