@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/ng-zorro-imports';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -12,9 +12,9 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 })
 export class EmpProfile implements OnInit {
 employeeProfileForm!: FormGroup;
-  imagePreview: string = '';
+  imagePreview: string | null = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.employeeProfileForm = this.fb.group({
@@ -33,14 +33,15 @@ employeeProfileForm!: FormGroup;
     reader.onload = () => {
       this.imagePreview = reader.result as string;
       this.employeeProfileForm.patchValue({ avatar: this.imagePreview });
+
+      // ✅ Force Angular to detect the change immediately
+      this.cdr.detectChanges();
     };
     reader.readAsDataURL(file as any);
 
-    return false; 
+    return false; // prevent actual upload
   };
 
-  handleChange(event: any): void {
-    
-  }
+  handleChange(event: any): void {}
 
 }
