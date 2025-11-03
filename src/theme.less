@@ -1,16 +1,159 @@
+// =============================
+// 🔧 Custom Theming for NG-ZORRO v20
+// =============================
 
-@import "../node_modules/ng-zorro-antd/ng-zorro-antd.compact.less";
-
-// 2️⃣ (Optional) Override your own variables
-@primary-color: #1890ff; // ya koi bhi brand color
+// 🎨 Override default theme variables before importing
+@primary-color: #076cfa;
 @font-size-base: 13px;
 @border-radius-base: 4px;
 
+// (Optional secondary tweaks)
+@btn-border-radius-base: 4px;
+@input-border-radius-base: 4px;
+@card-radius: 4px;
+@modal-border-radius: 4px;
+@popover-border-radius: 4px;
+@select-border-radius: 4px;
 
-.ant-card-head-title{
-    font-size: 15px;
+// ✅ Import Compact Theme (use one of: default.less / compact.less / dark.less)
+@import "../node_modules/ng-zorro-antd/style/themes/compact.less";
+
+// =============================
+// ✨ Global Input & Label Styling
+// =============================
+
+
+// Labels
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #595959;
+  transition: color 0.3s ease;
+
+  input:focus + &,
+  textarea:focus + & {
+    color: @primary-color;
+  }
 }
 
-.ant-form-item-label{
+// =============================
+// 🧩 Optional: apply rounded corners to all NG Zorro elements
+// =============================
+.ant-input,
+.ant-btn,
+.ant-card,
+.ant-select-selector,
+.ant-modal-content,
+.ant-table,
+.ant-form-item,
+.ant-picker,
+.ant-tabs-tab,
+.ant-tag,
+.ant-alert,
+.ant-avatar {
+  border-radius: 4px !important;
+}
+
+.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+    display: inline-block;
+    margin-right: 4px;
+    color: #ff4d4f;
+    font-size: 12px;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+    content: "*";
+    font-weight: bolder;
+}
+
+.ant-card-head-title {
+    display: inline-block;
+    flex: 1;
+    padding: 8.5px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 15px;
     font-weight: 600;
+
+}
+
+.ant-card , .ant-card-head{
+    border-radius: 6px !important;
+    border-bottom: @primary-color 3px solid !important;
+
+}
+
+
+
+// =============================
+// 🎨 Enhanced NZ-Select Custom Look
+// =============================
+.ant-select-selector {
+  background-color: #fff !important;
+  border-color: #d9d9d9 !important;
+  transition: all 0.3s ease;
+  box-shadow: none !important;
+  border-radius: 4px !important;
+
+  &:hover {
+    border-color: @primary-color !important;
+  }
+
+  &:focus,
+  &.ant-select-focused {
+    border-color: @primary-color !important;
+    box-shadow: 0 0 0 2px fade(@primary-color, 25%) !important;
+  }
+}
+
+// =============================
+// 🧩 Dropdown Items
+// =============================
+
+// Hovered option
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: fade(@primary-color, 18%) !important;
+  color: @primary-color !important;
+  transition: all 0.25s ease;
+}
+
+// Selected option (highlighted)
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: @primary-color !important;
+  color: #fff !important;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+// When hovering on a selected option
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled):hover {
+  background-color: darken(@primary-color, 5%) !important;
+  color: #fff !important;
+}
+
+// =============================
+// ⬇️ Arrow & Clear Button Styling
+// =============================
+.ant-select-arrow {
+  color: @primary-color !important;
+  opacity: 0.9;
+  transition: color 0.3s ease;
+}
+
+.ant-select-clear {
+  color: fade(@primary-color, 70%) !important;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: @primary-color !important;
+  }
+}
+
+// =============================
+// 📦 Dropdown Panel (optional enhancement)
+// =============================
+.ant-select-dropdown {
+  border-radius: 6px !important;
+  box-shadow: 0 4px 12px fade(@primary-color, 15%) !important;
 }

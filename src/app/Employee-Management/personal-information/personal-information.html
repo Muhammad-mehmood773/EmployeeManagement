@@ -36,6 +36,70 @@
                 </nz-form-item>
             </div>
 
+            <!-- Email -->
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        nzErrorTip="Please input your E-mail!">
+                        <nz-form-label nzFor="email">
+                            E-mail</nz-form-label>
+                        <input nz-input id="email" name="email" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <!-- CNIC -->
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        nzErrorTip="Please input your CNIC!">
+                        <nz-form-label nzRequired nzFor="cnic">
+                            CNIC</nz-form-label>
+                        <input nz-input id="cnic" name="cnic" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <!-- Nationality -->
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        nzErrorTip="Please Select Nationality!">
+                        <nz-form-label nzRequired nzFor="nationality">
+                            Nationality</nz-form-label>
+                        <nz-select nzShowSearch nzAllowClear id="nationality" name="nationality"
+                           
+                           >
+                            <nz-option nzLabel="Jack"
+                                nzValue="jack"></nz-option>
+                            <nz-option nzLabel="Lucy"
+                                nzValue="lucy"></nz-option>
+                            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+             <!-- Religion -->
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        nzErrorTip="Please Select Religion!">
+                        <nz-form-label nzRequired nzFor="rreligion">
+                            Religion</nz-form-label>
+                        <nz-select nzShowSearch nzAllowClear id="religion" name="religion"
+                           
+                           >
+                            <nz-option nzLabel="Jack"
+                                nzValue="jack"></nz-option>
+                            <nz-option nzLabel="Lucy"
+                                nzValue="lucy"></nz-option>
+                            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
         </div>
     </form>
 </nz-card>
