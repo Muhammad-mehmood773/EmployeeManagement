@@ -1,1 +1,99 @@
-<p>present-address works!</p>
+<nz-card [nzBordered]="false" >
+    <form [formGroup]="presentAddressForm" nz-form nzLayout="vertical">
+        <div nz-row [nzGutter]="8">
+
+            <!-- Country -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control [nzErrorTip]="getError('countryId')">
+                        <nz-form-label nzRequired
+                            nzFor="country">
+                            Country</nz-form-label>
+                        <nz-select nzShowSearch nzAllowClear id="country"
+                            formControlName="countryId"
+                            name="country">
+                            <nz-option nzLabel="Jack"
+                                nzValue="jack"></nz-option>
+                            <nz-option nzLabel="Lucy"
+                                nzValue="lucy"></nz-option>
+                            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <!-- State -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control [nzErrorTip]="getError('stateId')">
+                        <nz-form-label nzRequired
+                            nzFor="country">
+                            State</nz-form-label>
+                        <nz-select nzShowSearch nzAllowClear id="state"
+                            formControlName="stateId"
+                            name="state">
+                            <nz-option nzLabel="Jack"
+                                nzValue="jack"></nz-option>
+                            <nz-option nzLabel="Lucy"
+                                nzValue="lucy"></nz-option>
+                            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <!-- City -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control [nzErrorTip]="getError('cityId')">
+                        <nz-form-label nzRequired
+                            nzFor="country">
+                            City</nz-form-label>
+                        <nz-select nzShowSearch nzAllowClear id="city"
+                            formControlName="cityId"
+                            name="city">
+                            <nz-option nzLabel="Jack"
+                                nzValue="jack"></nz-option>
+                            <nz-option nzLabel="Lucy"
+                                nzValue="lucy"></nz-option>
+                            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <!-- Postal Code -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control [nzErrorTip]="getError('postalCode')">
+                        <nz-form-label
+                            nzFor="address">
+                            Postal Code </nz-form-label>
+                        <input type="text" formControlName="postalCode"
+                            nz-input />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+          
+        </div>
+
+        <div nz-row >
+              <!-- Address -->
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24"
+                [nzXl]="24" [nzXXl]="24">
+                <nz-form-item>
+                    <nz-form-control [nzErrorTip]="getError('address')">
+                        <nz-form-label 
+                            nzFor="address">
+                            Address</nz-form-label>
+                        <nz-textarea-count [nzMaxCharacterCount]="200">
+                            <textarea rows="4" formControlName="address"
+                                nz-input></textarea>
+                        </nz-textarea-count>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
+</nz-card>
