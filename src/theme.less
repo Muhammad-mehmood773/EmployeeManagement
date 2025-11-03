@@ -31,8 +31,8 @@ label {
   color: #595959;
   transition: color 0.3s ease;
 
-  input:focus + &,
-  textarea:focus + & {
+  input:focus+&,
+  textarea:focus+& {
     color: @primary-color;
   }
 }
@@ -55,32 +55,33 @@ label {
   border-radius: 4px !important;
 }
 
-.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
-    display: inline-block;
-    margin-right: 4px;
-    color: #ff4d4f;
-    font-size: 12px;
-    font-family: SimSun, sans-serif;
-    line-height: 1;
-    content: "*";
-    font-weight: bolder;
+.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+  display: inline-block;
+  margin-right: 4px;
+  color: #ff4d4f;
+  font-size: 12px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+  content: "*";
+  font-weight: bolder;
 }
 
 .ant-card-head-title {
-    display: inline-block;
-    flex: 1;
-    padding: 8.5px 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-size: 15px;
-    font-weight: 600;
+  display: inline-block;
+  flex: 1;
+  padding: 8.5px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 15px;
+  font-weight: 600;
 
 }
 
-.ant-card , .ant-card-head{
-    border-radius: 6px !important;
-    border-bottom: @primary-color 3px solid !important;
+.ant-card,
+.ant-card-head {
+  border-radius: 6px !important;
+  border-bottom: @primary-color 3px solid !important;
 
 }
 
@@ -150,10 +151,61 @@ label {
   }
 }
 
+
 // =============================
-// 📦 Dropdown Panel (optional enhancement)
+// 📅 Calendar Icon Styling
 // =============================
-.ant-select-dropdown {
+.ant-picker-suffix {
+  color: @primary-color !important;
+  opacity: 0.9;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: darken(@primary-color, 10%) !important;
+  }
+}
+
+// =============================
+// 📆 Date Panel Styling
+// =============================
+.ant-picker-dropdown {
   border-radius: 6px !important;
   box-shadow: 0 4px 12px fade(@primary-color, 15%) !important;
+
+  .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
+    background-color: @primary-color !important;
+    color: #fff !important;
+    border-radius: 6px;
+  }
+
+  .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+    border-color: @primary-color !important;
+  }
+
+  .ant-picker-cell-in-view.ant-picker-cell:hover .ant-picker-cell-inner {
+    background-color: fade(@primary-color, 20%) !important;
+    color: @primary-color !important;
+    transition: all 0.25s ease;
+  }
+}
+
+
+.ant-tabs>.ant-tabs-nav .ant-tabs-nav-wrap,
+.ant-tabs>div>.ant-tabs-nav .ant-tabs-nav-wrap {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  flex: auto;
+  align-self: stretch;
+  overflow: hidden;
+  white-space: nowrap;
+  transform: translate(0);
+  height: 40px;
+}
+
+.card-container > .ant-tabs-card .ant-tabs-tab-active {
+    border-color: #f1f4fa;
+    background: #f1f4fa;
+    font-size: 14px;
+    font-weight: 700;
 }
