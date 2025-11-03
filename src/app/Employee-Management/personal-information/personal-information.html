@@ -1,231 +1,266 @@
-<nz-card [nzBordered]="false" nzTitle="Personal Information">
-    <form [formGroup]="employeeForm" nz-form nzLayout="vertical">
-        <div nz-row [nzGutter]="8">
 
-            <!-- First Name -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-control [nzErrorTip]="getError('firstName')">
-                        <nz-form-label nzRequired
-                            nzFor="firstName">First
-                            Name</nz-form-label>
-                        <input nz-input formControlName="firstName"
-                            id="firstName" name="firstName" />
-                    </nz-form-control>
-                </nz-form-item>
+<div nz-row [nzGutter]="12">
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="18" [nzXl]="18">
+        <nz-card [nzBordered]="false" nzTitle="Personal Information">
+            <form [formGroup]="employeeForm" nz-form nzLayout="vertical">
+                <div nz-row [nzGutter]="8">
+
+                    <!-- First Name -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('firstName')">
+                                <nz-form-label nzRequired
+                                    nzFor="firstName">First
+                                    Name</nz-form-label>
+                                <input nz-input formControlName="firstName"
+                                    id="firstName" name="firstName" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('lastName')">
+                                <nz-form-label nzRequired
+                                    nzFor="lastName">Last
+                                    Name</nz-form-label>
+                                <input nz-input formControlName="lastName"
+                                    id="lastName"
+                                    name="lastName" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Father Name -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('fatherName')">
+                                <nz-form-label nzRequired
+                                    nzFor="fatherName">Father
+                                    Name</nz-form-label>
+                                <input nz-input formControlName="fatherName"
+                                    id="fatherName" name="fatherName" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Email -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('personalEmail')">
+                                <nz-form-label nzFor="email">
+                                    E-mail</nz-form-label>
+                                <input nz-input formControlName="personalEmail"
+                                    id="email" name="email" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- CNIC / Passport Number-->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('cnicOrPassportNumber')">
+                                <nz-form-label nzRequired
+                                    nzFor="cnicOrPassportNumber">
+                                    CNIC/PassportNumber</nz-form-label>
+                                <input nz-input id="cnicOrPassportNumber"
+                                    name="cnicOrPassportNumber"
+                                    formControlName="cnicOrPassportNumber" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- CNIC / Passport Expiry Date -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('cnicOrPassportExpiryDate')">
+                                <nz-form-label nzRequired
+                                    nzFor="cnicOrPassportExpiryDate">
+                                    CNIC/Passpor Expiry Date</nz-form-label>
+                                <nz-date-picker style="width: 100%;"
+                                    id="cnicOrPassportExpiryDate"
+                                    name="cnicOrPassportExpiryDate"
+                                    formControlName="cnicOrPassportExpiryDate"
+                                    nzPlaceHolder=" "
+                                    nzFormat="MMM d, yyyy">
+                                </nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Nationality -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('nationalityId')">
+                                <nz-form-label nzRequired
+                                    nzFor="nationality">
+                                    Nationality</nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="nationality"
+                                    formControlName="nationalityId"
+                                    name="nationality">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy"
+                                        nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom"
+                                        nzValue="tom"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Religion -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('religionId')">
+                                <nz-form-label nzRequired
+                                    nzFor="religion">
+                                    Religion</nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="religion"
+                                    formControlName="religionId"
+                                    name="religion">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy"
+                                        nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom"
+                                        nzValue="tom"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Date of Birth -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-label nzRequired nzFor="dob">Date of
+                                Birth</nz-form-label>
+                            <nz-form-control
+                                [nzErrorTip]="getError('dob')"><nz-date-picker
+                                    style="width: 100%;"
+                                    id="dob"
+                                    name="dob"
+                                    formControlName="dob"
+                                    nzPlaceHolder=" "
+                                    nzFormat="MMM d, yyyy">
+                                </nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Material  -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('materialId')">
+                                <nz-form-label nzRequired
+                                    nzFor="materialId">
+                                    Material</nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="materialId"
+                                    formControlName="materialId"
+                                    name="materialId">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy"
+                                        nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom"
+                                        nzValue="tom"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Gender  -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('genderId')">
+                                <nz-form-label nzRequired
+                                    nzFor="genderId">
+                                    Gender</nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="genderId"
+                                    formControlName="genderId"
+                                    name="genderId">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy"
+                                        nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom"
+                                        nzValue="tom"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Personal Phone Number  -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('personalPhoneNumber')">
+                                <nz-form-label nzRequired
+                                    nzFor="personalPhoneNumber">
+                                    Personal Phone Number</nz-form-label>
+                                <input nz-input
+                                    formControlName="personalPhoneNumber"
+                                    id="personalPhoneNumber"
+                                    name="personalPhoneNumber" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                </div>
+
+            </form>
+        </nz-card>
+
+    </div>
+
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8" [nzLg]="6" [nzXl]="6">
+        <app-emp-profile></app-emp-profile>
+    </div>
+
+</div>
+
+<div nz-row>
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="12" [nzXl]="12">
+        <nz-card nzTitle="Address Information" [nzBordered]="false"
+            style="margin-top: 16px;">
+            <div class="card-container">
+                <nz-tabs nzType="card" [(nzSelectedIndex)]="activeTab">
+                    <nz-tab *ngFor="let tab of tabs; let i = index"
+                        [nzTitle]="tab.title">
+                        @if (tab.index === 0) {
+                        <app-permanent-address></app-permanent-address>
+                        }
+                        @else if (tab.index === 1) {
+                        <app-present-address></app-present-address>
+                        }
+                    </nz-tab>
+                </nz-tabs>
             </div>
-
-            <!-- Last Name -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-control [nzErrorTip]="getError('lastName')">
-                        <nz-form-label nzRequired
-                            nzFor="lastName">Last
-                            Name</nz-form-label>
-                        <input nz-input formControlName="lastName" id="lastName"
-                            name="lastName" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- Father Name -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-control [nzErrorTip]="getError('fatherName')">
-                        <nz-form-label nzRequired nzFor="fatherName">Father
-                            Name</nz-form-label>
-                        <input nz-input formControlName="fatherName"
-                            id="fatherName" name="fatherName" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- Email -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-control [nzErrorTip]="getError('personalEmail')">
-                        <nz-form-label nzFor="email">
-                            E-mail</nz-form-label>
-                        <input nz-input formControlName="personalEmail"
-                            id="email" name="email" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- CNIC / Passport Number-->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('cnicOrPassportNumber')">
-                        <nz-form-label nzRequired
-                            nzFor="cnicOrPassportNumber">
-                            CNIC/PassportNumber</nz-form-label>
-                        <input nz-input id="cnicOrPassportNumber"
-                            name="cnicOrPassportNumber"
-                            formControlName="cnicOrPassportNumber" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- CNIC / Passport Expiry Date -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('cnicOrPassportExpiryDate')">
-                        <nz-form-label nzRequired
-                            nzFor="cnicOrPassportExpiryDate">
-                            CNIC/Passpor Expiry Date</nz-form-label>
-                        <nz-date-picker style="width: 100%;"
-                            id="cnicOrPassportExpiryDate"
-                            name="cnicOrPassportExpiryDate"
-                            formControlName="cnicOrPassportExpiryDate"
-                            nzPlaceHolder=" "
-                            nzFormat="MMM d, yyyy">
-                        </nz-date-picker>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- Nationality -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-control [nzErrorTip]="getError('nationalityId')">
-                        <nz-form-label nzRequired
-                            nzFor="nationality">
-                            Nationality</nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear id="nationality"
-                            formControlName="nationalityId"
-                            name="nationality">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- Religion -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-control [nzErrorTip]="getError('religionId')">
-                        <nz-form-label nzRequired
-                            nzFor="religion">
-                            Religion</nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear id="religion"
-                            formControlName="religionId"
-                            name="religion">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- Date of Birth -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-label nzRequired nzFor="dob">Date of
-                        Birth</nz-form-label>
-                    <nz-form-control
-                        [nzErrorTip]="getError('dob')"><nz-date-picker
-                            style="width: 100%;"
-                            id="dob"
-                            name="dob"
-                            formControlName="dob"
-                            nzPlaceHolder=" "
-                            nzFormat="MMM d, yyyy">
-                        </nz-date-picker>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- Material  -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-control [nzErrorTip]="getError('materialId')">
-                        <nz-form-label nzRequired
-                            nzFor="materialId">
-                            Material</nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear id="materialId"
-                            formControlName="materialId"
-                            name="materialId">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <!-- Gender  -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-control [nzErrorTip]="getError('genderId')">
-                        <nz-form-label nzRequired
-                            nzFor="genderId">
-                            Gender</nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear id="genderId"
-                            formControlName="genderId"
-                            name="genderId">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <!-- Personal Phone Number  -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="6" [nzXXl]="6">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('personalPhoneNumber')">
-                        <nz-form-label nzRequired
-                            nzFor="personalPhoneNumber">
-                            Personal Phone Number</nz-form-label>
-                        <input nz-input formControlName="personalPhoneNumber"
-                            id="personalPhoneNumber"
-                            name="personalPhoneNumber" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-        </div>
-
-    </form>
-</nz-card>
-
-<nz-card nzTitle="Address Information" [nzBordered]="false" style="margin-top: 16px;">
-  <div class="card-container">
-    <nz-tabs nzType="card" [(nzSelectedIndex)]="activeTab">
-      <nz-tab *ngFor="let tab of tabs; let i = index" [nzTitle]="tab.title">
-        @if (tab.index === 0) {
-          <app-permanent-address></app-permanent-address>
-        }
-        @else if (tab.index === 1) {
-          <app-present-address></app-present-address>
-        }
-      </nz-tab>
-    </nz-tabs>
-  </div>
-</nz-card>
-
+        </nz-card>
+    </div>
+</div>

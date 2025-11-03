@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SHARED_IMPORTS } from '../shared/ng-zorro-imports';
+import { SHARED_IMPORTS } from '../../shared/ng-zorro-imports';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { getNzErrorMessage } from '../shared/helpers/validation-messages';
+import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
 
 @Component({
   selector: 'app-permanent-address',
@@ -15,15 +15,15 @@ export class PermanentAddress implements OnInit {
   permanentAddressForm!: FormGroup;
 
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.permanentAddressForm = this.fb.group({
-      countryId: ['',[Validators.required]],
-      provinceId: ['',[Validators.required]],
-      cityId: ['',[Validators.required]],
+      countryId: ['', [Validators.required]],
+      stateId: ['', [Validators.required]],
+      cityId: ['', [Validators.required]],
       postalCode: [''],
-      address: ['',[Validators.maxLength(300)]],
+      address: ['', [Validators.maxLength(512)]],
     });
   }
 
@@ -40,14 +40,12 @@ export class PermanentAddress implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    if (this.permanentAddressForm.invalid) {
-      this.markFormTouched();
-      return;
-    }
 
-    console.log('Form Data:', this.permanentAddressForm.value);
+  validateForm(): boolean {
+    this.markFormTouched();
+    return this.permanentAddressForm.valid;
   }
+
 
 
 }

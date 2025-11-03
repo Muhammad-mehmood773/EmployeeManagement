@@ -1,5 +1,5 @@
 <nz-card [nzBordered]="false" >
-    <form [formGroup]="presentAddressForm" nz-form nzLayout="vertical">
+    <form [formGroup]="permanentAddressForm" nz-form nzLayout="vertical">
         <div nz-row [nzGutter]="8">
 
             <!-- Country -->
@@ -87,8 +87,8 @@
                         <nz-form-label 
                             nzFor="address">
                             Address</nz-form-label>
-                        <nz-textarea-count [nzMaxCharacterCount]="200">
-                            <textarea rows="4" formControlName="address"
+                        <nz-textarea-count [nzMaxCharacterCount]="512">
+                            <textarea rows="2" formControlName="address"
                                 nz-input></textarea>
                         </nz-textarea-count>
                     </nz-form-control>

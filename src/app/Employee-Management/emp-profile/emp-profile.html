@@ -1,0 +1,28 @@
+<nz-card nzTitle="Employee Profile Upload" style="text-align: center;">
+  <form [formGroup]="employeeProfileForm">
+
+    <!-- Avatar Preview -->
+    <div class="avatar-wrapper">
+      <nz-avatar
+        [nzSrc]="imagePreview"
+        nzShape="circle"
+        [nzSize]="160"
+        style="background-color: #f0f0f0; color: #bfbfbf;">
+      </nz-avatar>
+    </div>
+
+    <!-- Upload Button -->
+    <nz-upload
+      nzName="avatar"
+      [nzShowUploadList]="false"
+      [nzBeforeUpload]="beforeUpload"
+      (nzChange)="handleChange($event)"
+    >
+      <button nz-button nzType="primary" type="button">
+        <i nz-icon nzType="upload" class="me-1"></i>
+        <span>{{ imagePreview ? 'Replace Image' : 'Upload Image' }}</span>
+      </button>
+    </nz-upload>
+
+  </form>
+</nz-card>
