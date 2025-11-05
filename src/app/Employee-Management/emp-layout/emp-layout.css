@@ -1,0 +1,10 @@
+.custom-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  padding: 12px 24px;
+  z-index: 1000;
+}

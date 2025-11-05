@@ -1,21 +1,21 @@
- <nz-layout style="min-height: 100vh">
-  <nz-content style="margin: 10px; padding: 10px; background: #f1f4fa">
+<nz-layout style="min-height: 100vh; position: relative;">
+  <nz-content style="margin: 10px; padding: 10px; background: #f1f4fa;">
     <div nz-row [nzGutter]="16">
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [nzXl]="24">
         <app-personal-information></app-personal-information>
       </div>
 
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="8" [nzXl]="6">
-
+        <!-- Optional right column content -->
       </div>
     </div>
-  
   </nz-content>
-    <nz-footer>
-      <div nz-row [nzGutter]="16" [nzJustify]="'end'">
-        <div nz-col >
-            <button nz-button nzType="primary" (click)="saveAll()">Save All</button>
-        </div>
+
+  <nz-footer class="custom-footer">
+    <div nz-row [nzGutter]="16" [nzJustify]="'end'">
+      <div nz-col>
+        <button nz-button nzType="primary" (click)="saveAll()">Save Employee</button>
       </div>
-    </nz-footer>
+    </div>
+  </nz-footer>
 </nz-layout>
