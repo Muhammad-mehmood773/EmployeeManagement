@@ -26,27 +26,29 @@ export class EmpProfile implements OnInit {
     });
   }
 
-beforeUpload = (file: any): boolean => {
-  const selectedFile = file instanceof File ? file : file?.file as File;
+  beforeUpload = (file: any): boolean => {
+    const selectedFile = file instanceof File ? file : file?.file as File;
+    if (!selectedFile) return false;
 
-  if (!selectedFile) return false;
-  const isImage = selectedFile.type.startsWith('image/');
-  if (!isImage) {
-    alert('Only image files are allowed!');
+    const isImage = selectedFile.type.startsWith('image/');
+    if (!isImage) {
+      alert('Only image files are allowed!');
+      return false;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      // ✅ Force Angular to run inside zone
+      this.zone.run(() => {
+        this.imagePreview = reader.result as string;
+        this.employeeProfileForm.patchValue({ avatar: this.imagePreview });
+        this.cdr.detectChanges();
+      });
+    };
+    reader.readAsDataURL(selectedFile);
+
     return false;
-  }
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    this.imagePreview = reader.result as string;
-    this.employeeProfileForm.patchValue({ avatar: this.imagePreview });
-    this.cdr.detectChanges();
   };
-  reader.readAsDataURL(selectedFile);
-
-  return false;
-};
-
 
   handleChange(event: any): void {}
 }
