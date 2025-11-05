@@ -9,8 +9,13 @@
 
       </div>
     </div>
-    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="8" [nzXl]="6">
-      <button nz-button nzType="primary" (click)="saveAll()">Save All</button>
-    </div>
+  
   </nz-content>
+    <nz-footer>
+      <div nz-row [nzGutter]="16" [nzJustify]="'end'">
+        <div nz-col >
+            <button nz-button nzType="primary" (click)="saveAll()">Save All</button>
+        </div>
+      </div>
+    </nz-footer>
 </nz-layout>

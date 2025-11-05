@@ -4,20 +4,21 @@
     <!-- Avatar Preview -->
     <div class="avatar-wrapper">
   
-            @if (imagePreview) {
-            <nz-avatar
-                [nzSrc]="imagePreview"
-                nzShape="circle"
-                [nzSize]="159"></nz-avatar>
-
-            } @else {
-            <nz-avatar
-                nzIcon="user"
-                nzShape="circle"
-                [nzSize]="159"
-                style="background-color: #f0f0f0; color: #bfbfbf;"></nz-avatar>
-            }
-
+  <!-- Avatar Circle -->
+  @if (imagePreview) {
+    <nz-avatar
+      [nzSrc]="imagePreview"
+      nzShape="circle"
+      [nzSize]="159"
+      class="avatar-circle shadow-sm border"></nz-avatar>
+  } @else {
+    <nz-avatar
+      nzIcon="user"
+      nzShape="circle"
+      [nzSize]="159"
+      class="avatar-circle"
+      style="background-color: #f0f0f0; color: #bfbfbf;"></nz-avatar>
+  }
     </div>
 
     <!-- Upload Button -->

@@ -1,10 +1,30 @@
 .avatar-wrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 .upload-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.avatar-wrapper {
+  text-align: center;
+  margin-top: 0px;
+}
+
+.avatar-circle {
+  border: 2px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.avatar-circle:hover {
+  border-color: #1890ff;
+  transform: scale(1.03);
+}
+
+.upload-btn {
+  border-radius: 20px;
+  font-size: 14px;
 }

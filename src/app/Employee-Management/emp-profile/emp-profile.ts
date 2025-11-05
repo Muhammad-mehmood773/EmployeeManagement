@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/ng-zorro-imports';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -11,10 +11,14 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
   styleUrl: './emp-profile.css',
 })
 export class EmpProfile implements OnInit {
-employeeProfileForm!: FormGroup;
+  employeeProfileForm!: FormGroup;
   imagePreview: string | null = null;
 
-  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef,
+    private zone: NgZone
+  ) {}
 
   ngOnInit(): void {
     this.employeeProfileForm = this.fb.group({
@@ -22,25 +26,27 @@ employeeProfileForm!: FormGroup;
     });
   }
 
-  beforeUpload = (file: NzUploadFile): boolean => {
-    const isImage = file.type?.startsWith('image/');
-    if (!isImage) {
-      alert('Only image files are allowed!');
-      return false;
-    }
+beforeUpload = (file: any): boolean => {
+  const selectedFile = file instanceof File ? file : file?.file as File;
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-      this.employeeProfileForm.patchValue({ avatar: this.imagePreview });
-
-      this.cdr.detectChanges();
-    };
-    reader.readAsDataURL(file as any);
-
+  if (!selectedFile) return false;
+  const isImage = selectedFile.type.startsWith('image/');
+  if (!isImage) {
+    alert('Only image files are allowed!');
     return false;
+  }
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    this.imagePreview = reader.result as string;
+    this.employeeProfileForm.patchValue({ avatar: this.imagePreview });
+    this.cdr.detectChanges();
   };
+  reader.readAsDataURL(selectedFile);
+
+  return false;
+};
+
 
   handleChange(event: any): void {}
-
 }
