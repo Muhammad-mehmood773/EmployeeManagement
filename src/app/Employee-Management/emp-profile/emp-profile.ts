@@ -34,12 +34,11 @@ employeeProfileForm!: FormGroup;
       this.imagePreview = reader.result as string;
       this.employeeProfileForm.patchValue({ avatar: this.imagePreview });
 
-      // ✅ Force Angular to detect the change immediately
       this.cdr.detectChanges();
     };
     reader.readAsDataURL(file as any);
 
-    return false; // prevent actual upload
+    return false;
   };
 
   handleChange(event: any): void {}
