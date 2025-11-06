@@ -210,4 +210,41 @@ label {
     font-weight: 700;
 }
 
+// =============================
+// 🧾 NZ-Table Header & Row Hover Effects
+// =============================
+
+// Table header styling
+.ant-table-thead > tr > th {
+  background-color: #f5f7fa !important;
+  color: #333;
+  font-weight: 600;
+  border-bottom: 2px solid fade(@primary-color, 35%) !important;
+  transition: background-color 0.3s ease;
+}
+
+// Table header hover (optional subtle effect)
+.ant-table-thead > tr > th:hover {
+  background-color: fade(@primary-color, 10%) !important;
+  color: @primary-color !important;
+}
+
+// Table rows
+.ant-table-tbody > tr {
+  transition: all 0.25s ease-in-out;
+  cursor: pointer;
+}
+
+// Hover effect for table rows
+.ant-table-tbody > tr:hover > td {
+  background-color: fade(@primary-color, 10%) !important;
+  color: #000 !important;
+}
+
+// Active (selected) row look (optional)
+.ant-table-tbody > tr.ant-table-row-selected > td {
+  background-color: fade(@primary-color, 18%) !important;
+  color: #000;
+  font-weight: 500;
+}
 

@@ -244,10 +244,10 @@
 
 </div>
 
-<div nz-row>
+<div nz-row [nzGutter]="12"  style="margin-top: 16px;">
     <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="12" [nzXl]="12">
         <nz-card nzTitle="Address Information" [nzBordered]="false"
-            style="margin-top: 16px;">
+           >
             <div class="card-container">
                 <nz-tabs nzType="card" [(nzSelectedIndex)]="activeTab">
                     <nz-tab *ngFor="let tab of tabs; let i = index"
@@ -265,6 +265,6 @@
     </div>
 
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="12" [nzXl]="12">
-        
+        <app-add-family-members></app-add-family-members>
     </div>
 </div>

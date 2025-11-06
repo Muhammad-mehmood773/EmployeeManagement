@@ -6,11 +6,12 @@ import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
 import { PermanentAddress } from '../permanent-address/permanent-address';
 import { EmpProfile } from '../emp-profile/emp-profile';
 import { PresentAddress } from '../present-address/present-address';
+import { AddFamilyMembers } from '../add-family-members/add-family-members';
 
 
 @Component({
   selector: 'app-personal-information',
-  imports: [SHARED_IMPORTS, PermanentAddress, PresentAddress,EmpProfile, ReactiveFormsModule, CommonModule],
+  imports: [SHARED_IMPORTS, PermanentAddress, AddFamilyMembers, PresentAddress,EmpProfile, ReactiveFormsModule, CommonModule],
   templateUrl: './personal-information.html',
   styleUrl: './personal-information.css',
 })
