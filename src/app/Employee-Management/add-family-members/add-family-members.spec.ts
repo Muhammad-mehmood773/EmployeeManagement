@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmpFamilyInformation } from './emp-family-information';
+import { AddFamilyMembers } from './add-family-members';
 
-describe('EmpFamilyInformation', () => {
-  let component: EmpFamilyInformation;
-  let fixture: ComponentFixture<EmpFamilyInformation>;
+describe('AddFamilyMembers', () => {
+  let component: AddFamilyMembers;
+  let fixture: ComponentFixture<AddFamilyMembers>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EmpFamilyInformation]
+      imports: [AddFamilyMembers]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EmpFamilyInformation);
+    fixture = TestBed.createComponent(AddFamilyMembers);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
