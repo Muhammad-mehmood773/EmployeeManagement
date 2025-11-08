@@ -96,6 +96,7 @@
     </form>
     }
 
+    
     <nz-table
         #basicTable
         [nzData]="familyDataList()"
@@ -107,6 +108,7 @@
                 <th>Phone</th>
                 <th>ID/Passport Number</th>
                 <th>Relationship</th>
+                <th>Action</th>
             </tr>
         </thead>
 
@@ -119,27 +121,37 @@
                 <td>{{ data.phoneNumber }}</td>
                 <td>{{ data.cnicOrPassportNumber || '--' }}</td>
                 <td>{{ data.relationshipName }}</td>
+               <td class="text-center">
+                    <i
+                     (click)="onDeleteMember(data)"
+                        nz-icon
+                        nzType="delete"
+                        nzTheme="fill"
+                        nzSize="md"
+                        class="text-danger fs-6">
+                    </i>
+                    </td>
+
             </tr>
             }
         </tbody>
     </nz-table>
-
 </nz-card>
 
 <ng-template #extraTemplate>
     @if (showFamilyForm) {
     <button (click)="addMember()" [disabled]="familyDataList().length >= 3"
         nz-button
-        nzType="primary">
+        nzType="primary" class="me-2">
         <i nz-icon nzType="plus-circle" [nzTheme]="'fill'"></i>
         Save Family Member
     </button>
     }
-    <button
-        (click)="showForm()"
-        nz-button
-        nzType="primary">
-        <i nz-icon nzType="plus-circle" [nzTheme]="'fill'"></i>
-        Add Family Member
-    </button>
+  <button [disabled]="familyDataList().length >= 3"
+    (click)="showForm()"
+    nz-button
+    nzType="primary">
+    <i nz-icon nzType="plus-circle" [nzTheme]="'fill'"></i>
+     <span>{{ showFamilyForm ? 'Remove' : 'Add Family Member' }}</span>
+  </button>
 </ng-template>

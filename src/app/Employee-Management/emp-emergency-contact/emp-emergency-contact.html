@@ -1,1 +1,135 @@
-<p>emp-emergency-contact works!</p>
+<nz-card nzTitle="Add Emergency Contact" [nzExtra]="extraTemplate">
+ 
+    @if (showEmergencyForm) {
+         <form [formGroup]="emergencyForm">
+        <div nz-row [nzGutter]="8">
+
+            <!-- Name -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('name')">
+                        <nz-form-label nzRequired
+                            nzFor="name">
+                            Name</nz-form-label>
+                        <input nz-input formControlName="name"
+                            id="name" name="name" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <!-- Number -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('primaryContact')">
+                        <nz-form-label nzRequired
+                            nzFor="primaryContact">
+                            Primary Contact</nz-form-label>
+                        <input nz-input formControlName="primaryContact"
+                            id="primaryContact" name="primaryContact" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <!-- cnicOrPassportNumber -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('secondoryContact')">
+                        <nz-form-label
+                            nzFor="secondoryContact">
+                            Secondory Contact</nz-form-label>
+                        <input nz-input
+                            formControlName="secondoryContact"
+                            id="secondoryContact"
+                            name="secondoryContact" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <!-- relationship -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('relationshipId')">
+                        <nz-form-label nzRequired
+                            nzFor="relationshipId">
+                            Relationship</nz-form-label>
+                        <nz-select
+                            nzShowSearch
+                            nzAllowClear
+                            formControlName="relationshipId"
+                            id="relationshipId"
+                            name="relationshipId">
+                            @for (relation of availableRelationships; track
+                            relation.id) {
+                            <nz-option [nzLabel]="relation.name"
+                                [nzValue]="relation.id"></nz-option>
+                            }
+                        </nz-select>
+
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
+    }
+
+    
+    <nz-table
+        #basicTable
+        [nzData]="emergencyDataList()"
+        [nzShowPagination]="false">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Primary Contact</th>
+                <th>Secondary Contact</th>
+                <th>Relationship</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (data of basicTable.data; track data) {
+            <tr>
+                <td>{{ data.name }}</td>
+                <td>{{ data.primaryContact }}</td>
+                <td>{{ data.secondoryContact || '--' }}</td>
+                <td>{{ data.relationshipName }}</td>
+               <td class="text-center">
+                    <i
+                     (click)="onDeleteMember(data)"
+                        nz-icon
+                        nzType="delete"
+                        nzTheme="fill"
+                        nzSize="md"
+                        class="text-danger fs-6">
+                    </i>
+                    </td>
+
+            </tr>
+            }
+        </tbody>
+    </nz-table>
+</nz-card>
+
+<ng-template #extraTemplate>
+    @if (showEmergencyForm) {
+    <button (click)="addMember()" [disabled]="emergencyDataList().length >= 3"
+        nz-button
+        nzType="primary" class="me-2">
+        <i nz-icon nzType="plus-circle" [nzTheme]="'fill'"></i>
+        Save Emergency Contact
+    </button>
+    }
+  <button [disabled]="emergencyDataList().length >= 3"
+    (click)="showForm()"
+    nz-button
+    nzType="primary">
+    <i nz-icon nzType="plus-circle" [nzTheme]="'fill'"></i>
+     <span>{{ showEmergencyForm ? 'Remove' : 'Add Emergency Contact' }}</span>
+  </button>
+</ng-template>

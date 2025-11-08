@@ -1,3 +1,12 @@
+.scrollable-content {
+  margin: 10px;
+  padding: 10px;
+  background: #f1f4fa;
+  height: calc(100vh - 70px); /* adjust 70px if footer height changes */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .custom-footer {
   position: fixed;
   bottom: 0;

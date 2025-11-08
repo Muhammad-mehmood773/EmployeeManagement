@@ -7,13 +7,15 @@ import { PermanentAddress } from '../permanent-address/permanent-address';
 import { EmpProfile } from '../emp-profile/emp-profile';
 import { PresentAddress } from '../present-address/present-address';
 import { AddFamilyMembers } from '../add-family-members/add-family-members';
+import { EmpEmergencyContact } from "../emp-emergency-contact/emp-emergency-contact";
 
 
 @Component({
   selector: 'app-personal-information',
-  imports: [SHARED_IMPORTS, PermanentAddress, AddFamilyMembers, PresentAddress,EmpProfile, ReactiveFormsModule, CommonModule],
+  imports: [SHARED_IMPORTS, PermanentAddress, AddFamilyMembers, PresentAddress, EmpProfile, ReactiveFormsModule, CommonModule, EmpEmergencyContact],
   templateUrl: './personal-information.html',
   styleUrl: './personal-information.css',
+  standalone:true
 })
 export class PersonalInformation implements OnInit {
 
@@ -24,6 +26,8 @@ export class PersonalInformation implements OnInit {
   @ViewChild(PermanentAddress) permanentAddressComp!: PermanentAddress;
   @ViewChild(PresentAddress) presentAddressComp!: PresentAddress;
   @ViewChild(EmpProfile) employeeProfile!: EmpProfile;
+  @ViewChild(AddFamilyMembers) addFamilyMemberComp!: AddFamilyMembers;
+  @ViewChild(EmpEmergencyContact) emergencyComp!: EmpEmergencyContact;
 
   tabs = [
     { title: 'Permanent Address', index: 0 },
@@ -69,8 +73,15 @@ export class PersonalInformation implements OnInit {
     const permValid = this.permanentAddressComp?.validateForm() ?? false;
     const presentValid = this.presentAddressComp?.validateForm() ?? false;
 
-    return mainValid && permValid && presentValid;
+    // ✅ Family validation only when form is visible
+    let familyValid = true; // default true if form hidden
+    if (this.addFamilyMemberComp?.showFamilyForm) {
+      familyValid = this.addFamilyMemberComp.validateForm();
+    }
+
+    return mainValid && permValid && presentValid && familyValid;
   }
+
 
   getPersonalInfoData() {
     return {
@@ -78,6 +89,8 @@ export class PersonalInformation implements OnInit {
       permanentAddress: this.permanentAddressComp?.permanentAddressForm?.value,
       presentAddress: this.presentAddressComp?.presentAddressForm?.value,
       employeeProfile: this.employeeProfile?.employeeProfileForm?.value,
+      familyMembers: this.addFamilyMemberComp?.familyDataList(),
+      emergencyContact: this.emergencyComp?.emergencyDataList(),
     };
   }
 

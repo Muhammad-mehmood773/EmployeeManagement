@@ -57,6 +57,17 @@ export class AddFamilyMembers implements OnInit {
     Object.values(this.familyForm.controls).forEach(c => c.updateValueAndValidity());
   }
 
+    showForm(): void {
+    this.showFamilyForm = !this.showFamilyForm ;
+    
+    if(this.showFamilyForm){
+      this.enableMandatoryFields(); 
+    }else{
+    this.familyForm.reset();
+    }
+  }
+
+
   getError(controlName: string): string {
     const control = this.familyForm.get(controlName);
     return getNzErrorMessage(control, controlName);
@@ -99,10 +110,13 @@ export class AddFamilyMembers implements OnInit {
 
     // Reset form after adding
     this.familyForm.reset();
+    this.showFamilyForm = false ;
+
   }
 
-  showForm(): void {
-    this.showFamilyForm = !this.showFamilyForm ;
-    this.enableMandatoryFields(); 
-  }
+
+  onDeleteMember(member: FamilyMember): void {
+  this.familyDataList.update(list => list.filter(m => m !== member));
+}
+
 }

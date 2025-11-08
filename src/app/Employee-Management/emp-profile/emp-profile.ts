@@ -13,6 +13,7 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 export class EmpProfile implements OnInit {
   employeeProfileForm!: FormGroup;
   imagePreview: string | null = null;
+   hovering = false; // 🟦 hover state flag
 
   constructor(
     private fb: FormBuilder,
@@ -51,4 +52,9 @@ export class EmpProfile implements OnInit {
   };
 
   handleChange(event: any): void {}
+
+    removeImage(): void {
+    this.imagePreview = null;
+    this.employeeProfileForm.patchValue({ avatar: null });
+  }
 }

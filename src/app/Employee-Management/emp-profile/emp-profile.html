@@ -1,32 +1,43 @@
 <nz-card nzTitle="Employee Profile Upload" style="text-align: center;">
   <form [formGroup]="employeeProfileForm">
-
     <!-- Avatar Preview -->
-    <div class="avatar-wrapper">
-  
-  <!-- Avatar Circle -->
-  @if (imagePreview) {
-    <nz-avatar
-      [nzSrc]="imagePreview"
-      nzShape="circle"
-      [nzSize]="159"
-      class="avatar-circle shadow-sm border"></nz-avatar>
-  } @else {
-    <nz-avatar
-      nzIcon="user"
-      nzShape="circle"
-      [nzSize]="159"
-      class="avatar-circle"
-      style="background-color: #f0f0f0; color: #bfbfbf;"></nz-avatar>
-  }
+    <div class="avatar-wrapper" (mouseenter)="hovering = true" (mouseleave)="hovering = false">
+
+      <!-- Avatar Circle -->
+      @if (imagePreview) {
+        <div class="avatar-container">
+          <nz-avatar
+            [nzSrc]="imagePreview"
+            nzShape="circle"
+            [nzSize]="228"
+            class="avatar-circle shadow-sm border">
+          </nz-avatar>
+
+          <!-- 🗙 Hover delete icon overlay -->
+          <div
+            class="avatar-overlay"
+            *ngIf="hovering"
+            (click)="removeImage()">
+            <i nz-icon nzType="close-circle" nzTheme="fill" class="delete-icon"></i>
+          </div>
+        </div>
+      } @else {
+        <nz-avatar
+          nzIcon="user"
+          nzShape="circle"
+          [nzSize]="228"
+          class="avatar-circle"
+          style="background-color: #f0f0f0; color: #bfbfbf;">
+        </nz-avatar>
+      }
+
     </div>
 
     <!-- Upload Button -->
     <nz-upload
       nzName="avatar"
       [nzShowUploadList]="false"
-      [nzBeforeUpload]="beforeUpload"
-    >
+      [nzBeforeUpload]="beforeUpload">
       <button nz-button nzType="primary" type="button">
         <i nz-icon nzType="upload" class="me-1"></i>
         <span>{{ imagePreview ? 'Replace Image' : 'Upload Image' }}</span>
