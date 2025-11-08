@@ -6,7 +6,7 @@ import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-emp-layout',
-  imports: [SHARED_IMPORTS, PersonalInformation, RouterLink],
+  imports: [SHARED_IMPORTS, PersonalInformation],
   templateUrl: './emp-layout.html',
   styleUrl: './emp-layout.css',
   standalone:true

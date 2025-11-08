@@ -26,6 +26,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 export const SHARED_IMPORTS = [
   // Form controls
   NzInputModule,
@@ -63,5 +64,6 @@ export const SHARED_IMPORTS = [
   // Actions
   NzButtonModule,
   NzIconModule,
-  NzUploadModule
+  NzUploadModule,
+  NzSpaceModule
 ];

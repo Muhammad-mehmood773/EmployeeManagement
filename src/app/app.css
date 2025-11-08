@@ -1,0 +1,13 @@
+nz-header {
+  background-color: #ffffff; /* white background */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* deeper shadow */
+  height: 50px;
+  padding-inline: 48px;
+  line-height: 50px;
+  position: sticky; /* makes header stick to top */
+  top: 0;
+  z-index: 1000; /* ensures it stays above content */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

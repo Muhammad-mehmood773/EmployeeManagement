@@ -1,0 +1,136 @@
+<div class="row">
+    <div
+        class="MainHeaderNaivigator d-flex justify-content-start align-items-center"
+        style="background-color: #1b2e3a;">
+
+        <div
+            class="col-6 p-1 LeftSide d-flex justify-content-start align-items-center">
+            <nz-space>
+
+                <!-- Menu Button -->
+                <button nz-button nzType="link"
+                    class="text-white fw-bolder MenuBar BtnEffect">
+                    <span nz-icon nzType="menu" nzTheme="outline"></span>
+                </button>
+
+                <!-- Employee Management Dropdown -->
+                <button nz-button nzType="link"
+                    class="text-white fw-bolder BtnEffect"
+                    [nzTrigger]="'click'" nz-dropdown
+                    [nzDropdownMenu]="empMenu">
+                    Employee Management <i nz-icon nzType="down"></i>
+                </button>
+                <nz-dropdown-menu #empMenu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <li nz-menu-item>Add Employee</li>
+                        <li nz-menu-item>Employee List</li>
+                        <li nz-menu-item>Employee Status</li>
+                    </ul>
+                </nz-dropdown-menu>
+
+                <!-- HRMS Dropdown -->
+                <button nz-button nzType="link"
+                    class="text-white fw-bolder BtnEffect"
+                    [nzTrigger]="'click'" nz-dropdown
+                    [nzDropdownMenu]="hrmsMenu">
+                    HRMS <i nz-icon nzType="down"></i>
+                </button>
+                <nz-dropdown-menu #hrmsMenu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <li nz-menu-item>Payroll</li>
+                        <li nz-menu-item>Attendance</li>
+                        <li nz-menu-item>Leave Management</li>
+                    </ul>
+                </nz-dropdown-menu>
+
+                <!-- Groups Dropdown -->
+                <button nz-button nzType="link"
+                    class="text-white fw-bolder BtnEffect"
+                    [nzTrigger]="'click'" nz-dropdown
+                    [nzDropdownMenu]="groupsMenu">
+                    Groups <i nz-icon nzType="down"></i>
+                </button>
+                <nz-dropdown-menu #groupsMenu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <li nz-menu-item>Admins</li>
+                        <li nz-menu-item>Managers</li>
+                        <li nz-menu-item>Employees</li>
+                    </ul>
+                </nz-dropdown-menu>
+
+                <!-- Files Dropdown -->
+                <button nz-button nzType="link"
+                    class="text-white fw-bolder BtnEffect"
+                    [nzTrigger]="'click'" nz-dropdown
+                    [nzDropdownMenu]="filesMenu">
+                    Files <i nz-icon nzType="down"></i>
+                </button>
+                <nz-dropdown-menu #filesMenu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <li nz-menu-item>Documents</li>
+                        <li nz-menu-item>Reports</li>
+                        <li nz-menu-item>Policies</li>
+                    </ul>
+                </nz-dropdown-menu>
+
+            </nz-space>
+        </div>
+
+        <!-- Right Side Search + Icons -->
+        <div
+            class="col-6 p-1 RightSide d-flex justify-content-end align-items-center">
+            <nz-space>
+                <!-- User Avatar Dropdown -->
+                <button nz-button nzType="link" nz-dropdown
+                    [nzDropdownMenu]="userMenu">
+                    <nz-avatar nzText="MM" nzSize="default"
+                        style="background-color:#fde3cf; color:#f56a00;"></nz-avatar>
+                </button>
+                <nz-dropdown-menu #userMenu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <li nz-menu-item>
+                            <a class="d-flex align-items-center p-1">
+                                <nz-space>
+                                    <span *nzSpaceItem>
+                                        <i nz-icon nzType="user"
+                                            nzTheme="outline"></i>
+                                    </span>
+                                    <span *nzSpaceItem
+                                        class="DropdownLinkName">Profile</span>
+                                </nz-space>
+                            </a>
+                        </li>
+
+                        <li nz-menu-item>
+                            <a class="d-flex align-items-center p-1">
+                                <nz-space>
+                                    <span *nzSpaceItem>
+                                        <i nz-icon nzType="setting"
+                                            nzTheme="outline"></i>
+                                    </span>
+                                    <span *nzSpaceItem
+                                        class="DropdownLinkName">Settings</span>
+                                </nz-space>
+                            </a>
+                        </li>
+
+                        <li nz-menu-item>
+                            <a class="d-flex align-items-center p-1">
+                                <nz-space>
+                                    <span *nzSpaceItem>
+                                        <i nz-icon nzType="logout"
+                                            nzTheme="outline"></i>
+                                    </span>
+                                    <span *nzSpaceItem
+                                        class="DropdownLinkName">Logout</span>
+                                </nz-space>
+                            </a>
+                        </li>
+                    </ul>
+                </nz-dropdown-menu>
+
+            </nz-space>
+        </div>
+
+    </div>
+</div>

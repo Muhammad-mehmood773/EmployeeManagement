@@ -1,0 +1,311 @@
+ .DropdownLinkName {
+  cursor: pointer;
+  align-items: center;
+  color: #202227;
+  display: flex;
+  font-weight: 500;
+  height: 100%;
+  width: 100%;
+  font-size: 14px;
+  align-items: center;
+}
+.MainHeaderNaivigator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #000;
+  padding: 10px 0;
+}
+body {
+  padding-top: 60px;
+}
+
+.anticon{
+  gap: 5px;
+}
+
+
+.ant-space-item {
+  font-size: 18px;
+
+}
+
+.MainNavDropdownsRow .MainNavDropdown-icon-only {
+  display: block !important;
+}
+
+.seachField {
+  margin-top: 3px;
+  width: 300px;
+  height: 35px;
+  border-radius: 5px;
+}
+
+.seachField:hover {
+  border: 1px solid blue;
+}
+
+.circle {
+  width: 1.7rem;
+  height: 1.7rem;
+  background-color: pink;
+  border-radius: 50%; /* Makes it a circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem; /* Adjust the font size as needed */
+  color: white; /* Text color inside the circle */
+}
+
+/* your-component.css */
+/* your-component.css */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.dropdown-menu.open {
+  display: block;
+  animation: fadeIn 0.5s ease;
+  animation-fill-mode: both;
+}
+
+.dropdown-menu.close {
+  animation: fadeOut 0.5s ease;
+  animation-fill-mode: both;
+}
+
+#navbarSupportedContent {
+  z-index: 1;
+}
+
+.dropdown-menu{
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+
+
+.MainHeaderNaivigator {
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  top: 0;
+  z-index: 100;
+  background: #565657;
+  height: 50px;
+}
+
+nz-space .BtnEffect {
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 800;
+  transition: background-color 0.3s ease;
+  /* border: 1px solid #ffffff; */
+}
+
+nz-space .BtnEffect:hover {
+  background-color: #424141;
+}
+
+nz-space .BtnEffect:focus {
+  outline: none;
+  background-color: #424141;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adjust the gap between buttons as needed */
+}
+
+
+nz-space button {
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.example-input input{
+  border-radius: 10px !important;
+  width: 230px;
+}
+
+
+.MainHeaderNaivigator .LeftSide .MoreMenuBar {
+  display: none !important;
+}
+
+
+
+.MainHeaderNaivigator .LeftSide .HideAndShow,
+.MainHeaderNaivigator .LeftSide .MenuBar,
+.MainHeaderNaivigator .RightSide .SearchIcon,
+.MainHeaderNaivigator .RightSide .CloseBar
+{
+  display: none ;
+}
+
+
+/* .MainHeaderNaivigator .LeftSide ,
+.MainHeaderNaivigator .RightSide
+{
+  display: none  !important;
+} */
+
+
+@media screen and (max-width: 1270px) {
+  .MainHeaderNaivigator .LeftSide .HideAndShow:nth-last-child(2),
+  .MainHeaderNaivigator .LeftSide .HideAndShow:nth-last-child(3) {
+    display: none !important;
+  }
+
+  .MainHeaderNaivigator .LeftSide .MoreMenuBar {
+    display: inline-block !important;
+  }
+}
+
+@media screen and (max-width: 1081px) {
+  .MainHeaderNaivigator .LeftSide .HideAndShow:nth-last-child(4) {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 969px) {
+  .MainHeaderNaivigator .LeftSide .HideAndShow:nth-last-child(5) {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .MainHeaderNaivigator .LeftSide .HideAndShow:nth-last-child(6) {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 713px) {
+  .MainHeaderNaivigator .LeftSide .HideAndShow:nth-last-child(7) {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 633px) {
+  .MainHeaderNaivigator .LeftSide .HideAndShow:nth-last-child(8) {
+    display: none !important;
+  }
+
+  .MainHeaderNaivigator .LeftSide .MenuBar {
+    display: inline-block !important;
+  }
+
+  .MainHeaderNaivigator .LeftSide .MoreMenuBar {
+    display: none !important;
+  }
+}
+
+
+
+@media screen and (max-width: 1330px) {
+  .MainHeaderNaivigator .RightSide .example-input nz-input-group {
+    width: 280px;
+  }
+}
+@media screen and (max-width: 1185px) {
+  .MainHeaderNaivigator .RightSide .example-input nz-input-group {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .MainHeaderNaivigator .RightSide .example-input nz-input-group {
+    width: 180px;
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .MainHeaderNaivigator .RightSide .example-input nz-input-group {
+    width: 160px;
+  }
+}
+
+@media screen and (max-width: 713px) {
+  .MainHeaderNaivigator .RightSide .example-input nz-input-group {
+    width: 140px;
+  }
+}
+@media screen and (max-width: 633px) {
+  .MainHeaderNaivigator .RightSide .example-input nz-input-group {
+    width: 120px;
+  }
+
+}
+@media screen and (max-width: 530px) {
+  .MainHeaderNaivigator .RightSide .example-input nz-input-group {
+    display: none;
+  }
+
+  .MainHeaderNaivigator .RightSide .SearchIcon {
+    display: inline-block !important;
+  }
+  .MainHeaderNaivigator .RightSide .CloseBar {
+    display: inline-block !important;
+  }
+
+
+}
+
+
+
+.menu-scroll {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+
+::ng-deep .ant-dropdown-menu-item {
+  padding-left: 4px !important;
+  padding: 5px 10px;
+}
+
+  /* Raza Job Info Disable/Enable */
+.pointer-events-none {
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+  opacity: 0.5;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.DropdownLinkName {
+  font-weight: 500;
+  font-size: 14px;
+  color: #000; /* default color */
+}
+
+li[nz-menu-item]:not(.pointer-events-none):hover {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+  /* Raza Job Info Disable/Enable */
