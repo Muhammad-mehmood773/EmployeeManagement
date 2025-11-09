@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SHARED_IMPORTS } from './shared/ng-zorro-imports';
-import { Header } from './header/header';
+import { SHARED_IMPORTS } from './shared/theme/ng-zorro-imports';
+import { Header } from './shared/components/header/header';
 
 @Component({
   selector: 'app-root',

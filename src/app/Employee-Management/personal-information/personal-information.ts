@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { SHARED_IMPORTS } from '../../shared/ng-zorro-imports';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
@@ -8,6 +8,7 @@ import { EmpProfile } from '../emp-profile/emp-profile';
 import { PresentAddress } from '../present-address/present-address';
 import { AddFamilyMembers } from '../add-family-members/add-family-members';
 import { EmpEmergencyContact } from "../emp-emergency-contact/emp-emergency-contact";
+import { PersonalInfoBridge } from '../services/personal-info-bridge';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { EmpEmergencyContact } from "../emp-emergency-contact/emp-emergency-cont
   styleUrl: './personal-information.css',
   standalone:true
 })
-export class PersonalInformation implements OnInit {
+export class PersonalInformation implements OnInit,AfterViewInit  {
 
   employeeForm!: FormGroup;
   activeTab = 0;
@@ -34,7 +35,7 @@ export class PersonalInformation implements OnInit {
     { title: 'Present Address', index: 1 }
   ];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private bridgeService: PersonalInfoBridge) { }
 
   ngOnInit(): void {
     this.employeeForm = this.fb.group({
@@ -59,6 +60,13 @@ export class PersonalInformation implements OnInit {
     return getNzErrorMessage(control, controlName);
   }
 
+
+  ngAfterViewInit(): void {
+    this.bridgeService.registerValidateFn(() => this.validateAllSections());
+    this.bridgeService.registerDataFn(() => this.getPersonalInfoData());
+    this.bridgeService.registerUnsavedFn(() => this.hasUnsavedChanges());
+  }
+
   markFormTouched(): void {
     Object.values(this.employeeForm.controls).forEach((ctrl) => {
       ctrl.markAsTouched();
@@ -73,13 +81,17 @@ export class PersonalInformation implements OnInit {
     const permValid = this.permanentAddressComp?.validateForm() ?? false;
     const presentValid = this.presentAddressComp?.validateForm() ?? false;
 
-    // ✅ Family validation only when form is visible
-    let familyValid = true; // default true if form hidden
+    let familyValid = true; 
     if (this.addFamilyMemberComp?.showFamilyForm) {
       familyValid = this.addFamilyMemberComp.validateForm();
     }
 
-    return mainValid && permValid && presentValid && familyValid;
+    let emergencyValid = true; 
+    if (this.emergencyComp?.showEmergencyForm) {
+      familyValid = this.emergencyComp.validateForm();
+    }
+
+    return mainValid && permValid && presentValid && familyValid && emergencyValid;
   }
 
 
@@ -94,5 +106,14 @@ export class PersonalInformation implements OnInit {
     };
   }
 
+    hasUnsavedChanges(): boolean {
+    const mainDirty = this.employeeForm.dirty;
+    const permDirty = this.permanentAddressComp?.permanentAddressForm?.dirty ?? false;
+    const presentDirty = this.presentAddressComp?.presentAddressForm?.dirty ?? false;
+    const familyDirty = this.addFamilyMemberComp?.familyForm?.dirty ?? false;
+    const emergencyDirty = this.emergencyComp?.emergencyForm?.dirty ?? false;
+    const profileDirty = this.employeeProfile?.employeeProfileForm?.dirty ?? false;
+    return mainDirty || permDirty || presentDirty || familyDirty || emergencyDirty || profileDirty;
+  }
 
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
-import { SHARED_IMPORTS } from '../../shared/ng-zorro-imports';
+import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NzUploadFile } from 'ng-zorro-antd/upload';

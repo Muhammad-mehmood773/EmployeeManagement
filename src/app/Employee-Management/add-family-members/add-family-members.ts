@@ -1,5 +1,5 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { SHARED_IMPORTS } from './../../shared/ng-zorro-imports';
+import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { getNzErrorMessage } from '../../shared/helpers/validation-messages';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SHARED_IMPORTS } from '../../ng-zorro-imports';
+import { SHARED_IMPORTS } from '../../theme/ng-zorro-imports';
 import { RouterModule } from '@angular/router';
 
 @Component({

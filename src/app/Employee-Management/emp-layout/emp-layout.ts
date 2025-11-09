@@ -1,42 +1,39 @@
-import { Component, ViewChild } from '@angular/core';
-import { SHARED_IMPORTS } from '../../shared/ng-zorro-imports';
-import { PersonalInformation } from '../personal-information/personal-information';
-import { HasUnsavedChanges, UnsavedGuard } from '../../core/guards/unsaved-guard';
-import { RouterLink } from "@angular/router";
+import { Component } from '@angular/core';
+import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
+import { HasUnsavedChanges } from '../../core/guards/unsaved-guard';
+import { RouterOutlet } from "@angular/router";
+import { PersonalInfoBridge } from '../services/personal-info-bridge';
 
 @Component({
   selector: 'app-emp-layout',
-  imports: [SHARED_IMPORTS, PersonalInformation],
+  imports: [SHARED_IMPORTS, RouterOutlet],
   templateUrl: './emp-layout.html',
   styleUrl: './emp-layout.css',
-  standalone:true
+  standalone: true
 })
 export class EmpLayout implements HasUnsavedChanges {
 
-  @ViewChild(PersonalInformation) personalInfoComp!: PersonalInformation;
-
   hasError = false;
 
+  constructor(private bridge: PersonalInfoBridge) { }
   saveAll() {
-    const valid = this.personalInfoComp.validateAllSections();
-    if (!valid) {
+    const validateFn = this.bridge.getValidateFn();
+    const getDataFn = this.bridge.getDataFn();
+
+    if (validateFn && !validateFn()) {
       this.hasError = true;
       console.warn('Some forms are invalid!');
       return;
     }
+
     this.hasError = false;
-    const allData = { personalInfo: this.personalInfoComp.getPersonalInfoData() };
-    console.log('Final Form Object:', allData);
+    const allData = getDataFn;
+
+    console.log('✅ Final Form Object:', allData);
   }
 
-hasUnsavedChanges(): boolean {
-    const mainFormDirty = this.personalInfoComp?.employeeForm?.dirty ?? false;
-    const permDirty = this.personalInfoComp?.permanentAddressComp?.permanentAddressForm?.dirty ?? false;
-    const presentDirty = this.personalInfoComp?.presentAddressComp?.presentAddressForm?.dirty ?? false;
-    const familyDirty = this.personalInfoComp?.addFamilyMemberComp?.familyForm?.dirty ?? false;
-    const profileDirty = this.personalInfoComp?.employeeProfile?.employeeProfileForm?.dirty ?? false;
-    const emergencyDirty = this.personalInfoComp?.emergencyComp?.emergencyForm?.dirty ?? false;
-
-    return mainFormDirty || permDirty || presentDirty || familyDirty || profileDirty || emergencyDirty;
+  hasUnsavedChanges(): boolean {
+    const unsavedFn = this.bridge.getUnsavedFn();
+    return unsavedFn ? unsavedFn() : false;
   }
 }

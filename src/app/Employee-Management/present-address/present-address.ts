@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SHARED_IMPORTS } from '../../shared/ng-zorro-imports';
+import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
 
 @Component({

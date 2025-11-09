@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SHARED_IMPORTS } from '../shared/ng-zorro-imports';
+import { SHARED_IMPORTS } from '../../theme/ng-zorro-imports';
 
 @Component({
   selector: 'app-header',
