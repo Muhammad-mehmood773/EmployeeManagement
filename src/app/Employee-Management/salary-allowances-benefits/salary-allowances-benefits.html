@@ -1,0 +1,96 @@
+<nz-card nzTitle="Salary & Compensation" style="margin-top: 10px;">
+    <form [formGroup]="salrayPackForm" nz-form nzLayout="vertical">
+        <div nz-row [nzGutter]="8">
+
+             <!-- Basic Salary -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="8" [nzXXl]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('basicSalary')">
+                        <nz-form-label  nzRequired
+                            nzFor="basicSalary">Basic Salary
+                        </nz-form-label>
+                        <input nz-input formControlName="basicSalary"
+                            id="basicSalary" name="basicSalary" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+             <!-- Gross Salary -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="8" [nzXXl]="8">
+                <nz-form-item>
+                    <nz-form-control nzRequired
+                        [nzErrorTip]="getError('grossSalary')">
+                        <nz-form-label 
+                            nzFor="grossSalary">Gross Salary
+                        </nz-form-label>
+                        <input nz-input formControlName="grossSalary" [disabled]="true"
+                            id="grossSalary" name="grossSalary" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <!-- Department -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="8" [nzXXl]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('salaryFrequencyId')">
+                        <nz-form-label nzRequired
+                            nzFor="SalaryFrequency">Salary Frequency
+                        </nz-form-label>
+                        <nz-select nzShowSearch nzAllowClear
+                            id="SalaryFrequency"
+                            formControlName="salaryFrequencyId"
+                            name="SalaryFrequency">
+                            <nz-option nzLabel="Jack"
+                                nzValue="jack"></nz-option>
+                            <nz-option nzLabel="Lucy"
+                                nzValue="lucy"></nz-option>
+                            <nz-option nzLabel="Tom"
+                                nzValue="tom"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+             <!-- AllowancesMapId -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="8" [nzXXl]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('allowancesMapId')">
+                        <nz-form-label 
+                            nzFor="allowancesMap">Allowance(s)
+                        </nz-form-label>
+                        <nz-select nzShowSearch nzAllowClear
+                            id="allowancesMap"
+                            formControlName="allowancesMapId"
+                            name="allowancesMap">
+                            <nz-option nzLabel="Jack"
+                                nzValue="jack"></nz-option>
+                            <nz-option nzLabel="Lucy"
+                                nzValue="lucy"></nz-option>
+                            <nz-option nzLabel="Tom"
+                                nzValue="tom"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <!-- Total Allowances -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="8" [nzXXl]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('totalAllowances')">
+                        <nz-form-label 
+                            nzFor="SalaryFrequency">Total Allowances
+                        </nz-form-label>
+                        <input nz-input formControlName="totalAllowances"
+                            id="totalAllowances" name="totalAllowances" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
+</nz-card>

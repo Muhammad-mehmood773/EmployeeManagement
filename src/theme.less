@@ -248,3 +248,26 @@ label {
   font-weight: 500;
 }
 
+
+
+/* Close button container (the X) */
+.ant-modal-close {
+  border-radius: 50%;             // circular button
+  width: 32px;                    // optional size
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: #f1f4fa;    // hover background color
+  }
+}
+
+/* The X icon itself */
+.ant-modal-close-x {
+  color: #000;                    // X color
+  font-size: 16px;                // size of the X
+  font-weight: bold;
+}
