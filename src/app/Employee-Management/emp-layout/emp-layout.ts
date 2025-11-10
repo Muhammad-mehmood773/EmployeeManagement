@@ -3,22 +3,26 @@ import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { HasUnsavedChanges } from '../../core/guards/unsaved-guard';
 import { RouterOutlet } from "@angular/router";
 import { PersonalInfoBridge } from '../services/personal-info-bridge';
+import { PersonalInformation } from '../personal-information/personal-information';
+import { EmpJobDetails } from "../emp-job-details/emp-job-details";
 
 @Component({
   selector: 'app-emp-layout',
-  imports: [SHARED_IMPORTS, RouterOutlet],
+  imports: [SHARED_IMPORTS, PersonalInformation, EmpJobDetails],
   templateUrl: './emp-layout.html',
-  styleUrl: './emp-layout.css',
-  standalone: true
+  styleUrls: ['./emp-layout.css'], // ✅ plural form
+  standalone: true,
+  host: { ngSkipHydration: 'true' },
+
 })
 export class EmpLayout implements HasUnsavedChanges {
 
   hasError = false;
 
-  constructor(private bridge: PersonalInfoBridge) { }
+  constructor(private bridgeService: PersonalInfoBridge) { }
   saveAll() {
-    const validateFn = this.bridge.getValidateFn();
-    const getDataFn = this.bridge.getDataFn();
+    const validateFn = this.bridgeService.getValidateFn();
+    const getDataFn = this.bridgeService.getDataFn();
 
     if (validateFn && !validateFn()) {
       this.hasError = true;
@@ -33,7 +37,7 @@ export class EmpLayout implements HasUnsavedChanges {
   }
 
   hasUnsavedChanges(): boolean {
-    const unsavedFn = this.bridge.getUnsavedFn();
+    const unsavedFn = this.bridgeService.getUnsavedFn();
     return unsavedFn ? unsavedFn() : false;
   }
 }

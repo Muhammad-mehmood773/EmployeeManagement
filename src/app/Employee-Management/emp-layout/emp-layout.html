@@ -3,7 +3,16 @@
   <nz-content class="scrollable-content">
     <div nz-row [nzGutter]="16">
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [nzXl]="24">
-        <router-outlet></router-outlet>
+        <div class="card-container">
+        <nz-tabs nzType="card" >
+           <nz-tab nzTitle="Personal Information">
+            <app-personal-information></app-personal-information>
+           </nz-tab>
+           <nz-tab nzTitle="Job Details">
+            <app-emp-job-details></app-emp-job-details>
+           </nz-tab>
+        </nz-tabs>
+        </div>
       </div>
     </div>
   </nz-content>
@@ -11,7 +20,8 @@
   <nz-footer class="custom-footer">
     <div nz-row [nzGutter]="16" [nzJustify]="'end'">
       <div nz-col>
-        <button nz-button nzType="primary" (click)="saveAll()">Save Employee</button>
+        <button nz-button nzType="primary" (click)="saveAll()">Save
+          Employee</button>
       </div>
     </div>
   </nz-footer>
