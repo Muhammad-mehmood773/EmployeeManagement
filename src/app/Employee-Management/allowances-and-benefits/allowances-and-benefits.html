@@ -1,0 +1,43 @@
+<nz-card nzTitle="Allowances And Benefits" style="margin-top: 10px;">
+    <form [formGroup]="allowanceBenefitsForm" nz-form nzLayout="vertical">
+        <div nz-row [nzGutter]="12">
+             <!-- totalBenefitsId -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
+                [nzXl]="12" [nzXXl]="12">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('totalBenefitsId')">
+                        <nz-form-label 
+                            nzFor="totalBenefit">Total Benefits
+                        </nz-form-label>
+                        <nz-select nzShowSearch nzAllowClear
+                            id="totalBenefit"
+                            formControlName="totalBenefitsId"
+                            name="totalBenefit">
+                            <nz-option nzLabel="Jack"
+                                nzValue="jack"></nz-option>
+                            <nz-option nzLabel="Lucy"
+                                nzValue="lucy"></nz-option>
+                            <nz-option nzLabel="Tom"
+                                nzValue="tom"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <!-- Total Allowances -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
+                [nzXl]="12" [nzXXl]="12">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('totalAllowances')">
+                        <nz-form-label 
+                            nzFor="SalaryFrequency">Total Allowances
+                        </nz-form-label>
+                        <input nz-input formControlName="totalAllowances"
+                            id="totalAllowances" name="totalAllowances" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
+</nz-card>
