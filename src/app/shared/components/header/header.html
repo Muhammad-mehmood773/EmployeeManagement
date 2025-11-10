@@ -14,62 +14,41 @@
                 </button>
 
                 <!-- Employee Management Dropdown -->
-                <button nz-button nzType="link"
+                <button
+                    nz-button
+                    nzType="link"
                     class="text-white fw-bolder BtnEffect"
-                    [nzTrigger]="'click'" nz-dropdown
+                    [nzTrigger]="'click'"
+                    nz-dropdown
                     [nzDropdownMenu]="empMenu">
-                    Employee Management <i nz-icon nzType="down"></i>
+                    <i nz-icon nzType="user" nzTheme="outline" class="me-1"></i>
+                    Employee Management
+                    <i nz-icon nzType="down"></i>
                 </button>
+
                 <nz-dropdown-menu #empMenu="nzDropdownMenu">
                     <ul nz-menu>
-                        <li nz-menu-item>Add Employee</li>
-                        <li nz-menu-item routerLink="/employee/job-details">Employee List</li>
-                        <li nz-menu-item>Employee Status</li>
-                    </ul>
-                </nz-dropdown-menu>
-
-                <!-- HRMS Dropdown -->
-                <button nz-button nzType="link"
-                    class="text-white fw-bolder BtnEffect"
-                    [nzTrigger]="'click'" nz-dropdown
-                    [nzDropdownMenu]="hrmsMenu">
-                    HRMS <i nz-icon nzType="down"></i>
-                </button>
-                <nz-dropdown-menu #hrmsMenu="nzDropdownMenu">
-                    <ul nz-menu>
-                        <li nz-menu-item>Payroll</li>
-                        <li nz-menu-item>Attendance</li>
-                        <li nz-menu-item>Leave Management</li>
-                    </ul>
-                </nz-dropdown-menu>
-
-                <!-- Groups Dropdown -->
-                <button nz-button nzType="link"
-                    class="text-white fw-bolder BtnEffect"
-                    [nzTrigger]="'click'" nz-dropdown
-                    [nzDropdownMenu]="groupsMenu">
-                    Groups <i nz-icon nzType="down"></i>
-                </button>
-                <nz-dropdown-menu #groupsMenu="nzDropdownMenu">
-                    <ul nz-menu>
-                        <li nz-menu-item>Admins</li>
-                        <li nz-menu-item>Managers</li>
-                        <li nz-menu-item>Employees</li>
-                    </ul>
-                </nz-dropdown-menu>
-
-                <!-- Files Dropdown -->
-                <button nz-button nzType="link"
-                    class="text-white fw-bolder BtnEffect"
-                    [nzTrigger]="'click'" nz-dropdown
-                    [nzDropdownMenu]="filesMenu">
-                    Files <i nz-icon nzType="down"></i>
-                </button>
-                <nz-dropdown-menu #filesMenu="nzDropdownMenu">
-                    <ul nz-menu>
-                        <li nz-menu-item>Documents</li>
-                        <li nz-menu-item>Reports</li>
-                        <li nz-menu-item>Policies</li>
+                        <li nz-menu-item routerLink="/employee/personal-information">
+                            <nz-space>
+                                <span *nzSpaceItem>
+                                    <i nz-icon nzType="user-add"
+                                        nzTheme="outline"></i>
+                                </span>
+                                <span *nzSpaceItem class="DropdownLinkName">Add
+                                    Employee</span>
+                            </nz-space>
+                        </li>
+                        <li nz-menu-item routerLink="/employee/job-details">
+                            <nz-space>
+                                <span *nzSpaceItem>
+                                    <i nz-icon nzType="team"
+                                        nzTheme="outline"></i>
+                                </span>
+                                <span *nzSpaceItem
+                                    class="DropdownLinkName">Employee
+                                    List</span>
+                            </nz-space>
+                        </li>
                     </ul>
                 </nz-dropdown-menu>
 
