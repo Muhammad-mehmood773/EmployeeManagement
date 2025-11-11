@@ -5,8 +5,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class PersonalInfoBridge {
-  
-   private validateFnSubject = new BehaviorSubject<(() => boolean) | null>(null);
+
+  private validateFnSubject = new BehaviorSubject<(() => boolean) | null>(null);
   private getDataFnSubject = new BehaviorSubject<(() => any) | null>(null);
   private hasUnsavedFnSubject = new BehaviorSubject<(() => boolean) | null>(null);
 

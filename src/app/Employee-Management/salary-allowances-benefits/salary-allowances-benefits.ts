@@ -10,7 +10,7 @@ import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
   templateUrl: './salary-allowances-benefits.html',
   styleUrl: './salary-allowances-benefits.css',
 })
-export class SalaryAllowancesBenefits implements OnInit{
+export class SalaryAllowancesBenefits implements OnInit {
 
   salrayPackForm!: FormGroup;
 
@@ -26,17 +26,22 @@ export class SalaryAllowancesBenefits implements OnInit{
     });
   }
 
-    getError(controlName: string): string {
-      const control = this.salrayPackForm.get(controlName);
-      return getNzErrorMessage(control, controlName);
-    }
-  
-  
-  
-    markFormTouched(): void {
-      Object.values(this.salrayPackForm.controls).forEach((ctrl) => {
-        ctrl.markAsTouched();
-        ctrl.updateValueAndValidity();
-      });
-    }
+  getError(controlName: string): string {
+    const control = this.salrayPackForm.get(controlName);
+    return getNzErrorMessage(control, controlName);
+  }
+
+
+
+  markFormTouched(): void {
+    Object.values(this.salrayPackForm.controls).forEach((ctrl) => {
+      ctrl.markAsTouched();
+      ctrl.updateValueAndValidity();
+    });
+  }
+
+  validateForm(): boolean {
+    this.markFormTouched();
+    return this.salrayPackForm.valid;
+  }
 }

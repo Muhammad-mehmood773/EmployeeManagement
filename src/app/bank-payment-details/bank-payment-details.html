@@ -1,0 +1,64 @@
+<nz-card nzTitle="Bank & Payment Details" style="margin-top: 10px;">
+    <form [formGroup]="bankDetailForm" nz-form nzLayout="vertical">
+        <div nz-row [nzGutter]="8">
+
+             <!-- Basic Salary -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('bankName')">
+                        <nz-form-label  nzRequired
+                            nzFor="bankName">Bank Name
+                        </nz-form-label>
+                        <input nz-input formControlName="bankName"
+                            id="bankName" name="bankName" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+             <!-- Gross Salary -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control 
+                        [nzErrorTip]="getError('bankAccountNumber')">
+                        <nz-form-label  nzRequired
+                            nzFor="bankAccountNumber">Account Number
+                        </nz-form-label>
+                        <input nz-input formControlName="bankAccountNumber" 
+                            id="bankAccountNumber" name="bankAccountNumber" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <!-- Total Allowances -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('ifscOrSwiftCode')">
+                        <nz-form-label 
+                            nzFor="SalaryFrequency">IFSC/Swift Code
+                        </nz-form-label>
+                        <input nz-input formControlName="ifscOrSwiftCode"
+                            id="ifscOrSwiftCode" name="ifscOrSwiftCode" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+           <!--Branch Name  -->
+             <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                [nzXl]="6" [nzXXl]="6">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('branchName')">
+                        <nz-form-label 
+                            nzFor="SalaryFrequency">Branch Name
+                        </nz-form-label>
+                        <input nz-input formControlName="branchName"
+                            id="branchName" name="branchName" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
+</nz-card>

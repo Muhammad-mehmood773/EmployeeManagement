@@ -1,294 +1,305 @@
-<nz-card nzTitle="Employee Job Details">
 
-    <form [formGroup]="jobDetailForm" nz-form nzLayout="vertical">
-        <div nz-row [nzGutter]="8">
-
-            <!-- Department -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('departmentId')">
-                        <nz-form-label nzRequired
-                            nzFor="department">Department
-                        </nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear
-                            id="department"
-                            formControlName="departmentId"
-                            name="department">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom"
-                                nzValue="tom"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <!-- Designation -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('designationId')">
-                        <nz-form-label nzRequired
-                            nzFor="designation">Designation
-                        </nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear
-                            id="designation"
-                            formControlName="designationId"
-                            name="department">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom"
-                                nzValue="tom"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <!-- Reporting Authority -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('reportingAuthorityId')">
-                        <nz-form-label
-                            nzFor="reportingAuthority">Reporting
-                            Authority
-                        </nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear
-                            id="reportingAuthority"
-                            formControlName="reportingAuthorityId"
-                            name="reportingAuthority">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom"
-                                nzValue="tom"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <!-- Date of Birth -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-label nzRequired
-                        nzFor="joiningDate">Joining
-                        Date</nz-form-label>
-                    <nz-form-control
-                        [nzErrorTip]="getError('joiningDate')"><nz-date-picker
-                            style="width: 100%;"
-                            id="joiningDate"
-                            name="joiningDate"
-                            formControlName="joiningDate"
-                            nzPlaceHolder=" "
-                            nzFormat="MMM d, yyyy">
-                        </nz-date-picker>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <!-- Probation Period -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-label nzRequired
-                        nzFor="probationPeriod">Probation
-                        Period</nz-form-label>
-                    <nz-form-control
-                        [nzErrorTip]="getError('probationPeriod')"><nz-date-picker
-                            style="width: 100%;"
-                            id="probationPeriod"
-                            name="probationPeriod"
-                            formControlName="probationPeriod"
-                            nzPlaceHolder=" "
-                            nzFormat="MMM d, yyyy">
-                        </nz-date-picker>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <!-- Employee Type -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('employeeTypeId')">
-                        <nz-form-label nzRequired
-                            nzFor="employeeType">Employee Type
-                        </nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear
-                            id="employeeType"
-                            formControlName="employeeTypeId"
-                            name="employeeType">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom"
-                                nzValue="tom"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- Shift -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('shiftId')">
-                        <nz-form-label nzRequired
-                            nzFor="shift">Shift
-                        </nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear
-                            id="shift"
-                            formControlName="shiftId"
-                            name="shift">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom"
-                                nzValue="tom"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <!-- Location  -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('locationId')">
-                        <nz-form-label
-                            nzFor="location">Location
-                        </nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear
-                            id="location"
-                            formControlName="locationId"
-                            name="location">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom"
-                                nzValue="tom"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- Floor Number -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('floorNumber')">
-                        <nz-form-label
-                            nzFor="floorNumber">Floor No</nz-form-label>
-                        <input nz-input formControlName="floorNumber"
-                            id="floorNumber" name="floorNumber" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- Room -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('room')">
-                        <nz-form-label
-                            nzFor="room">Room</nz-form-label>
-                        <input nz-input formControlName="room"
-                            id="room" name="room" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <!-- Seat No -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('seat')">
-                        <nz-form-label
-                            nzFor="seat">Seat</nz-form-label>
-                        <input nz-input formControlName="seat"
-                            id="seat" name="seat" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- Work Phone Number -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('phoneNumber')">
-                        <nz-form-label
-                            nzFor="phoneNumber">Work Phone
-                            Number</nz-form-label>
-                        <input nz-input formControlName="phoneNumber"
-                            id="phoneNumber" name="phoneNumber" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <!-- Work Extension -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('workExtension')">
-                        <nz-form-label
-                            nzFor="workExtension">Work Extension
-                        </nz-form-label>
-                        <input nz-input formControlName="workExtension"
-                            id="workExtension" name="workExtension" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-            <!-- Grade   -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
-                [nzXl]="4" [nzXXl]="4">
-                <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('gradeId')">
-                        <nz-form-label nzRequired
-                            nzFor="grade">Grade
-                        </nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear
-                            id="grade"
-                            formControlName="gradeId"
-                            name="grade">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom"
-                                nzValue="tom"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-
-        </div>
-    </form>
-
-</nz-card>
 
 <div nz-row [nzGutter]="8">
-    <div  nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
-                [nzXl]="12" [nzXXl]="12">
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="16"
+        [nzXl]="16" [nzXXl]="16">
+        <nz-card nzTitle="Employee Job Details">
+
+            <form [formGroup]="jobDetailForm" nz-form nzLayout="vertical">
+                <div nz-row [nzGutter]="8">
+
+                    <!-- Department -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('departmentId')">
+                                <nz-form-label nzRequired
+                                    nzFor="department">Department
+                                </nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="department"
+                                    formControlName="departmentId"
+                                    name="department">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy"
+                                        nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom"
+                                        nzValue="tom"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Designation -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('designationId')">
+                                <nz-form-label nzRequired
+                                    nzFor="designation">Designation
+                                </nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="designation"
+                                    formControlName="designationId"
+                                    name="department">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy"
+                                        nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom"
+                                        nzValue="tom"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Reporting Authority -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('reportingAuthorityId')">
+                                <nz-form-label
+                                    nzFor="reportingAuthority">Reporting
+                                    Authority
+                                </nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="reportingAuthority"
+                                    formControlName="reportingAuthorityId"
+                                    name="reportingAuthority">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy"
+                                        nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom"
+                                        nzValue="tom"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Date of Birth -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-label nzRequired
+                                nzFor="joiningDate">Joining
+                                Date</nz-form-label>
+                            <nz-form-control
+                                [nzErrorTip]="getError('joiningDate')"><nz-date-picker
+                                    style="width: 100%;"
+                                    id="joiningDate"
+                                    name="joiningDate"
+                                    formControlName="joiningDate"
+                                    nzPlaceHolder=" "
+                                    nzFormat="MMM d, yyyy">
+                                </nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Probation Period -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-label nzRequired
+                                nzFor="probationPeriod">Probation
+                                Period</nz-form-label>
+                            <nz-form-control
+                                [nzErrorTip]="getError('probationPeriod')"><nz-date-picker
+                                    style="width: 100%;"
+                                    id="probationPeriod"
+                                    name="probationPeriod"
+                                    formControlName="probationPeriod"
+                                    nzPlaceHolder=" "
+                                    nzFormat="MMM d, yyyy">
+                                </nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Employee Type -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('employeeTypeId')">
+                                <nz-form-label nzRequired
+                                    nzFor="employeeType">Employee Type
+                                </nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="employeeType"
+                                    formControlName="employeeTypeId"
+                                    name="employeeType">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy"
+                                        nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom"
+                                        nzValue="tom"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Shift -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('shiftId')">
+                                <nz-form-label nzRequired
+                                    nzFor="shift">Shift
+                                </nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="shift"
+                                    formControlName="shiftId"
+                                    name="shift">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy"
+                                        nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom"
+                                        nzValue="tom"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Location  -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('locationId')">
+                                <nz-form-label
+                                    nzFor="location">Location
+                                </nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="location"
+                                    formControlName="locationId"
+                                    name="location">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy"
+                                        nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom"
+                                        nzValue="tom"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Floor Number -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('floorNumber')">
+                                <nz-form-label
+                                    nzFor="floorNumber">Floor No</nz-form-label>
+                                <input nz-input formControlName="floorNumber"
+                                    id="floorNumber" name="floorNumber" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Room -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('room')">
+                                <nz-form-label
+                                    nzFor="room">Room</nz-form-label>
+                                <input nz-input formControlName="room"
+                                    id="room" name="room" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Seat No -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('seat')">
+                                <nz-form-label
+                                    nzFor="seat">Seat</nz-form-label>
+                                <input nz-input formControlName="seat"
+                                    id="seat" name="seat" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Work Phone Number -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('phoneNumber')">
+                                <nz-form-label
+                                    nzFor="phoneNumber">Work Phone
+                                    Number</nz-form-label>
+                                <input nz-input formControlName="phoneNumber"
+                                    id="phoneNumber" name="phoneNumber" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Work Extension -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('workExtension')">
+                                <nz-form-label
+                                    nzFor="workExtension">Work Extension
+                                </nz-form-label>
+                                <input nz-input formControlName="workExtension"
+                                    id="workExtension" name="workExtension" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <!-- Grade   -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="4"
+                        [nzXl]="4" [nzXXl]="4">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('gradeId')">
+                                <nz-form-label nzRequired
+                                    nzFor="grade">Grade
+                                </nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="grade"
+                                    formControlName="gradeId"
+                                    name="grade">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy"
+                                        nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom"
+                                        nzValue="tom"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                </div>
+            </form>
+
+        </nz-card>
+    </div>
+    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+        [nzXl]="8" [nzXXl]="8">
         <app-salary-allowances-benefits></app-salary-allowances-benefits>
     </div>
+</div>
 
-    <div  nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
-                [nzXl]="12" [nzXXl]="12">
+<div nz-row [nzGutter]="8">
+    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
+        [nzXl]="12" [nzXXl]="12">
         <app-allowances-and-benefits></app-allowances-and-benefits>
+    </div>
+    
+    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
+    [nzXl]="12" [nzXXl]="12">
+    <app-bank-payment-details></app-bank-payment-details>
     </div>
 </div>

@@ -37,4 +37,9 @@ export class AllowancesAndBenefits implements OnInit{
       });
     }
 
+              validateForm(): boolean {
+    this.markFormTouched();
+    return this.allowanceBenefitsForm.valid;
+  }
+
   }

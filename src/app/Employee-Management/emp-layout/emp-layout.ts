@@ -55,7 +55,7 @@ ngAfterViewInit() {
   const index = this.tabRoutes.findIndex(t => t.route === current);
   if (index !== -1) {
     this.selectedIndex = index;
-    this.cdr.detectChanges();  // notify Angular about the change
+    this.cdr.detectChanges();  
   }
 }
 

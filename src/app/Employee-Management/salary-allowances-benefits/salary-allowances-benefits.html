@@ -1,10 +1,10 @@
-<nz-card nzTitle="Salary & Compensation" style="margin-top: 10px;">
+<nz-card nzTitle="Salary & Compensation">
     <form [formGroup]="salrayPackForm" nz-form nzLayout="vertical">
         <div nz-row [nzGutter]="8">
 
              <!-- Basic Salary -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="8" [nzXXl]="8">
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
+                [nzXl]="12" [nzXXl]="12">
                 <nz-form-item>
                     <nz-form-control
                         [nzErrorTip]="getError('basicSalary')">
@@ -17,12 +17,12 @@
                 </nz-form-item>
             </div>
              <!-- Gross Salary -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="8" [nzXXl]="8">
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
+                [nzXl]="12" [nzXXl]="12">
                 <nz-form-item>
-                    <nz-form-control nzRequired
+                    <nz-form-control 
                         [nzErrorTip]="getError('grossSalary')">
-                        <nz-form-label 
+                        <nz-form-label nzRequired
                             nzFor="grossSalary">Gross Salary
                         </nz-form-label>
                         <input nz-input formControlName="grossSalary" [disabled]="true"
@@ -31,8 +31,8 @@
                 </nz-form-item>
             </div>
             <!-- Department -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="8" [nzXXl]="8">
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
+                [nzXl]="12" [nzXXl]="12">
                 <nz-form-item>
                     <nz-form-control
                         [nzErrorTip]="getError('salaryFrequencyId')">
@@ -55,8 +55,8 @@
             </div>
 
              <!-- AllowancesMapId -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="8" [nzXXl]="8">
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
+                [nzXl]="12" [nzXXl]="12">
                 <nz-form-item>
                     <nz-form-control
                         [nzErrorTip]="getError('allowancesMapId')">
@@ -78,8 +78,8 @@
                 </nz-form-item>
             </div>
             <!-- Total Allowances -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="8" [nzXXl]="8">
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
+                [nzXl]="12" [nzXXl]="12">
                 <nz-form-item>
                     <nz-form-control
                         [nzErrorTip]="getError('totalAllowances')">
