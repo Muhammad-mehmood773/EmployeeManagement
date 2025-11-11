@@ -5,10 +5,14 @@ import { PersonalInfoBridge } from '../services/personal-info-bridge';
 
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
+import { JobDetailsBridge } from '../services/job-details-bridge';
+import { PersonalInformation } from "../personal-information/personal-information";
+import { EmpJobDetails } from "../emp-job-details/emp-job-details";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-emp-layout',
-  imports: [SHARED_IMPORTS, RouterOutlet],
+  imports: [SHARED_IMPORTS, PersonalInformation, EmpJobDetails,CommonModule],
   templateUrl: './emp-layout.html',
   styleUrl: './emp-layout.css',
   standalone: true,
@@ -24,57 +28,69 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
 
   hasError = false;
   constructor(
-  private router: Router,
-  private route: ActivatedRoute,
-  private bridge: PersonalInfoBridge,
-  private cdr: ChangeDetectorRef
-) {}
+    private personalBridge: PersonalInfoBridge,
+    private cdr: ChangeDetectorRef,
+    private jobBridge: JobDetailsBridge,
+  ) { }
+
   ngOnInit() {
-    this.router.events
-      .pipe(filter(e => e instanceof NavigationEnd))
-      .subscribe(() => {
-        const current = this.route.firstChild?.snapshot.routeConfig?.path;
-        const index = this.tabRoutes.findIndex(t => t.route === current);
-        if (index !== -1) {
-          this.selectedIndex = index;
-        }
-      });
 
   }
 
 
-  onTabChange(index: number) {
+
+  onTabChange(index: number): void {
+    const unsaved =
+      this.selectedIndex === 0
+        ? this.personalBridge.getUnsavedFn()?.()
+        : this.jobBridge.getUnsavedFn()?.();
+
+    if (unsaved) {
+      const confirmSwitch = confirm('You have unsaved changes. Continue?');
+      if (!confirmSwitch) return;
+    }
+
     this.selectedIndex = index;
-    const routePath = this.tabRoutes[index].route;
-    this.router.navigate([routePath], { relativeTo: this.route });
   }
 
 
-ngAfterViewInit() {
-  const current = this.route.firstChild?.snapshot.routeConfig?.path;
-  const index = this.tabRoutes.findIndex(t => t.route === current);
-  if (index !== -1) {
-    this.selectedIndex = index;
-    this.cdr.detectChanges();  
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
   }
-}
+
 
   saveAll() {
-    const validateFn = this.bridge.getValidateFn();
-    const getDataFn = this.bridge.getDataFn();
+    let validateFn, getDataFn;
 
-    if (validateFn && !validateFn()) {
+    if (this.selectedIndex === 0) {
+      validateFn = this.personalBridge.getValidateFn();
+      getDataFn = this.personalBridge.getDataFn();
+    } else if (this.selectedIndex === 1) {
+      validateFn = this.jobBridge.getValidateFn();
+      getDataFn = this.jobBridge.getDataFn();
+    }
+
+    if (!validateFn) {
+      console.error('Validation function not registered yet!');
+      return;
+    }
+
+    if (!validateFn()) {
       this.hasError = true;
       console.warn('Some forms are invalid!');
       return;
     }
 
     this.hasError = false;
-    console.log('Final Form Object:', getDataFn);
+    console.log('Final Form Object:', getDataFn ? getDataFn() : {});
   }
 
+
+
   hasUnsavedChanges(): boolean {
-    const unsavedFn = this.bridge.getUnsavedFn();
-    return unsavedFn ? unsavedFn() : false;
+    const personalUnsaved = this.personalBridge.getUnsavedFn()?.() ?? false;
+    const jobUnsaved = this.jobBridge.getUnsavedFn()?.() ?? false;
+    return personalUnsaved || jobUnsaved;
   }
+
 }

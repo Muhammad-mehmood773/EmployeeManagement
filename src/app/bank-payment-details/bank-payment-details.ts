@@ -10,7 +10,7 @@ import { SHARED_IMPORTS } from '../shared/theme/ng-zorro-imports';
   templateUrl: './bank-payment-details.html',
   styleUrl: './bank-payment-details.css',
 })
-export class BankPaymentDetails implements OnInit{
+export class BankPaymentDetails implements OnInit {
 
   bankDetailForm!: FormGroup;
 
@@ -18,28 +18,28 @@ export class BankPaymentDetails implements OnInit{
 
   ngOnInit(): void {
     this.bankDetailForm = this.fb.group({
-      bankName: [null, [Validators.required,Validators.maxLength(80)]],
+      bankName: [null, [Validators.required, Validators.maxLength(80)]],
       bankAccountNumber: [null, [Validators.required]],
       ifscOrSwiftCode: [null],
-      branchName: [null,[Validators.maxLength(80)]],
+      branchName: [null, [Validators.maxLength(80)]],
     });
   }
 
-    getError(controlName: string): string {
-      const control = this.bankDetailForm.get(controlName);
-      return getNzErrorMessage(control, controlName);
-    }
-  
-  
-  
-    markFormTouched(): void {
-      Object.values(this.bankDetailForm.controls).forEach((ctrl) => {
-        ctrl.markAsTouched();
-        ctrl.updateValueAndValidity();
-      });
-    }
+  getError(controlName: string): string {
+    const control = this.bankDetailForm.get(controlName);
+    return getNzErrorMessage(control, controlName);
+  }
 
-      validateForm(): boolean {
+
+
+  markFormTouched(): void {
+    Object.values(this.bankDetailForm.controls).forEach((ctrl) => {
+      ctrl.markAsTouched();
+      ctrl.updateValueAndValidity();
+    });
+  }
+
+  validateForm(): boolean {
     this.markFormTouched();
     return this.bankDetailForm.valid;
   }

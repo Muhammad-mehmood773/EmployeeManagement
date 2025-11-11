@@ -7,6 +7,7 @@ import { addMonths } from 'date-fns';
 import { SalaryAllowancesBenefits } from "../salary-allowances-benefits/salary-allowances-benefits";
 import { AllowancesAndBenefits } from "../allowances-and-benefits/allowances-and-benefits";
 import { BankPaymentDetails } from "../../bank-payment-details/bank-payment-details";
+import { JobDetailsBridge } from '../services/job-details-bridge';
 
 @Component({
   selector: 'app-emp-job-details',
@@ -25,7 +26,8 @@ export class EmpJobDetails implements OnInit {
   @ViewChild(BankPaymentDetails) bankPaymentDetailsComp!: BankPaymentDetails;
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private bridge: JobDetailsBridge) {}
+
 
   ngOnInit(): void {
     this.jobDetailForm = this.fb.group({
@@ -54,9 +56,14 @@ export class EmpJobDetails implements OnInit {
         this.jobDetailForm.get('probationPeriod')?.setValue(null);
       }
     });
+
+     // 🔹 Register bridge methods
+  this.bridge.registerValidateFn(() => this.validateAllSections());
+  this.bridge.registerDataFn(() => this.getJobInfoData());
+  this.bridge.registerUnsavedFn(() => this.hasUnsavedChanges());
   }
 
-    /** 🔹 Validate all child + main forms */
+  /** 🔹 Validate all child + main forms */
   validateAllSections(): boolean {
     this.markFormTouched();
     const mainValid = this.jobDetailForm.valid;
@@ -65,7 +72,7 @@ export class EmpJobDetails implements OnInit {
     const allowanceValid = this.allowancesAndBenefitsComp?.validateForm() ?? false;
     const bankValid = this.bankPaymentDetailsComp?.validateForm() ?? false;
 
-   
+
     return mainValid && salaryValid && allowanceValid && bankValid;
   }
 
@@ -84,13 +91,21 @@ export class EmpJobDetails implements OnInit {
   }
 
 
-    getjobInfoData() {
+  getJobInfoData() {
     return {
       ...this.jobDetailForm.value,
       salaryAllowancesBenefits: this.salaryAllowancesBenefitsComp?.salrayPackForm?.value,
       allowancesAndBenefits: this.allowancesAndBenefitsComp?.allowanceBenefitsForm?.value,
       bankPaymentDetails: this.bankPaymentDetailsComp?.bankDetailForm?.value,
     };
+  }
+
+  hasUnsavedChanges(): boolean {
+    const mainDirty = this.jobDetailForm.dirty;
+    const salaryAllowancesBenefitsDirty = this.salaryAllowancesBenefitsComp?.salrayPackForm?.dirty ?? false;
+    const allowancesAndBenefitsDirty = this.allowancesAndBenefitsComp?.allowanceBenefitsForm?.dirty ?? false;
+    const bankPaymentDetailsDirty = this.bankPaymentDetailsComp?.bankDetailForm?.dirty ?? false;
+    return mainDirty || salaryAllowancesBenefitsDirty || allowancesAndBenefitsDirty || bankPaymentDetailsDirty;
   }
 
 }

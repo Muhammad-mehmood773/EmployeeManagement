@@ -3,13 +3,38 @@
     <div nz-row [nzGutter]="16">
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [nzXl]="24">
         <div class="card-container">
-          <nz-tabset nzType="card" [nzSelectedIndex]="selectedIndex"
+          <!-- <nz-tabset nzType="card" [nzSelectedIndex]="selectedIndex" [nzAnimated]="false"
           (nzSelectedIndexChange)="onTabChange($event)">
-          @for (tab of tabRoutes; track tab.title) {
-            <nz-tab [nzTitle]="tab.title">
-              <router-outlet></router-outlet>
+          @if (selectedIndex == 0) {
+            <nz-tab [nzTitle]="tabRoutes[0].title">
+              <app-personal-information></app-personal-information>
             </nz-tab>
           }
+           @if (selectedIndex == 1) {
+            <nz-tab [nzTitle]="tabRoutes[1].title">
+              <app-emp-job-details></app-emp-job-details>
+            </nz-tab>
+          }
+          </nz-tabset> -->
+
+          <nz-tabset
+            nzType="card"
+            [nzSelectedIndex]="selectedIndex"
+            [nzAnimated]="false"
+            (nzSelectedIndexChange)="onTabChange($event)">
+            <!-- 🔹 Personal Info Tab -->
+            <nz-tab [nzTitle]="tabRoutes[0].title">
+              @if (selectedIndex == 0) {
+              <app-personal-information></app-personal-information>
+              }
+            </nz-tab>
+
+            <!-- 🔹 Job Details Tab -->
+            <nz-tab [nzTitle]="tabRoutes[1].title">
+              @if (selectedIndex == 1) {
+              <app-emp-job-details></app-emp-job-details>
+              }
+            </nz-tab>
           </nz-tabset>
 
         </div>

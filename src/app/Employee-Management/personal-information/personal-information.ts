@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -16,9 +16,9 @@ import { PersonalInfoBridge } from '../services/personal-info-bridge';
   imports: [SHARED_IMPORTS, PermanentAddress, AddFamilyMembers, PresentAddress, EmpProfile, ReactiveFormsModule, CommonModule, EmpEmergencyContact],
   templateUrl: './personal-information.html',
   styleUrl: './personal-information.css',
-  standalone:true
+  standalone: true
 })
-export class PersonalInformation implements OnInit,AfterViewInit  {
+export class PersonalInformation implements OnInit, AfterViewInit {
 
   employeeForm!: FormGroup;
   activeTab = 0;
@@ -34,8 +34,8 @@ export class PersonalInformation implements OnInit,AfterViewInit  {
     { title: 'Permanent Address', index: 0 },
     { title: 'Present Address', index: 1 }
   ];
+constructor(private fb: FormBuilder, private bridgeService: PersonalInfoBridge, private cdr: ChangeDetectorRef) {}
 
-  constructor(private fb: FormBuilder,private bridgeService: PersonalInfoBridge) { }
 
   ngOnInit(): void {
     this.employeeForm = this.fb.group({
@@ -52,7 +52,12 @@ export class PersonalInformation implements OnInit,AfterViewInit  {
       personalPhoneNumber: ['', [Validators.required, Validators.maxLength(16)]],
       personalEmail: ['', [Validators.email, Validators.maxLength(100)]],
     });
+
+    this.bridgeService.registerValidateFn(() => this.validateAllSections());
+    this.bridgeService.registerDataFn(() => this.getPersonalInfoData());
+    this.bridgeService.registerUnsavedFn(() => this.hasUnsavedChanges());
   }
+
 
 
   getError(controlName: string): string {
@@ -67,6 +72,7 @@ export class PersonalInformation implements OnInit,AfterViewInit  {
     this.bridgeService.registerUnsavedFn(() => this.hasUnsavedChanges());
   }
 
+
   markFormTouched(): void {
     Object.values(this.employeeForm.controls).forEach((ctrl) => {
       ctrl.markAsTouched();
@@ -74,25 +80,29 @@ export class PersonalInformation implements OnInit,AfterViewInit  {
     });
   }
   /** 🔹 Validate all child + main forms */
-  validateAllSections(): boolean {
-    this.markFormTouched();
-    const mainValid = this.employeeForm.valid;
+validateAllSections(): boolean {
+  this.markFormTouched();
 
-    const permValid = this.permanentAddressComp?.validateForm() ?? false;
-    const presentValid = this.presentAddressComp?.validateForm() ?? false;
+  // ✅ Force Angular to refresh error states and UI bindings
+  this.cdr.detectChanges();
 
-    let familyValid = true; 
-    if (this.addFamilyMemberComp?.showFamilyForm) {
-      familyValid = this.addFamilyMemberComp.validateForm();
-    }
+  const mainValid = this.employeeForm.valid;
+  const permValid = this.permanentAddressComp?.validateForm() ?? false;
+  const presentValid = this.presentAddressComp?.validateForm() ?? false;
 
-    let emergencyValid = true; 
-    if (this.emergencyComp?.showEmergencyForm) {
-      familyValid = this.emergencyComp.validateForm();
-    }
-
-    return mainValid && permValid && presentValid && familyValid && emergencyValid;
+  let familyValid = true; 
+  if (this.addFamilyMemberComp?.showFamilyForm) {
+    familyValid = this.addFamilyMemberComp.validateForm();
   }
+
+  let emergencyValid = true; 
+  if (this.emergencyComp?.showEmergencyForm) {
+    emergencyValid = this.emergencyComp.validateForm();
+  }
+
+  return mainValid && permValid && presentValid && familyValid && emergencyValid;
+}
+
 
 
   getPersonalInfoData() {
@@ -106,7 +116,7 @@ export class PersonalInformation implements OnInit,AfterViewInit  {
     };
   }
 
-    hasUnsavedChanges(): boolean {
+  hasUnsavedChanges(): boolean {
     const mainDirty = this.employeeForm.dirty;
     const permDirty = this.permanentAddressComp?.permanentAddressForm?.dirty ?? false;
     const presentDirty = this.presentAddressComp?.presentAddressForm?.dirty ?? false;
