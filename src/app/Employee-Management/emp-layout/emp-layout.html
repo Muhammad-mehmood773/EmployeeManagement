@@ -1,17 +1,23 @@
 <nz-layout style="min-height: 100vh; position: relative;">
-
   <nz-content class="scrollable-content">
     <div nz-row [nzGutter]="16">
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [nzXl]="24">
         <div class="card-container">
-        <nz-tabs nzType="card" >
-           <nz-tab nzTitle="Personal Information">
-            <app-personal-information></app-personal-information>
-           </nz-tab>
-           <nz-tab nzTitle="Job Details">
-            <app-emp-job-details></app-emp-job-details>
-           </nz-tab>
-        </nz-tabs>
+          <nz-tabset
+            nzType="card"
+            [nzSelectedIndex]="selectedIndex"
+            (nzSelectedIndexChange)="onTabChange($event)">
+
+            <nz-tab [nzTitle]="tabRoutes[0].title">
+              <app-personal-information></app-personal-information>
+            </nz-tab>
+
+            <nz-tab [nzTitle]="tabRoutes[1].title">
+              <app-emp-job-details></app-emp-job-details>
+            </nz-tab>
+
+          </nz-tabset>
+
         </div>
       </div>
     </div>

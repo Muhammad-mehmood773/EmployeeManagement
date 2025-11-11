@@ -35,8 +35,6 @@ nz-footer {
   padding: 10px;
   border-left: 1px solid #65a1f5;
   border-right: 1px solid #65a1f5;
-
-  
 }
 
 .card-container ::ng-deep>.ant-tabs-card>.ant-tabs-nav::before {

@@ -18,11 +18,10 @@
      background: transparent;
  }
 
- .card-container ::ng-deep>.ant-tabs-card .ant-tabs-tab-active {
-     border-color: #f1f4fa;
-     background: #f1f4fa;
- }
-
+.card-container ::ng-deep>.ant-tabs-card .ant-tabs-tab-active {
+  border-color: #65a1f5;
+  background: #f1f4fa;
+} 
  .card-container ::ng-deep>.ant-tabs-card .ant-tabs-content {
     /* margin-top: -16px; */
     padding: 0px;
