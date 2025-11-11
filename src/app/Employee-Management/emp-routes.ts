@@ -5,7 +5,7 @@ import { UnsavedGuard } from '../core/guards/unsaved-guard';
 export const employeeRoutes: Route[] = [
   {
     path: '',
-    component: EmpLayout, // Shell layout
+    component: EmpLayout, 
     children: [
       { path: '', redirectTo: 'personal-information', pathMatch: 'full' },
       {

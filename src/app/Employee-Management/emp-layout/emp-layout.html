@@ -3,19 +3,13 @@
     <div nz-row [nzGutter]="16">
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [nzXl]="24">
         <div class="card-container">
-          <nz-tabset
-            nzType="card"
-            [nzSelectedIndex]="selectedIndex"
-            (nzSelectedIndexChange)="onTabChange($event)">
-
-            <nz-tab [nzTitle]="tabRoutes[0].title">
-              <app-personal-information></app-personal-information>
+          <nz-tabset nzType="card" [nzSelectedIndex]="selectedIndex"
+          (nzSelectedIndexChange)="onTabChange($event)">
+          @for (tab of tabRoutes; track tab.title) {
+            <nz-tab [nzTitle]="tab.title">
+              <router-outlet></router-outlet>
             </nz-tab>
-
-            <nz-tab [nzTitle]="tabRoutes[1].title">
-              <app-emp-job-details></app-emp-job-details>
-            </nz-tab>
-
+          }
           </nz-tabset>
 
         </div>

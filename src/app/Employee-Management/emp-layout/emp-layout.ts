@@ -1,55 +1,63 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { HasUnsavedChanges } from '../../core/guards/unsaved-guard';
 import { PersonalInfoBridge } from '../services/personal-info-bridge';
-import { PersonalInformation } from '../personal-information/personal-information';
-import { EmpJobDetails } from "../emp-job-details/emp-job-details";
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-emp-layout',
-  imports: [SHARED_IMPORTS, PersonalInformation, EmpJobDetails],
+  imports: [SHARED_IMPORTS, RouterOutlet],
   templateUrl: './emp-layout.html',
-  styleUrl: './emp-layout.css', 
+  styleUrl: './emp-layout.css',
   standalone: true,
   host: { ngSkipHydration: 'true' },
 })
-export class EmpLayout implements HasUnsavedChanges {
+export class EmpLayout implements HasUnsavedChanges, OnInit {
 
-   selectedIndex = 0;
+  selectedIndex = 0;
   tabRoutes = [
     { title: 'Personal Information', route: 'personal-information' },
     { title: 'Job Details', route: 'job-details' },
   ];
 
   hasError = false;
-constructor(private router: Router, private route: ActivatedRoute, private bridge: PersonalInfoBridge) {}
+  constructor(
+  private router: Router,
+  private route: ActivatedRoute,
+  private bridge: PersonalInfoBridge,
+  private cdr: ChangeDetectorRef
+) {}
+  ngOnInit() {
+    this.router.events
+      .pipe(filter(e => e instanceof NavigationEnd))
+      .subscribe(() => {
+        const current = this.route.firstChild?.snapshot.routeConfig?.path;
+        const index = this.tabRoutes.findIndex(t => t.route === current);
+        if (index !== -1) {
+          this.selectedIndex = index;
+        }
+      });
 
-ngOnInit() {
-  this.router.events
-    .pipe(filter(e => e instanceof NavigationEnd))
-    .subscribe(() => {
-      const current = this.route.firstChild?.snapshot.routeConfig?.path;
-      const index = this.tabRoutes.findIndex(t => t.route === current);
-      if (index !== -1) {
-        this.selectedIndex = index;
-      }
-    });
-}
+  }
 
 
-onTabChange(index: number) {
-  this.selectedIndex = index; // update index immediately
-  this.router.navigate([this.tabRoutes[index].route], { relativeTo: this.route });
-}
+  onTabChange(index: number) {
+    this.selectedIndex = index;
+    const routePath = this.tabRoutes[index].route;
+    this.router.navigate([routePath], { relativeTo: this.route });
+  }
+
 
 ngAfterViewInit() {
   const current = this.route.firstChild?.snapshot.routeConfig?.path;
   const index = this.tabRoutes.findIndex(t => t.route === current);
-  if (index !== -1) this.selectedIndex = index;
+  if (index !== -1) {
+    this.selectedIndex = index;
+    this.cdr.detectChanges();  // notify Angular about the change
+  }
 }
-
 
   saveAll() {
     const validateFn = this.bridge.getValidateFn();
