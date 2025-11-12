@@ -42,6 +42,9 @@
                 [hidden]="selectedIndex !== 1">
               </app-emp-job-details>
             </nz-tab>
+            <nz-tab [nzTitle]="tabRoutes[2].title">
+              <app-emp-access-permissions [hidden]="selectedIndex !== 2"></app-emp-access-permissions>
+            </nz-tab>
           </nz-tabset>
 
         </div>

@@ -9,10 +9,11 @@ import { JobDetailsBridge } from '../services/job-details-bridge';
 import { PersonalInformation } from "../personal-information/personal-information";
 import { EmpJobDetails } from "../emp-job-details/emp-job-details";
 import { CommonModule } from '@angular/common';
+import { EmpAccessPermissions } from '../emp-access-permissions/emp-access-permissions';
 
 @Component({
   selector: 'app-emp-layout',
-  imports: [SHARED_IMPORTS, PersonalInformation, EmpJobDetails, CommonModule],
+  imports: [SHARED_IMPORTS, PersonalInformation, EmpJobDetails,EmpAccessPermissions, CommonModule],
   templateUrl: './emp-layout.html',
   styleUrl: './emp-layout.css',
   standalone: true,
@@ -24,6 +25,7 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
   tabRoutes = [
     { title: 'Personal Information', route: 'personal-information' },
     { title: 'Job Details', route: 'job-details' },
+    { title: 'Access & Permissions', route: 'access-and-permission' },
   ];
 
   hasError = false;
@@ -75,7 +77,6 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
     }
 
     this.hasError = false;
-    console.log('Final Form Object:', getDataFn ? getDataFn() : {});
     console.log('Final Form Object:', getDataFn ? getDataFn() : {});
   }
 
