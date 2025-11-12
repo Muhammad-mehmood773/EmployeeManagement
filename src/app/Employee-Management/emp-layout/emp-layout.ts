@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-emp-layout',
-  imports: [SHARED_IMPORTS, PersonalInformation, EmpJobDetails,CommonModule],
+  imports: [SHARED_IMPORTS, PersonalInformation, EmpJobDetails, CommonModule],
   templateUrl: './emp-layout.html',
   styleUrl: './emp-layout.css',
   standalone: true,
@@ -37,18 +37,11 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
 
   }
 
-
-
   onTabChange(index: number): void {
     const unsaved =
       this.selectedIndex === 0
         ? this.personalBridge.getUnsavedFn()?.()
         : this.jobBridge.getUnsavedFn()?.();
-
-    if (unsaved) {
-      const confirmSwitch = confirm('You have unsaved changes. Continue?');
-      if (!confirmSwitch) return;
-    }
 
     this.selectedIndex = index;
   }
