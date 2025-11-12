@@ -76,6 +76,7 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
 
     this.hasError = false;
     console.log('Final Form Object:', getDataFn ? getDataFn() : {});
+    console.log('Final Form Object:', getDataFn ? getDataFn() : {});
   }
 
 
