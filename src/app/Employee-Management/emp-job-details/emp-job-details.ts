@@ -93,7 +93,7 @@ export class EmpJobDetails implements OnInit {
 
   getJobInfoData() {
     return {
-      ...this.jobDetailForm.value,
+      jobdetails:this.jobDetailForm.value,
       salaryAllowancesBenefits: this.salaryAllowancesBenefitsComp?.salrayPackForm?.value,
       allowancesAndBenefits: this.allowancesAndBenefitsComp?.allowanceBenefitsForm?.value,
       bankPaymentDetails: this.bankPaymentDetailsComp?.bankDetailForm?.value,
