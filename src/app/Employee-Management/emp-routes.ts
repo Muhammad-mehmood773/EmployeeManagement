@@ -2,7 +2,7 @@ import { Route } from '@angular/router';
 import { UnsavedGuard } from '../core/guards/unsaved-guard';
 
 export const employeeRoutes: Route[] = [
-  { path: '', redirectTo: 'personal-information', pathMatch: 'full' },
+  { path: '', redirectTo: 'add-employee', pathMatch: 'full' },
   {
     path: 'add-employee',
     loadComponent: () =>

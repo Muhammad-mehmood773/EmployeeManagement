@@ -97,7 +97,8 @@
     }
 
     
-    <nz-table      nzSize="small"
+ @if (familyDataList().length) {
+      <nz-table      nzSize="small"
         #basicTable
         [nzData]="familyDataList()"
         [nzShowPagination]="false">
@@ -136,6 +137,13 @@
             }
         </tbody>
     </nz-table>
+ } @else {
+   <nz-empty
+      nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+      nzNotFoundContent="No family members added yet"
+      >
+    </nz-empty>
+ }
 </nz-card>
 
 <ng-template #extraTemplate>

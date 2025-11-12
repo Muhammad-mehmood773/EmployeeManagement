@@ -78,7 +78,12 @@
     }
 
     
-    <nz-table    nzSize="small"
+   
+
+
+
+    @if (emergencyDataList().length) {
+       <nz-table    nzSize="small"
         #basicTable
         [nzData]="emergencyDataList()"
         [nzShowPagination]="false">
@@ -114,6 +119,15 @@
             }
         </tbody>
     </nz-table>
+    } @else {
+           <nz-empty
+      nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+      nzNotFoundContent="No Emergency Contact added yet"
+      >
+    </nz-empty>
+    }
+
+
 </nz-card>
 
 <ng-template #extraTemplate>
