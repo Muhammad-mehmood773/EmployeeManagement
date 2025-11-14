@@ -1,1 +1,54 @@
-<p>emp-access-permissions works!</p>
+ <nz-card [nzBordered]="false" nzTitle="HRMS Access Permission">
+    <form [formGroup]="roleAccessForm" nz-form nzLayout="vertical">
+        <div nz-row [nzGutter]="8">
+
+            <!-- HRMS User Name -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="8" [nzXXl]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('hrmsUserName')">
+                        <nz-form-label nzRequired
+                            nzFor="hrmsUserName">HRMS
+                            User Name</nz-form-label>
+                        <input nz-input formControlName="hrmsUserName"
+                            id="hrmsUserName" name="hrmsUserName" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <!-- Work Email -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="8" [nzXXl]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('workEmail')">
+                        <nz-form-label nzRequired
+                            nzFor="workEmail">Work Email</nz-form-label>
+                        <input nz-input formControlName="workEmail"
+                            id="workEmail" name="workEmail" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <!-- Role  -->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
+                [nzXl]="8" [nzXXl]="8">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('roleId')">
+                        <nz-form-label nzRequired
+                            nzFor="roleId">
+                            Role</nz-form-label>
+                        <nz-select nzShowSearch nzAllowClear
+                            id="roleId"
+                            formControlName="roleId"
+                            name="roleId">
+                            <nz-option nzLabel="Jack"
+                                nzValue="jack"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
+</nz-card>

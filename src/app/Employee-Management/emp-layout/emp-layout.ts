@@ -10,10 +10,12 @@ import { PersonalInformation } from "../personal-information/personal-informatio
 import { EmpJobDetails } from "../emp-job-details/emp-job-details";
 import { CommonModule } from '@angular/common';
 import { EmpAccessPermissions } from '../emp-access-permissions/emp-access-permissions';
+import { AccessPermissionBridge } from '../services/access-permission-bridge';
+import { EmpSkills } from "../emp-skills/emp-skills";
 
 @Component({
   selector: 'app-emp-layout',
-  imports: [SHARED_IMPORTS, PersonalInformation, EmpJobDetails,EmpAccessPermissions, CommonModule],
+  imports: [SHARED_IMPORTS, PersonalInformation, EmpJobDetails, EmpAccessPermissions, CommonModule, EmpSkills],
   templateUrl: './emp-layout.html',
   styleUrl: './emp-layout.css',
   standalone: true,
@@ -25,6 +27,7 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
   tabRoutes = [
     { title: 'Personal Information', route: 'personal-information' },
     { title: 'Job Details', route: 'job-details' },
+    { title: 'Skills & Documents', route: 'skills-and-documents' },
     { title: 'Access & Permissions', route: 'access-and-permission' },
   ];
 
@@ -33,6 +36,7 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
     private personalBridge: PersonalInfoBridge,
     private cdr: ChangeDetectorRef,
     private jobBridge: JobDetailsBridge,
+    private accessBridge: AccessPermissionBridge,
   ) { }
 
   ngOnInit() {
@@ -41,9 +45,10 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
 
   onTabChange(index: number): void {
     const unsaved =
-      this.selectedIndex === 0
-        ? this.personalBridge.getUnsavedFn()?.()
-        : this.jobBridge.getUnsavedFn()?.();
+      this.selectedIndex === 0 ? this.personalBridge.getUnsavedFn()?.() :
+        this.selectedIndex === 1 ? this.jobBridge.getUnsavedFn()?.() :
+          this.selectedIndex === 2 ? this.accessBridge.getUnsavedFn()?.() :
+            false;
 
     this.selectedIndex = index;
   }
@@ -63,29 +68,36 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
     } else if (this.selectedIndex === 1) {
       validateFn = this.jobBridge.getValidateFn();
       getDataFn = this.jobBridge.getDataFn();
+    } 
+    else if (this.selectedIndex === 2) { 
+      validateFn = this.accessBridge.getValidateFn();
+      getDataFn = this.accessBridge.getDataFn();
+    }
+    else if (this.selectedIndex === 3) { 
+      validateFn = this.accessBridge.getValidateFn();
+      getDataFn = this.accessBridge.getDataFn();
     }
 
     if (!validateFn) {
-      console.error('Validation function not registered yet!');
+      console.error('Validation function missing!');
       return;
     }
 
     if (!validateFn()) {
-      this.hasError = true;
-      console.warn('Some forms are invalid!');
+      console.warn('Form invalid!');
       return;
     }
 
     this.hasError = false;
-    console.log('Final Form Object:', getDataFn ? getDataFn() : {});
+    console.log("Final Submitted Data:", getDataFn ? getDataFn() : {});
   }
 
-
-
   hasUnsavedChanges(): boolean {
-    const personalUnsaved = this.personalBridge.getUnsavedFn()?.() ?? false;
-    const jobUnsaved = this.jobBridge.getUnsavedFn()?.() ?? false;
-    return personalUnsaved || jobUnsaved;
+    return (
+      (this.personalBridge.getUnsavedFn()?.() ?? false) ||
+      (this.jobBridge.getUnsavedFn()?.() ?? false) ||
+      (this.accessBridge.getUnsavedFn()?.() ?? false)
+    );
   }
 
 }
