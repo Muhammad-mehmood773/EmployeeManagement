@@ -1,7 +1,8 @@
 <div nz-row [nzGutter]="10">
     <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
         [nzXl]="12" [nzXXl]="12">
-        <nz-card [nzBordered]="false" nzTitle="Add Personal Skills">
+        <nz-card [nzBordered]="false" nzTitle="Add Personal Skills"
+            [nzExtra]="cardTemplate">
             <form [formGroup]="skillsForm" nz-form nzLayout="vertical">
                 <div nz-row [nzGutter]="8">
 
@@ -147,15 +148,19 @@
                         </nz-upload>
                     </div>
                 </div>
-                <button nz-button (click)="submitForm()">save</button>
             </form>
         </nz-card>
+        <ng-template #cardTemplate>
+            <button nz-button nzType="primary" (click)="submitForm()">Save
+                Skill</button>
+        </ng-template>
     </div>
 
     <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
         [nzXl]="12" [nzXXl]="12">
         <nz-card nzTitle="All Skills">
-            <nz-table #basicTable>
+            @if (tableData().length) {
+            <nz-table #basicTable [nzData]="tableData()" [nzBordered]="false">
                 <thead>
                     <tr>
                         <th>Skill</th>
@@ -165,23 +170,43 @@
                         <th>Issue Month</th>
                         <th>Expiration Year</th>
                         <th>Credential Url</th>
-                        <th>Expiration Year</th>
                         <th>Documents</th>
                     </tr>
                 </thead>
+
                 <tbody>
+                    @for (item of tableData(); track $index) {
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ item.skillId }}</td>
+                        <td>{{ item.proficiencyId }}</td>
+                        <td>{{ item.yearOf }}</td>
+                        <td>{{ item.certificationName }}</td>
+                        <td>{{ item.issueDate }}</td>
+                        <td>{{ item.expirationDate }}</td>
+                        <td>{{ item.credentialUrl }}</td>
+
+                        <td>
+                            @if (item.document?.length) {
+                            @for (f of item.document!; track f.uid) {
+                            <div>{{ f.name }}</div>
+                            }
+                            } @else {
+                            <span>No File</span>
+                            }
+                        </td>
+
                     </tr>
+                    }
                 </tbody>
+
             </nz-table>
+
+            } @else {
+            <nz-empty
+                nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                nzNotFoundContent="No Personal Skills added yet">
+            </nz-empty>
+            }
         </nz-card>
     </div>
 </div>

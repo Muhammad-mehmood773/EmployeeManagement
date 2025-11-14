@@ -1,8 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+export interface SkillDocument {
+  name: string;
+  type: string;
+  size: number;
+  lastModified: number;
+  uid: string;
+}
+
+export interface EmpSkillRecord {
+  skillId: number | null;
+  proficiencyId: number | null;
+  yearOf: number | null;
+  certificationName: string | null;
+  issueDate: string | null;
+  expirationDate: string | null;
+  credentialId: string | null;
+  credentialUrl: string | null;
+  document: SkillDocument[] | null;
+}
 
 @Component({
   selector: 'app-emp-skills',
@@ -13,6 +32,8 @@ import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 export class EmpSkills implements OnInit {
   fileList: any[] = [];
   skillsForm!: FormGroup;
+  tableData = signal<EmpSkillRecord[]>([]);
+
   constructor(private fb: FormBuilder) { }
 
 
@@ -78,15 +99,36 @@ export class EmpSkills implements OnInit {
     console.log('Uploaded Files:', this.fileList);
   }
 
-  submitForm(): void {
-    this.markFormTouched();
-    if (this.skillsForm.valid) {
-      const formData = this.skillsForm.value;
-      console.log('Form is valid. Data ready to submit:', formData);
-    } else {
-      console.log('Form is invalid. Please fix errors.');
-    }
+submitForm(): void {
+  this.markFormTouched();
+
+  if (this.skillsForm.valid) {
+    const formData = this.skillsForm.value;
+
+    const newRecord: EmpSkillRecord = {
+      skillId: formData.skillId,
+      proficiencyId: formData.proficiencyId,
+      yearOf: formData.yearOf,
+      certificationName: formData.certificationName,
+      issueDate: formData.issueDate,
+      expirationDate: formData.expirationDate,
+      credentialId: formData.credentialId,
+      credentialUrl: formData.credentialUrl,
+      document: formData.document || []
+    };
+
+    this.tableData.update(list => [...list, newRecord]);
+
+    console.log("Row added:", newRecord);
+
+    this.skillsForm.reset();
+    this.fileList = [];
+  } else {
+    console.log('Form is invalid. Please fix errors.');
   }
+}
+
+
 
 
 }
