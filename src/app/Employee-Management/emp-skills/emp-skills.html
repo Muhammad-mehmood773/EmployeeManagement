@@ -1,1 +1,187 @@
-<p>emp-skills works!</p>
+<div nz-row [nzGutter]="10">
+    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
+        [nzXl]="12" [nzXXl]="12">
+        <nz-card [nzBordered]="false" nzTitle="Add Personal Skills">
+            <form [formGroup]="skillsForm" nz-form nzLayout="vertical">
+                <div nz-row [nzGutter]="8">
+
+                    <!-- Skill -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('skillId')">
+                                <nz-form-label nzRequired
+                                    nzFor="skill">
+                                    Skill</nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="skill"
+                                    formControlName="skillId"
+                                    name="skill">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- proficiency -->
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('proficiencyId')">
+                                <nz-form-label nzRequired
+                                    nzFor="proficiency">
+                                    Proficiency</nz-form-label>
+                                <nz-select nzShowSearch nzAllowClear
+                                    id="proficiency"
+                                    formControlName="proficiencyId"
+                                    name="proficiency">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('yearOf')">
+                                <nz-form-label nzRequired
+                                    nzFor="yearOf">
+                                    Year Of</nz-form-label>
+                                <input nz-input formControlName="yearOf"
+                                    id="yearOf" name="yearOf" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('certificationName')">
+                                <nz-form-label
+                                    nzFor="certificationName">
+                                    Certification Name </nz-form-label>
+                                <input nz-input
+                                    formControlName="certificationName"
+                                    id="certificationName"
+                                    name="certificationName" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('issueDate')">
+                                <nz-form-label
+                                    nzFor="issueDate">
+                                    Issue Date</nz-form-label>
+                                <nz-date-picker nzMode="month"
+                                    nzFormat="MMMM yyyy"
+                                    style="width: 100%;" [nzPlaceHolder]="' '"
+                                    formControlName="issueDate" name="issueDate"
+                                    id="issueDate"
+                                    (ngModelChange)="onChange($event)"></nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('expirationDate')">
+                                <nz-form-label
+                                    nzFor="expirationDate">
+                                    Expiration Date (if any)</nz-form-label>
+                                <nz-date-picker nzMode="year"
+                                    style="width: 100%;" [nzPlaceHolder]="' '"
+                                    formControlName="expirationDate"
+                                    name="expirationDate" id="expirationDate"
+                                    (ngModelChange)="onChange($event)"></nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('credentialId')">
+                                <nz-form-label
+                                    nzFor="credentialId">
+                                    Credential Id</nz-form-label>
+                                <input nz-input formControlName="credentialId"
+                                    id="credentialId" name="credentialId" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('credentialUrl')">
+                                <nz-form-label
+                                    nzFor="credentialUrl">
+                                    Credential Url</nz-form-label>
+                                <input nz-input formControlName="credentialUrl"
+                                    id="credentialUrl" name="credentialUrl" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24"
+                        [nzXl]="24" [nzXXl]="24">
+                        <nz-upload
+                            nzType="drag"
+                            [nzMultiple]="true"
+                            [nzBeforeUpload]="beforeUpload"
+                            [nzFileList]="fileList"
+                            nzAction=" "
+                            (nzChange)="handleChange($event)">
+                            <p class="ant-upload-drag-icon">
+                                <nz-icon nzType="inbox"></nz-icon>
+                            </p>
+                            <p class="ant-upload-text">Click or drag files to
+                                this area to upload</p>
+                        </nz-upload>
+                    </div>
+                </div>
+                <button nz-button (click)="submitForm()">save</button>
+            </form>
+        </nz-card>
+    </div>
+
+    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
+        [nzXl]="12" [nzXXl]="12">
+        <nz-card nzTitle="All Skills">
+            <nz-table #basicTable>
+                <thead>
+                    <tr>
+                        <th>Skill</th>
+                        <th>Proficiency</th>
+                        <th>Year Of</th>
+                        <th>Certification Name</th>
+                        <th>Issue Month</th>
+                        <th>Expiration Year</th>
+                        <th>Credential Url</th>
+                        <th>Expiration Year</th>
+                        <th>Documents</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-card>
+    </div>
+</div>
