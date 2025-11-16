@@ -1,0 +1,75 @@
+.leave-container {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+/* Default (Desktop) → 3 Columns */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+/* Tablet → 2 Columns */
+@media (max-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile → 1 Column */
+@media (max-width: 768px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .switch-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cancel-btn,
+  .save-btn {
+    width: 100%;
+  }
+}
+
+.switch-row {
+  display: flex;
+  justify-content: flex-start;
+  gap: 60px;
+  margin: 25px 0;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  padding-top: 15px;
+}
+
+.cancel-btn {
+  width: 150px;
+}
+
+.save-btn {
+  width: 180px;
+  background: #1668dc;
+}

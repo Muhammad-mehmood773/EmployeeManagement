@@ -1,0 +1,138 @@
+<div class="leave-container">
+  <div class="header">
+    <i nz-icon nzType="form" nzTheme="outline"></i>
+    <span>Add New Leave Type</span>
+  </div>
+
+  <form nz-form nzLayout="vertical" class="leave-form" [formGroup]="leaveForm">
+
+    <div class="grid-3">
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Leave Type Name</nz-form-label>
+        <nz-form-control [nzErrorTip]="error.message">
+          <nz-input-group nzPrefixIcon="user">
+            <input nz-input formControlName="leaveTypeName" placeholder="Enter Name Here" appNzError
+              #error="appNzError">
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item>
+        <nz-form-label>Leave Code</nz-form-label>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="user">
+            <input nz-input formControlName="leaveCode" placeholder="Auto Generate but editable" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired >Accrual Method</nz-form-label>
+        <nz-form-control [nzErrorTip]="errorDiv.message" >
+          <nz-select formControlName="accrualMethod"
+           appNzError
+           #errorDiv="appNzError" 
+          nzPlaceHolder="Select">
+            <nz-option nzValue="monthly" nzLabel="Monthly"></nz-option>
+            <nz-option nzValue="yearly" nzLabel="Yearly"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+    </div>
+
+    <div class="grid-3">
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Days Accrued Per Year/Period</nz-form-label>
+        <nz-form-control [nzErrorTip]="errorDir.message" >
+          <nz-input-group nzPrefixIcon="user">
+            <input nz-input formControlName="daysAccrued" appNzError #errorDir="appNzError" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Carry Forward Limit (days)</nz-form-label>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="global">
+            <input nz-input formControlName="carryForwardLimit" placeholder="" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Maximum Consecutive Days Allowed</nz-form-label>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="global">
+            <input nz-input formControlName="maxConsecutiveDays" placeholder="" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+    </div>
+
+    <div class="grid-3">
+
+      <nz-form-item>
+        <nz-form-label>Can Apply Backdated</nz-form-label>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="user">
+            <input nz-input formControlName="backdated" placeholder="" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Enable Leave Encashment</nz-form-label>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="global">
+            <input nz-input formControlName="encashment" placeholder="" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Inform Before (Days)</nz-form-label>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="global">
+            <input nz-input formControlName="informBefore" placeholder="" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+    </div>
+
+    <div class="switch-row">
+      <div>
+        <label>Is Paid Leave</label>
+        <nz-switch formControlName="isPaidLeave"></nz-switch>
+      </div>
+
+      <div>
+        <label>Half-Days Allowed</label>
+        <nz-switch formControlName="halfDaysAllowed"></nz-switch>
+      </div>
+
+      <div>
+        <label>Proof Required</label>
+        <nz-switch formControlName="proofRequired"></nz-switch>
+      </div>
+    </div>
+
+    <nz-form-item>
+      <nz-form-label>Description</nz-form-label>
+      <nz-form-control>
+        <textarea nz-input formControlName="description" rows="4" placeholder="Optional description..."></textarea>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+
+  <div class="footer">
+    <button nz-button nzType="default" class="cancel-btn">Cancel</button>
+    <button nz-button nzType="primary" class="save-btn" (click)="save()">Save Leave Type</button>
+  </div>
+</div>

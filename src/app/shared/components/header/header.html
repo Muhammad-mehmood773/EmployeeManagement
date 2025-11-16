@@ -53,6 +53,55 @@
                 </nz-dropdown-menu>
 
             </nz-space>
+ 
+            <nz-space>
+
+                <!-- Menu Button -->
+                <button nz-button nzType="link"
+                    class="text-white fw-bolder MenuBar BtnEffect">
+                    <span nz-icon nzType="menu" nzTheme="outline"></span>
+                </button>
+
+                <!-- Employee Management Dropdown -->
+                <button
+                    nz-button
+                    nzType="link"
+                    class="text-white fw-bolder BtnEffect"
+                    [nzTrigger]="'click'"
+                    nz-dropdown
+                    [nzDropdownMenu]="leaveMenu">
+                    <i nz-icon nzType="user" nzTheme="outline" class="me-1"></i>
+                    Leave
+                    <i nz-icon nzType="down"></i>
+                </button>
+
+                <nz-dropdown-menu #leaveMenu="nzDropdownMenu">
+                    <ul nz-menu> 
+                        <li nz-menu-item routerLink="/leave/add-leave">
+                            <nz-space>
+                                <span *nzSpaceItem>
+                                    <i nz-icon nzType="leave-add"
+                                        nzTheme="outline"></i>
+                                </span>
+                                <span *nzSpaceItem class="DropdownLinkName">
+                                    Add Leave</span>
+                            </nz-space>
+                        </li>
+                        <li nz-menu-item routerLink="/leave/leave-list">
+                            <nz-space>  
+                                <span *nzSpaceItem>
+                                    <i nz-icon nzType="team"
+                                        nzTheme="outline"></i>
+                                </span>
+                                <span *nzSpaceItem
+                                    class="DropdownLinkName">Leave
+                                    List</span>
+                            </nz-space>
+                        </li>
+                    </ul>
+                </nz-dropdown-menu>
+
+            </nz-space>
         </div>
 
         <!-- Right Side Search + Icons -->
