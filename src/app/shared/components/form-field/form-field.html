@@ -1,0 +1,29 @@
+<nz-form-item [formGroup]="form">
+  <!-- Label -->
+  <nz-form-label [nzRequired]="required">{{ label }}</nz-form-label>
+
+  <!-- Control -->
+  <nz-form-control [nzErrorTip]="error">
+
+    <!-- Input with icon -->
+    <nz-input-group *ngIf="type === 'input' && icon" [nzPrefixIcon]="icon">
+      <input nz-input [formControlName]="controlName" [placeholder]="placeholder" />
+    </nz-input-group>
+
+    <!-- Input without icon -->
+    <input *ngIf="type === 'input' && !icon" nz-input [formControlName]="controlName" [placeholder]="placeholder" />
+
+    <!-- Select -->
+    <nz-select *ngIf="type === 'select'" [formControlName]="controlName" [nzPlaceHolder]="placeholder">
+      <nz-option *ngFor="let opt of options" [nzValue]="opt.value" [nzLabel]="opt.label"></nz-option>
+    </nz-select>
+
+    <!-- Textarea -->
+    <textarea *ngIf="type === 'textarea'" nz-input [formControlName]="controlName" [placeholder]="placeholder"
+      [rows]="rows"></textarea>
+
+    <!-- Switch -->
+    <nz-switch *ngIf="type === 'switch'" [formControlName]="controlName"></nz-switch>
+
+  </nz-form-control>
+</nz-form-item>

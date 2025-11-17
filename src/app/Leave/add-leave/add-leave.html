@@ -8,11 +8,93 @@
 
     <div class="grid-3">
 
-      <nz-form-item>
+      <app-form-field [form]="leaveForm" controlName="leaveTypeName" label="Leave Type Name" type="input"
+        [required]="true" placeholder="Enter Name Here" icon="user">
+      </app-form-field>
+
+      <app-form-field [form]="leaveForm" controlName="leaveCode" label="Leave Code" type="input"
+        placeholder="Auto Generate but editable" icon="user">
+      </app-form-field>
+
+
+      <app-form-field [form]="leaveForm" controlName="accrualMethod" label="Accrual Method" type="select"
+        [required]="true" placeholder="Select" [options]="[
+    { value: 'monthly', label: 'Monthly' },
+    { value: 'yearly', label: 'Yearly' }
+  ]"></app-form-field>
+
+    </div>
+
+    <div class="grid-3">
+
+      <app-form-field [form]="leaveForm" controlName="daysAccrued" label="Days Accrued Per Year/Period" type="input"
+        [required]="true" placeholder="" icon="user"></app-form-field>
+
+      <app-form-field [form]="leaveForm" controlName="carryForwardLimit" label="Carry Forward Limit (Days)" type="input"
+        [required]="false" icon="global"></app-form-field>
+
+      <app-form-field [form]="leaveForm" controlName="maxConsecutiveDays" label="Maximum Consecutive Days Allowed"
+        type="input" [required]="false" icon="global"></app-form-field>
+
+    </div>
+
+    <div class="grid-3">
+
+      <app-form-field [form]="leaveForm" controlName="backdated" label="Can Apply Backdated" type="input"
+        icon="user"></app-form-field>
+
+
+      <app-form-field [form]="leaveForm" controlName="encashment" label="Enable Leave Encashment" type="input"
+        icon="global"></app-form-field>
+
+
+      <app-form-field [form]="leaveForm" controlName="informBefore" label="Inform Before (Days)" type="input"
+        icon="global"></app-form-field>
+
+    </div>
+
+    <div class="switch-row">
+      <div>
+        <app-form-field [form]="leaveForm" controlName="isPaidLeave" label="Is Paid Leave"
+          type="switch"></app-form-field>
+
+      </div>
+
+      <div>
+        <app-form-field [form]="leaveForm" controlName="halfDaysAllowed" label="Half-Days Allowed"
+          type="switch"></app-form-field>
+
+      </div>
+
+      <div>
+        <app-form-field [form]="leaveForm" controlName="proofRequired" label="Proof Required"
+          type="switch"></app-form-field>
+
+      </div>
+    </div>
+
+    <app-form-field [form]="leaveForm" controlName="description" label="Description" type="textarea"
+      placeholder="Optional description..."></app-form-field>
+
+
+  </form>
+
+  <div class="footer">
+    <button nz-button nzType="default" class="cancel-btn">Cancel</button>
+    <button nz-button nzType="primary" class="save-btn" (click)="save()">Save Leave Type</button>
+  </div>
+</div>
+
+
+<!--
+ <div class="grid-3">
+ <nz-form-item>
         <nz-form-label nzRequired>Leave Type Name</nz-form-label>
         <nz-form-control [nzErrorTip]="error.message">
           <nz-input-group nzPrefixIcon="user">
-            <input nz-input formControlName="leaveTypeName" placeholder="Enter Name Here" appNzError
+            <input nz-input 
+            formControlName="leaveTypeName" 
+            placeholder="Enter Name Here" appNzError
               #error="appNzError">
           </nz-input-group>
         </nz-form-control>
@@ -26,28 +108,24 @@
             <input nz-input formControlName="leaveCode" placeholder="Auto Generate but editable" />
           </nz-input-group>
         </nz-form-control>
-      </nz-form-item>
+      </nz-form-item> 
 
-      <nz-form-item>
-        <nz-form-label nzRequired >Accrual Method</nz-form-label>
-        <nz-form-control [nzErrorTip]="errorDiv.message" >
-          <nz-select formControlName="accrualMethod"
-           appNzError
-           #errorDiv="appNzError" 
-          nzPlaceHolder="Select">
+     <nz-form-item>
+        <nz-form-label nzRequired>Accrual Method</nz-form-label>
+        <nz-form-control [nzErrorTip]="errorDiv.message">
+          <nz-select formControlName="accrualMethod" appNzError #errorDiv="appNzError" nzPlaceHolder="Select">
             <nz-option nzValue="monthly" nzLabel="Monthly"></nz-option>
             <nz-option nzValue="yearly" nzLabel="Yearly"></nz-option>
           </nz-select>
         </nz-form-control>
-      </nz-form-item>
+      </nz-form-item> 
+        </div>
 
-    </div>
-
-    <div class="grid-3">
+          <div class="grid-3">
 
       <nz-form-item>
         <nz-form-label nzRequired>Days Accrued Per Year/Period</nz-form-label>
-        <nz-form-control [nzErrorTip]="errorDir.message" >
+        <nz-form-control [nzErrorTip]="errorDir.message">
           <nz-input-group nzPrefixIcon="user">
             <input nz-input formControlName="daysAccrued" appNzError #errorDir="appNzError" />
           </nz-input-group>
@@ -128,11 +206,4 @@
         <textarea nz-input formControlName="description" rows="4" placeholder="Optional description..."></textarea>
       </nz-form-control>
     </nz-form-item>
-
-  </form>
-
-  <div class="footer">
-    <button nz-button nzType="default" class="cancel-btn">Cancel</button>
-    <button nz-button nzType="primary" class="save-btn" (click)="save()">Save Leave Type</button>
-  </div>
-</div>
+      -->

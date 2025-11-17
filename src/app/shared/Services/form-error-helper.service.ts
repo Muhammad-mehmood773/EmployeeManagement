@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { log } from 'console';
 
 
 @Injectable({ providedIn: 'root' })
@@ -13,10 +14,10 @@ export class ValidationMessageService {
         const touched = control.touched || control.dirty;
         if (!touched) return '';
 
-
+        console.log('touched' + touched);
         const e = control.errors;
         const name = this.format(field);
-
+ console.log('name' + name);
 
         if (e['required']) return `${name} is required`;
         if (e['minlength']) return `${name} must be at least ${e['minlength'].requiredLength} characters`;
