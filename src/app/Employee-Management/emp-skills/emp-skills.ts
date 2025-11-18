@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { EmpDocuments } from '../emp-documents/emp-documents';
+import { SkillBridge } from '../services/skill-bridge';
 export interface SkillDocument {
   name: string;
   type: string;
@@ -37,7 +38,7 @@ export class EmpSkills implements OnInit {
 
   @ViewChild(EmpDocuments) empDocumentsComp!: EmpDocuments;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private skillBridge: SkillBridge) { }
 
   ngOnInit(): void {
     this.skillsForm = this.fb.group({
@@ -51,11 +52,10 @@ export class EmpSkills implements OnInit {
       credentialUrl: [null, [Validators.maxLength(220)]],
       document: [null],
     });
+
+    this.skillBridge.registerDataFn(() => this.getSkillsAndDocuments());
   }
 
-  onChange(result: Date): void {
-    console.log('onChange: ', result);
-  }
 
   getError(controlName: string): string {
     const control = this.skillsForm.get(controlName);
@@ -67,6 +67,13 @@ export class EmpSkills implements OnInit {
       ctrl.markAsTouched();
       ctrl.updateValueAndValidity();
     });
+  }
+
+  getSkillsAndDocuments() {
+    return {
+      empSkills: this.tableData(),
+      empDocuments: this.empDocumentsComp?.allDocumentsList,
+    };
   }
 
   beforeUpload = (file: any): boolean => {
@@ -154,14 +161,9 @@ export class EmpSkills implements OnInit {
   }
 
 
-  getSkillsAndDocuments() {
-    return  {
-      empSkills: this.skillsForm.value,
-      empDocuments: this.empDocumentsComp?.allDocumentsList,
-    };
-  }
 
-  
+
+
 
 
 }

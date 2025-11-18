@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import * as XLSX from "xlsx";
+import { NgZone } from '@angular/core';
 @Component({
   selector: 'app-emp-documents',
   imports: [SHARED_IMPORTS, CommonModule],
@@ -55,7 +56,8 @@ export class EmpDocuments implements OnInit {
   constructor(
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+     private ngZone: NgZone
   ) { }
 
   ngOnInit(): void {
@@ -147,32 +149,37 @@ export class EmpDocuments implements OnInit {
 
 
 
-  async previewDocument(file: any) {
-    this.previewDoc = file;
+async previewDocument(file: any) {
+  this.previewDoc = file;
 
-    this.safePdfUrl = null;
-    this.previewTable = [];
+  this.safePdfUrl = null;
+  this.previewTable = [];
+  this.previewVisible = true;
 
-    if (file.fileType === 'pdf') {
-      const blob = new Blob([file.originFileObj], { type: 'application/pdf' });
-      this.safePdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-        URL.createObjectURL(blob)
-      );
-    }
+  // Next tick change detection fix
+  this.ngZone.runOutsideAngular(() => {
+    setTimeout(async () => {
+      this.ngZone.run(() => {
+        if (file.fileType === 'pdf') {
+          const blob = new Blob([file.originFileObj], { type: 'application/pdf' });
+          this.safePdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+            URL.createObjectURL(blob)
+          );
+        }
 
-    // CSV Preview
-    if (file.fileType === 'csv') {
-      this.previewTable = await this.parseCSV(file);
-    }
+        if (file.fileType === 'csv') {
+          this.parseCSV(file).then(rows => this.previewTable = rows);
+        }
 
-    // Excel Preview
-    if (file.fileType === 'xls' || file.fileType === 'xlsx') {
-      this.previewTable = await this.parseExcel(file);
-    }
+        if (file.fileType === 'xls' || file.fileType === 'xlsx') {
+          this.parseExcel(file).then(rows => this.previewTable = rows);
+        }
+      });
+    });
+  });
+}
 
-    this.previewVisible = true;
-    this.cdr.detectChanges();
-  }
+
 
 
   parseExcel(file: any) {

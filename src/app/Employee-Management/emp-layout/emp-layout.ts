@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { EmpAccessPermissions } from '../emp-access-permissions/emp-access-permissions';
 import { AccessPermissionBridge } from '../services/access-permission-bridge';
 import { EmpSkills } from "../emp-skills/emp-skills";
+import { SkillBridge } from '../services/skill-bridge';
 
 @Component({
   selector: 'app-emp-layout',
@@ -37,6 +38,7 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
     private cdr: ChangeDetectorRef,
     private jobBridge: JobDetailsBridge,
     private accessBridge: AccessPermissionBridge,
+    private skillBridge: SkillBridge,
   ) { }
 
   ngOnInit() {
@@ -47,11 +49,18 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
     const unsaved =
       this.selectedIndex === 0 ? this.personalBridge.getUnsavedFn()?.() :
         this.selectedIndex === 1 ? this.jobBridge.getUnsavedFn()?.() :
-          this.selectedIndex === 2 ? this.accessBridge.getUnsavedFn()?.() :
-            false;
+          this.selectedIndex === 2 ? false :  
+            this.selectedIndex === 3 ? this.accessBridge.getUnsavedFn()?.() :
+              false;
+
+    if (unsaved) {
+      this.hasError = true;
+      return;
+    }
 
     this.selectedIndex = index;
   }
+
 
 
   ngAfterViewInit() {
@@ -65,31 +74,36 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
     if (this.selectedIndex === 0) {
       validateFn = this.personalBridge.getValidateFn();
       getDataFn = this.personalBridge.getDataFn();
-    } else if (this.selectedIndex === 1) {
+    }
+    else if (this.selectedIndex === 1) {
       validateFn = this.jobBridge.getValidateFn();
       getDataFn = this.jobBridge.getDataFn();
     }
     else if (this.selectedIndex === 2) {
-
+      getDataFn = this.skillBridge.getDataFn();
     }
     else if (this.selectedIndex === 3) {
       validateFn = this.accessBridge.getValidateFn();
       getDataFn = this.accessBridge.getDataFn();
     }
 
-    if (!validateFn) {
-      console.error('Validation function missing!');
-      return;
-    }
+    // ⭐ SKIP VALIDATION FOR SKILLS TAB
+    if (this.selectedIndex !== 2) {
+      if (!validateFn) {
+        console.error('Validation function missing!');
+        return;
+      }
 
-    if (!validateFn()) {
-      console.warn('Form invalid!');
-      return;
+      if (!validateFn()) {
+        console.warn('Form invalid!');
+        return;
+      }
     }
 
     this.hasError = false;
     console.log("Final Submitted Data:", getDataFn ? getDataFn() : {});
   }
+
 
   hasUnsavedChanges(): boolean {
     return (

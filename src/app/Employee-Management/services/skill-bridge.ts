@@ -6,33 +6,21 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SkillBridge {
   
-    private validateFnSubject = new BehaviorSubject<(() => boolean) | null>(null);
-    private getDataFnSubject = new BehaviorSubject<(() => any) | null>(null);
-    private hasUnsavedFnSubject = new BehaviorSubject<(() => boolean) | null>(null);
-  
-    // register methods from child
-    registerValidateFn(fn: () => boolean) {
-      this.validateFnSubject.next(fn);
-    }
-  
-    registerDataFn(fn: () => any) {
-      this.getDataFnSubject.next(fn);
-    }
-  
-    registerUnsavedFn(fn: () => boolean) {
-      this.hasUnsavedFnSubject.next(fn);
-    }
-  
-    // getters for parent
-    getValidateFn() {
-      return this.validateFnSubject.getValue();
-    }
-  
-    getDataFn() {
-      return this.getDataFnSubject.getValue();
-    }
-  
-    getUnsavedFn() {
-      return this.hasUnsavedFnSubject.getValue();
-    }
+ private getDataFnSubject = new BehaviorSubject<(() => any) | null>(null);
+  private unsavedFnSubject = new BehaviorSubject<(() => boolean) | null>(null);
+
+  registerDataFn(fn: () => any) {
+    this.getDataFnSubject.next(fn);
+  }
+  getDataFn() {
+    return this.getDataFnSubject.getValue();
+  }
+
+  registerUnsavedFn(fn: () => boolean) {
+    this.unsavedFnSubject.next(fn);
+  }
+  getUnsavedFn() {
+    return this.unsavedFnSubject.getValue();
+  }
+
 }

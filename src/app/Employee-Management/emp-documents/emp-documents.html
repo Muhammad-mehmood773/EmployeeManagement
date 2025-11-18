@@ -4,9 +4,9 @@
 
     <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12" class="mt-3"
         [nzXl]="12" [nzXXl]="12">
-        <nz-card nzTitle="Employee Documents"
-           >
-           @if(!govUploaded || !academicUploaded || !experienceUploaded || !skillsUploaded){
+        <nz-card nzTitle="Employee Documents">
+            @if(!govUploaded || !academicUploaded || !experienceUploaded ||
+            !skillsUploaded){
             @if (!govUploaded) {
             <label class="fw-bold">Government Issue Document</label>
             <nz-upload
@@ -58,13 +58,13 @@
             </nz-upload>
             }
 
-             } @else {
+            } @else {
             <nz-empty
-                 nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
                 nzNotFoundContent="All Documents Uploaded!">
             </nz-empty>
             }
-         
+
         </nz-card>
 
     </div>
@@ -74,11 +74,11 @@
 
         <nz-card nzTitle="Uploaded Documents List">
             @if (allDocumentsList.length) {
-            <nz-list>
+            <nz-list >
                 @for (doc of allDocumentsList; track doc.name) {
-                <nz-list-item
+                <nz-list-item nzBordered
                     class="d-flex align-items-center justify-content-between p-2 mb-2"
-                    style="border: 1px solid #f0f0f0; border-radius: 5px;">
+                    style="border: 1px solid #bdb9b9; border-radius: 5px;">
 
                     <div class="d-flex align-items-center">
                         @if (isImage(doc.fileType)) {
@@ -99,7 +99,7 @@
 
                         <div>
                             <div class="fw-bold">{{ doc.name }}</div>
-                            <div class="fw-bold text-uppercase">{{
+                            <div class="fw-normal text-uppercase">{{
                                 formatTitle(doc.type) }}</div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                         @if (isPreviewTable(doc.fileType)) {
                         <button nz-button
                             nzType="link" (click)="previewDocument(doc)">
-                            <i nz-icon nzType="eye" class="me-1"></i> Preview
+                            <i nz-icon nzType="eye" class="me-2"></i> Preview
                         </button>
                         }
                         <button nz-button nzType="link" (click)="download(doc)">
@@ -156,12 +156,14 @@
 
                     <!-- PDF PREVIEW -->
                     @if (previewDoc?.fileType === 'pdf') {
+
                     <iframe
-                        [src]="safePdfUrl"
+                        [attr.src]="safePdfUrl"
                         width="100%"
                         height="700px"
                         style="border: none;">
                     </iframe>
+
                     }
 
                     <!-- NON-PREVIEW FILE -->
