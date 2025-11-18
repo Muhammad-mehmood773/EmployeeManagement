@@ -76,15 +76,16 @@
                         [nzXl]="6" [nzXXl]="6">
                         <nz-form-item>
                             <nz-form-control
-                                [nzErrorTip]="getError('issueDate')">
+                                [nzErrorTip]="getError('issueMonth')">
                                 <nz-form-label
-                                    nzFor="issueDate">
+                                    nzFor="issueMonth">
                                     Issue Date</nz-form-label>
                                 <nz-date-picker nzMode="month"
                                     nzFormat="MMMM yyyy"
                                     style="width: 100%;" [nzPlaceHolder]="' '"
-                                    formControlName="issueDate" name="issueDate"
-                                    id="issueDate"
+                                    formControlName="issueMonth"
+                                    name="issueMonth"
+                                    id="issueMonth"
                                     (ngModelChange)="onChange($event)"></nz-date-picker>
                             </nz-form-control>
                         </nz-form-item>
@@ -93,14 +94,14 @@
                         [nzXl]="6" [nzXXl]="6">
                         <nz-form-item>
                             <nz-form-control
-                                [nzErrorTip]="getError('expirationDate')">
+                                [nzErrorTip]="getError('expirationYear')">
                                 <nz-form-label
-                                    nzFor="expirationDate">
+                                    nzFor="expirationYear">
                                     Expiration Date (if any)</nz-form-label>
                                 <nz-date-picker nzMode="year"
                                     style="width: 100%;" [nzPlaceHolder]="' '"
-                                    formControlName="expirationDate"
-                                    name="expirationDate" id="expirationDate"
+                                    formControlName="expirationYear"
+                                    name="expirationYear" id="expirationYear"
                                     (ngModelChange)="onChange($event)"></nz-date-picker>
                             </nz-form-control>
                         </nz-form-item>
@@ -151,7 +152,7 @@
             </form>
         </nz-card>
         <ng-template #cardTemplate>
-            <button nz-button nzType="primary" (click)="submitForm()">Save
+            <button nz-button nzType="primary" (click)="submitForm()">Add
                 Skill</button>
         </ng-template>
     </div>
@@ -160,7 +161,9 @@
         [nzXl]="12" [nzXXl]="12">
         <nz-card nzTitle="All Skills">
             @if (tableData().length) {
-            <nz-table #basicTable [nzData]="tableData()" [nzBordered]="false">
+            <nz-table nzShowPagination="false" nzSize="small" #basicTable
+                [nzData]="tableData()"
+                [nzBordered]="false">
                 <thead>
                     <tr>
                         <th>Skill</th>
@@ -171,6 +174,7 @@
                         <th>Expiration Year</th>
                         <th>Credential Url</th>
                         <th>Documents</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
@@ -181,18 +185,47 @@
                         <td>{{ item.proficiencyId }}</td>
                         <td>{{ item.yearOf }}</td>
                         <td>{{ item.certificationName }}</td>
-                        <td>{{ item.issueDate }}</td>
-                        <td>{{ item.expirationDate }}</td>
+                        <td>{{ item.issueMonth }}</td>
+                        <td>{{ item.expirationYear }}</td>
                         <td>{{ item.credentialUrl }}</td>
 
                         <td>
                             @if (item.document?.length) {
-                            @for (f of item.document!; track f.uid) {
-                            <div>{{ f.name }}</div>
-                            }
+
+                            <button nz-button nz-dropdown nzTrigger="click"
+                                [nzDropdownMenu]="fileMenu" nzArrow>
+                                {{ item.document?.length }} Attachment(s)
+                                <i nz-icon [nzType]="'down'"></i>
+                            </button>
+
+                            <nz-dropdown-menu #fileMenu="nzDropdownMenu">
+                                <ul nz-menu>
+                                    @for (f of item.document!; track f.uid) {
+                                    <li nz-menu-item (click)="downloadFile(f)"
+                                        class="d-flex align-items-center justify-content-between">
+                                        <i nz-icon nzType="file"
+                                            [nzTheme]="'twotone'"
+                                            class="fs-6 me-1"></i> {{ f.name }}
+                                        <i nz-icon [nzType]="'download'"></i>
+
+                                    </li>
+                                    }
+                                </ul>
+                            </nz-dropdown-menu>
+
                             } @else {
                             <span>No File</span>
                             }
+                        </td>
+                        <td class="text-center">
+                            <i
+                                (click)="onDelete(item)"
+                                nz-icon
+                                nzType="delete"
+                                nzTheme="fill"
+                                nzSize="md"
+                                class="text-danger fs-6">
+                            </i>
                         </td>
 
                     </tr>
@@ -209,4 +242,7 @@
             }
         </nz-card>
     </div>
+
 </div>
+
+<app-emp-documents></app-emp-documents>

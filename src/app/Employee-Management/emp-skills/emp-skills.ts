@@ -3,6 +3,7 @@ import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { EmpDocuments } from '../emp-documents/emp-documents';
 export interface SkillDocument {
   name: string;
   type: string;
@@ -16,8 +17,8 @@ export interface EmpSkillRecord {
   proficiencyId: number | null;
   yearOf: number | null;
   certificationName: string | null;
-  issueDate: string | null;
-  expirationDate: string | null;
+  issueMonth: string | null;
+  expirationYear: string | null;
   credentialId: string | null;
   credentialUrl: string | null;
   document: SkillDocument[] | null;
@@ -25,7 +26,7 @@ export interface EmpSkillRecord {
 
 @Component({
   selector: 'app-emp-skills',
-  imports: [SHARED_IMPORTS, ReactiveFormsModule],
+  imports: [SHARED_IMPORTS, ReactiveFormsModule, EmpDocuments],
   templateUrl: './emp-skills.html',
   styleUrl: './emp-skills.css',
 })
@@ -43,8 +44,8 @@ export class EmpSkills implements OnInit {
       proficiencyId: [null, [Validators.required]],
       yearOf: [null, [Validators.required]],
       certificationName: [null, [Validators.maxLength(100)]],
-      issueDate: [null],
-      expirationDate: [null],
+      issueMonth: [null],
+      expirationYear: [null],
       credentialId: [null],
       credentialUrl: [null, [Validators.maxLength(220)]],
       document: [null],
@@ -71,20 +72,12 @@ export class EmpSkills implements OnInit {
 
   beforeUpload = (file: any): boolean => {
 
-    const payload = {
-      name: file.name,
-      type: file.type,
-      size: file.size,
-      lastModified: file.lastModified,
-      uid: file.uid
-    };
-
+    file.originFileObj = file;
     this.fileList = [...this.fileList, file];
-
     this.skillsForm.patchValue({ document: [...this.fileList] });
-
     return false;
   };
+
 
 
   handleChange({ file, fileList }: NzUploadChangeParam): void {
@@ -99,35 +92,73 @@ export class EmpSkills implements OnInit {
     console.log('Uploaded Files:', this.fileList);
   }
 
-submitForm(): void {
-  this.markFormTouched();
+  submitForm(): void {
+    this.markFormTouched();
 
-  if (this.skillsForm.valid) {
-    const formData = this.skillsForm.value;
+    if (this.skillsForm.valid) {
+      const formData = this.skillsForm.value;
 
-    const newRecord: EmpSkillRecord = {
-      skillId: formData.skillId,
-      proficiencyId: formData.proficiencyId,
-      yearOf: formData.yearOf,
-      certificationName: formData.certificationName,
-      issueDate: formData.issueDate,
-      expirationDate: formData.expirationDate,
-      credentialId: formData.credentialId,
-      credentialUrl: formData.credentialUrl,
-      document: formData.document || []
-    };
+      const newRecord: EmpSkillRecord = {
+        ...formData,
+        issueMonth: this.extractMonthYear(formData.issueMonth),
+        expirationYear: this.extractYear(formData.expirationYear),
+        document: this.fileList.map(f => ({
+          name: f.name,
+          type: f.type,
+          size: f.size,
+          lastModified: f.lastModified,
+          uid: f.uid,
+          originFileObj: f.originFileObj   
+        }))
+      };
 
-    this.tableData.update(list => [...list, newRecord]);
+      this.tableData.update(list => [...list, newRecord]);
 
-    console.log("Row added:", newRecord);
-
-    this.skillsForm.reset();
-    this.fileList = [];
-  } else {
-    console.log('Form is invalid. Please fix errors.');
+      this.skillsForm.reset();
+      this.fileList = [];
+    }
   }
-}
 
+  downloadFile(file: any) {
+    if (!file?.originFileObj) {
+      console.error("No file data to download");
+      return;
+    }
+
+    const blob = new Blob([file.originFileObj], {
+      type: file.type || 'application/octet-stream'
+    });
+
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = file.name;
+    a.click();
+
+    window.URL.revokeObjectURL(url);
+  }
+
+
+
+  private extractMonthYear(date: Date | null): string | null {
+    if (!date) return null;
+
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 01–12
+    const year = date.getFullYear();
+    return `${month}-${year}`; // Example: "05-2024"
+  }
+
+  private extractYear(date: Date | null): string | null {
+    if (!date) return null;
+
+    return date.getFullYear().toString(); // Example: "2025"
+  }
+
+
+onDelete(member: EmpSkillRecord): void {
+  this.tableData.update(list => list.filter(m => m !== member));
+}
 
 
 

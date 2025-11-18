@@ -1,0 +1,201 @@
+
+
+<div nz-row [nzGutter]="10">
+
+    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12" class="mt-3"
+        [nzXl]="12" [nzXXl]="12">
+        <nz-card nzTitle="Employee Documents"
+            [nzExtra]="extraTemplate">
+
+            <!-- Government Issue Document -->
+            <label class="fw-bold">Government Issue Document</label>
+            <nz-upload
+                nzListType="text"
+                [nzMultiple]="false"
+                [nzBeforeUpload]="onGovUpload">
+                <button nz-button>
+                    <i nz-icon nzType="upload"></i> Upload Document
+                </button>
+            </nz-upload>
+            <br />
+
+            <!-- Academic Document -->
+            <label class="fw-bold">Academic Document</label>
+            <nz-upload
+                nzListType="text"
+                [nzMultiple]="false"
+                [nzBeforeUpload]="onAcedmicUpload">
+                <button nz-button>
+                    <i nz-icon nzType="upload"></i> Upload Document
+                </button>
+            </nz-upload>
+            <br />
+
+            <!-- Experience Document -->
+            <label class="fw-bold">Experience Document</label>
+            <nz-upload
+                nzListType="text"
+                [nzMultiple]="false"
+                [nzBeforeUpload]="onExperienceUpload">
+                <button nz-button>
+                    <i nz-icon nzType="upload"></i> Upload Document
+                </button>
+            </nz-upload>
+            <br />
+
+            <!-- Skill Document -->
+            <label class="fw-bold">Skill Document</label>
+            <nz-upload
+                nzListType="text"
+                [nzMultiple]="false"
+                [nzBeforeUpload]="onSkillsUpload">
+                <button nz-button>
+                    <i nz-icon nzType="upload"></i> Upload Document
+                </button>
+            </nz-upload>
+
+            <ng-template #extraTemplate>
+                <button nz-button nzType="primary"
+                    (click)="submitDocuments()">Add
+                    Document</button>
+            </ng-template>
+        </nz-card>
+
+    </div>
+
+    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12" class="mt-3"
+        [nzXl]="12" [nzXXl]="12">
+
+        <nz-card nzTitle="Uploaded Documents List">
+            @if (allDocumentsList.length) {
+            <nz-list>
+                @for (doc of allDocumentsList; track doc.name) {
+                <nz-list-item
+                    class="d-flex align-items-center justify-content-between p-2 mb-2"
+                    style="border: 1px solid #f0f0f0; border-radius: 5px;">
+
+                    <!-- Left: Avatar / Preview + Title -->
+                    <div class="d-flex align-items-center">
+                        <!-- IMAGE PREVIEW -->
+                        @if (isImage(doc.fileType)) {
+                        <img [src]="getFilePreview(doc)" alt="{{doc.name}}"
+                            style="width: 48px; height: 48px; object-fit: cover; border-radius: 4px; margin-right: 8px;">
+                        }
+                        @else {
+                        <nz-avatar nzShape="square" nzSize="large"
+                            class="me-2 p-1" style="background: #e6f7ff;">
+                            <i nz-icon
+                                [nzType]="doc.icon"
+                                nzTheme="twotone"
+                                [nzTwotoneColor]="getIconColor(doc.fileType)"
+                                class="fs-4">
+                            </i>
+                        </nz-avatar>
+                        }
+
+                        <div>
+                            <div class="fw-bold">{{ doc.name }}</div>
+                            <div class="text-muted">{{ doc.type }}</div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Preview & Download Buttons -->
+                    <div class="d-flex align-items-center">
+                        @if (isPreviewable(doc.fileType)) {
+                            <button  nz-button
+                                nzType="link" (click)="previewDocument(doc)">
+                                <i nz-icon nzType="eye" class="me-1"></i> Preview
+                            </button>
+                        }
+                        <button nz-button nzType="link" (click)="download(doc)">
+                            <i nz-icon nzType="download" class="me-1"></i>
+                            Download
+                        </button>
+                    </div>
+
+                </nz-list-item>
+                }
+            </nz-list>
+            } @else {
+            <nz-empty
+                nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                nzNotFoundContent="No Documents added yet">
+            </nz-empty>
+            }
+        </nz-card>
+
+        <!-- Modal for Preview -->
+        <!-- PREVIEW MODAL -->
+        <nz-modal
+            [(nzVisible)]="previewVisible"
+            nzTitle="Document Preview"
+            [nzFooter]="null"
+            nzWidth="50%"
+            [nzStyle]="{ top: '20px' }"
+            [nzFooter]="modalFooter"
+            (nzOnCancel)="previewVisible = false">
+
+            <div *nzModalContent style="background-color: #f1f4fa;">
+                @if (previewDoc) {
+                <ng-container>
+
+                    <!-- IMAGE PREVIEW -->
+                    @if (isImage(previewDoc.fileType)) {
+                    <img
+                        [src]="getFilePreview(previewDoc)"
+                        style="max-width: 100%; max-height: 80vh; display: block; margin: auto;" />
+                    }
+
+                    <!-- PDF PREVIEW -->
+                    @if (previewDoc?.fileType === 'pdf') {
+                    <iframe
+                        [src]="safePdfUrl"
+                        width="100%"
+                        height="700px"
+                        style="border: none;">
+                    </iframe>
+                    }
+
+                    <!-- NON-PREVIEW FILE -->
+                    @if (!isPreviewable(previewDoc.fileType)) {
+                    <div class="text-center p-4 fs-4">
+                        Preview not available for this file.
+                        <br />
+                        <button nz-button nzType="primary"
+                            (click)="download(previewDoc)">
+                            Download File
+                        </button>
+                    </div>
+                    }
+                    <!-- CSV OR EXCEL PREVIEW -->
+                   @if (previewDoc?.fileType === 'csv' || previewDoc?.fileType
+                    === 'xls' || previewDoc?.fileType === 'xlsx') {
+    <div class="table-responsive"
+        style="max-height: 70vh; overflow-y: auto;">
+        <table class="table table-bordered table-sm">
+            <tbody>
+                @for(row of previewTable; track row) {
+                    <tr>
+                        @for(col of row; track col) {
+                            <td>{{ col }}</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+
+                </ng-container>
+                }
+            </div>
+            <!-- FOOTER TEMPLATE -->
+            <ng-template #modalFooter>
+                <button nz-button nzType="default"
+                    (click)="previewVisible = false">Close</button>
+            </ng-template>
+        </nz-modal>
+
+    </div>
+</div>

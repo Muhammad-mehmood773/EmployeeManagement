@@ -27,7 +27,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
-
+import { NzListModule } from 'ng-zorro-antd/list';
 
 
 export const SHARED_IMPORTS = [
@@ -57,6 +57,7 @@ export const SHARED_IMPORTS = [
   NzTableModule,
   NzPaginationModule,
   NzTagModule,
+  NzListModule,
 
   // Feedback
   NzModalModule,
