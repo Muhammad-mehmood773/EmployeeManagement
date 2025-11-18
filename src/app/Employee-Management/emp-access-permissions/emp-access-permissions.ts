@@ -23,7 +23,6 @@ export class EmpAccessPermissions implements OnInit {
       roleId: [null, [Validators.required]]
     });
 
-     // 🔹 Register bridge methods
     this.bridge.registerValidateFn(() => this.validateForm());
     this.bridge.registerDataFn(() => this.getPermissionData());
     this.bridge.registerUnsavedFn(() => this.hasUnsavedChanges());

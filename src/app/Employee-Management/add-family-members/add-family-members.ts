@@ -108,7 +108,6 @@ export class AddFamilyMembers implements OnInit {
 
     this.familyDataList.update(list => [...list, newMember]);
 
-    // Reset form after adding
     this.familyForm.reset();
     this.showFamilyForm = false ;
 

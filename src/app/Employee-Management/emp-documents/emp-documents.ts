@@ -57,7 +57,7 @@ export class EmpDocuments implements OnInit {
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
     private sanitizer: DomSanitizer,
-     private ngZone: NgZone
+    private ngZone: NgZone
   ) { }
 
   ngOnInit(): void {
@@ -86,7 +86,6 @@ export class EmpDocuments implements OnInit {
     this.uploadedFiles[controlName] = record;
     this.allDocumentsList.push(record);
 
-    // ---- Button hide flags ----
     if (controlName === 'governmentIssueDocument') this.govUploaded = true;
     if (controlName === 'employeeAcademicDocument') this.academicUploaded = true;
     if (controlName === 'employeeExperienceDocument') this.experienceUploaded = true;
@@ -149,35 +148,34 @@ export class EmpDocuments implements OnInit {
 
 
 
-async previewDocument(file: any) {
-  this.previewDoc = file;
+  async previewDocument(file: any) {
+    this.previewDoc = file;
 
-  this.safePdfUrl = null;
-  this.previewTable = [];
-  this.previewVisible = true;
+    this.safePdfUrl = null;
+    this.previewTable = [];
+    this.previewVisible = true;
 
-  // Next tick change detection fix
-  this.ngZone.runOutsideAngular(() => {
-    setTimeout(async () => {
-      this.ngZone.run(() => {
-        if (file.fileType === 'pdf') {
-          const blob = new Blob([file.originFileObj], { type: 'application/pdf' });
-          this.safePdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-            URL.createObjectURL(blob)
-          );
-        }
+    this.ngZone.runOutsideAngular(() => {
+      setTimeout(async () => {
+        this.ngZone.run(() => {
+          if (file.fileType === 'pdf') {
+            const blob = new Blob([file.originFileObj], { type: 'application/pdf' });
+            this.safePdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+              URL.createObjectURL(blob)
+            );
+          }
 
-        if (file.fileType === 'csv') {
-          this.parseCSV(file).then(rows => this.previewTable = rows);
-        }
+          if (file.fileType === 'csv') {
+            this.parseCSV(file).then(rows => this.previewTable = rows);
+          }
 
-        if (file.fileType === 'xls' || file.fileType === 'xlsx') {
-          this.parseExcel(file).then(rows => this.previewTable = rows);
-        }
+          if (file.fileType === 'xls' || file.fileType === 'xlsx') {
+            this.parseExcel(file).then(rows => this.previewTable = rows);
+          }
+        });
       });
     });
-  });
-}
+  }
 
 
 
@@ -211,10 +209,10 @@ async previewDocument(file: any) {
 
   formatTitle(text: string): string {
     return text
-      .replace(/([A-Z])/g, ' $1')      // Capital letter se pehle space add
-      .replace(/_/g, ' ')              // Agar koi underscore ho to replace
-      .trim()                          // Extra spaces remove
-      .replace(/\b\w/g, c => c.toUpperCase()); // Har word ka first letter capital
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/_/g, ' ')
+      .trim()
+      .replace(/\b\w/g, c => c.toUpperCase());
   }
 
 
@@ -226,9 +224,45 @@ async previewDocument(file: any) {
     if (doc.type === 'employeeExperienceDocument') this.experienceUploaded = false;
     if (doc.type === 'employeeSkills') this.skillsUploaded = false;
 
-    // Uploaded file record clear
     this.uploadedFiles[doc.type] = null;
   }
+
+  draggedDoc: any = null;
+placeholderIndex: number | null = null;
+
+onDragStart(event: DragEvent, doc: any) {
+  this.draggedDoc = doc;
+  event.dataTransfer?.setData('text/plain', doc.name);
+  event.dataTransfer!.effectAllowed = 'move';
+}
+
+onDragOver(event: DragEvent, targetDoc: any) {
+  event.preventDefault();
+  const targetIndex = this.allDocumentsList.indexOf(targetDoc);
+
+  if (this.draggedDoc && this.draggedDoc !== targetDoc) {
+    this.placeholderIndex = targetIndex;
+  }
+}
+
+onDrop(event: DragEvent, targetDoc: any) {
+  event.preventDefault();
+  if (!this.draggedDoc) return;
+
+  const draggedIndex = this.allDocumentsList.indexOf(this.draggedDoc);
+  const targetIndex = this.allDocumentsList.indexOf(targetDoc);
+
+  this.allDocumentsList.splice(draggedIndex, 1); // remove from old
+  this.allDocumentsList.splice(targetIndex, 0, this.draggedDoc); // insert at new
+
+  this.draggedDoc = null;
+  this.placeholderIndex = null;
+}
+
+onDragEnd() {
+  this.draggedDoc = null;
+  this.placeholderIndex = null;
+}
 
 
 }

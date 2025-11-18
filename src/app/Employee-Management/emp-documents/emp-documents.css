@@ -1,0 +1,19 @@
+.draggable-item {
+  cursor: grab;
+  transition: box-shadow 0.2s ease;
+}
+
+.draggable-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.drag-handle {
+  font-size: 18px;
+  cursor: grab;
+}
+
+.placeholder {
+  background-color: #e6f7ff;
+  border: 2px dashed #1890ff;
+  min-height: 64px;
+}
