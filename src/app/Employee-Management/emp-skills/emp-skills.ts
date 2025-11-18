@@ -108,7 +108,7 @@ export class EmpSkills implements OnInit {
           size: f.size,
           lastModified: f.lastModified,
           uid: f.uid,
-          originFileObj: f.originFileObj   
+          originFileObj: f.originFileObj
         }))
       };
 
@@ -144,21 +144,20 @@ export class EmpSkills implements OnInit {
   private extractMonthYear(date: Date | null): string | null {
     if (!date) return null;
 
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 01–12
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-    return `${month}-${year}`; // Example: "05-2024"
+    return `${month}-${year}`;
   }
 
   private extractYear(date: Date | null): string | null {
     if (!date) return null;
 
-    return date.getFullYear().toString(); // Example: "2025"
+    return date.getFullYear().toString();
   }
 
-
-onDelete(member: EmpSkillRecord): void {
-  this.tableData.update(list => list.filter(m => m !== member));
-}
+  onDelete(member: EmpSkillRecord): void {
+    this.tableData.update(list => list.filter(m => m !== member));
+  }
 
 
 
