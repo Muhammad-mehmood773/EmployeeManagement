@@ -23,7 +23,7 @@
               </app-emp-job-details>
             </nz-tab>
             <nz-tab [nzTitle]="tabRoutes[2].title">
-               <app-emp-skills></app-emp-skills>
+               <app-emp-skills [hidden]="selectedIndex !== 2"></app-emp-skills>
             </nz-tab>
             <nz-tab [nzTitle]="tabRoutes[3].title">
               <app-emp-access-permissions [hidden]="selectedIndex !== 3"></app-emp-access-permissions>

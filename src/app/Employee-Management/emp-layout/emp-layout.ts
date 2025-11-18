@@ -68,12 +68,11 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
     } else if (this.selectedIndex === 1) {
       validateFn = this.jobBridge.getValidateFn();
       getDataFn = this.jobBridge.getDataFn();
-    } 
-    else if (this.selectedIndex === 2) { 
-      validateFn = this.accessBridge.getValidateFn();
-      getDataFn = this.accessBridge.getDataFn();
     }
-    else if (this.selectedIndex === 3) { 
+    else if (this.selectedIndex === 2) {
+
+    }
+    else if (this.selectedIndex === 3) {
       validateFn = this.accessBridge.getValidateFn();
       getDataFn = this.accessBridge.getDataFn();
     }

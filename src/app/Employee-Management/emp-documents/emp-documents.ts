@@ -21,10 +21,10 @@ export class EmpDocuments implements OnInit {
   onExperienceUpload = (file: any) => this.onSingleUpload(file, 'employeeExperienceDocument');
   onSkillsUpload = (file: any) => this.onSingleUpload(file, 'employeeSkills');
 
-govUploaded = false;
-academicUploaded = false;
-experienceUploaded = false;
-skillsUploaded = false;
+  govUploaded = false;
+  academicUploaded = false;
+  experienceUploaded = false;
+  skillsUploaded = false;
 
 
 
@@ -67,42 +67,32 @@ skillsUploaded = false;
     });
   }
 
-onSingleUpload(file: any, controlName: string): boolean {
+  onSingleUpload(file: any, controlName: string): boolean {
 
-  const fileType = file.name.split('.').pop()?.toLowerCase() ?? 'default';
-  const icon = this.fileIcons[fileType] || this.fileIcons.default;
+    const fileType = file.name.split('.').pop()?.toLowerCase() ?? 'default';
+    const icon = this.fileIcons[fileType] || this.fileIcons.default;
 
-  const record = {
-    name: file.name,
-    size: file.size,
-    type: controlName,
-    fileType: fileType,
-    icon: icon,
-    originFileObj: file
-  };
+    const record = {
+      name: file.name,
+      size: file.size,
+      type: controlName,
+      fileType: fileType,
+      icon: icon,
+      originFileObj: file
+    };
 
-  this.uploadedFiles[controlName] = record;
-  this.allDocumentsList.push(record);
+    this.uploadedFiles[controlName] = record;
+    this.allDocumentsList.push(record);
 
-  // ---- Button hide flags ----
-  if (controlName === 'governmentIssueDocument') this.govUploaded = true;
-  if (controlName === 'employeeAcademicDocument') this.academicUploaded = true;
-  if (controlName === 'employeeExperienceDocument') this.experienceUploaded = true;
-  if (controlName === 'employeeSkills') this.skillsUploaded = true;
+    // ---- Button hide flags ----
+    if (controlName === 'governmentIssueDocument') this.govUploaded = true;
+    if (controlName === 'employeeAcademicDocument') this.academicUploaded = true;
+    if (controlName === 'employeeExperienceDocument') this.experienceUploaded = true;
+    if (controlName === 'employeeSkills') this.skillsUploaded = true;
 
-  return false;
-}
+    return false;
+  }
 
-
-  // submitDocuments() {
-  //   const formData = new FormData();
-
-  //   Object.keys(this.docsForm.value).forEach(key => {
-  //     const fileObj = this.docsForm.value[key];
-  //     formData.append(key, fileObj?.originFileObj ?? null);
-  //   });
-
-  // }
 
   download(file: any) {
     const blob = new Blob([file.originFileObj], {
@@ -213,25 +203,25 @@ onSingleUpload(file: any, controlName: string): boolean {
   }
 
   formatTitle(text: string): string {
-  return text
-    .replace(/([A-Z])/g, ' $1')      // Capital letter se pehle space add
-    .replace(/_/g, ' ')              // Agar koi underscore ho to replace
-    .trim()                          // Extra spaces remove
-    .replace(/\b\w/g, c => c.toUpperCase()); // Har word ka first letter capital
-}
+    return text
+      .replace(/([A-Z])/g, ' $1')      // Capital letter se pehle space add
+      .replace(/_/g, ' ')              // Agar koi underscore ho to replace
+      .trim()                          // Extra spaces remove
+      .replace(/\b\w/g, c => c.toUpperCase()); // Har word ka first letter capital
+  }
 
 
-removeDocument(doc: any) {
-  this.allDocumentsList = this.allDocumentsList.filter(d => d !== doc);
+  removeDocument(doc: any) {
+    this.allDocumentsList = this.allDocumentsList.filter(d => d !== doc);
 
-  if (doc.type === 'governmentIssueDocument') this.govUploaded = false;
-  if (doc.type === 'employeeAcademicDocument') this.academicUploaded = false;
-  if (doc.type === 'employeeExperienceDocument') this.experienceUploaded = false;
-  if (doc.type === 'employeeSkills') this.skillsUploaded = false;
+    if (doc.type === 'governmentIssueDocument') this.govUploaded = false;
+    if (doc.type === 'employeeAcademicDocument') this.academicUploaded = false;
+    if (doc.type === 'employeeExperienceDocument') this.experienceUploaded = false;
+    if (doc.type === 'employeeSkills') this.skillsUploaded = false;
 
-  // Uploaded file record clear
-  this.uploadedFiles[doc.type] = null;
-}
+    // Uploaded file record clear
+    this.uploadedFiles[doc.type] = null;
+  }
 
 
 }

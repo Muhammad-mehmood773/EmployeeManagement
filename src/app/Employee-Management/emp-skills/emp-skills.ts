@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
@@ -35,8 +35,9 @@ export class EmpSkills implements OnInit {
   skillsForm!: FormGroup;
   tableData = signal<EmpSkillRecord[]>([]);
 
-  constructor(private fb: FormBuilder) { }
+  @ViewChild(EmpDocuments) empDocumentsComp!: EmpDocuments;
 
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.skillsForm = this.fb.group({
@@ -68,17 +69,12 @@ export class EmpSkills implements OnInit {
     });
   }
 
-
-
   beforeUpload = (file: any): boolean => {
-
     file.originFileObj = file;
     this.fileList = [...this.fileList, file];
     this.skillsForm.patchValue({ document: [...this.fileList] });
     return false;
   };
-
-
 
   handleChange({ file, fileList }: NzUploadChangeParam): void {
     this.fileList = fileList;
@@ -139,8 +135,6 @@ export class EmpSkills implements OnInit {
     window.URL.revokeObjectURL(url);
   }
 
-
-
   private extractMonthYear(date: Date | null): string | null {
     if (!date) return null;
 
@@ -159,6 +153,15 @@ export class EmpSkills implements OnInit {
     this.tableData.update(list => list.filter(m => m !== member));
   }
 
+
+  getSkillsAndDocuments() {
+    return  {
+      empSkills: this.skillsForm.value,
+      empDocuments: this.empDocumentsComp?.allDocumentsList,
+    };
+  }
+
+  
 
 
 }
