@@ -1,29 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { log } from 'console';
-
-
 @Injectable({ providedIn: 'root' })
 export class ValidationMessageService {
-
-
     getMessage(control: AbstractControl | null, field: string): string {
         if (!control || !control.errors) return '';
 
-
         const touched = control.touched || control.dirty;
         if (!touched) return '';
-
-        console.log('touched' + touched);
         const e = control.errors;
         const name = this.format(field);
- console.log('name' + name);
 
         if (e['required']) return `${name} is required`;
         if (e['minlength']) return `${name} must be at least ${e['minlength'].requiredLength} characters`;
         if (e['maxlength']) return `${name} must be at most ${e['maxlength'].requiredLength} characters`;
         if (e['email']) return `Invalid ${name}`;
-
 
         if (e['pattern']) {
             const lower = field.toLowerCase();
@@ -32,8 +22,6 @@ export class ValidationMessageService {
             if (lower.includes('phone') || lower.includes('mobile')) return `Invalid Phone Number`;
             return `Invalid ${name}`;
         }
-
-
         const firstKey = Object.keys(e)[0];
         return firstKey ? `${name} ${firstKey}` : '';
     }

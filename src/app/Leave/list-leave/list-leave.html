@@ -1,0 +1,27 @@
+<nz-table [nzData]="leaveList" nzBordered nzSize="middle">
+  <thead>
+    <tr>
+      <th>Leave Name</th>
+      <th>Code</th>
+      <th>Accrual</th>
+      <th>Encashment</th>
+      <th>Description</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of leaveList">
+      <td>{{ item.leaveTypeName }}</td>
+      <td>{{ item.leaveCode }}</td>
+      <td>{{ item.accrualMethodId }}</td>
+      <td>{{ item.encashment ? 'Yes' : 'No' }}</td>
+      <td>{{ item.description }}</td>
+      <td>
+        <nz-tag [nzColor]="item.isPaidLeave ? 'green' : 'red'">
+          {{ item.isPaidLeave ? 'Paid' : 'Unpaid' }}
+        </nz-tag>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

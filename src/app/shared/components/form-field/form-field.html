@@ -1,3 +1,12 @@
+<nz-skeleton
+  *ngIf="loading"
+  nzActive
+  [nzTitle]="true"
+  [nzParagraph]="{ rows: 1 }">
+</nz-skeleton>
+
+
+<ng-template [ngIf]="!loading">
 <nz-form-item [formGroup]="form">
   <!-- Label -->
   <nz-form-label [nzRequired]="required">{{ label }}</nz-form-label>
@@ -14,9 +23,12 @@
     <input *ngIf="type === 'input' && !icon" nz-input [formControlName]="controlName" [placeholder]="placeholder" />
 
     <!-- Select -->
-    <nz-select *ngIf="type === 'select'" [formControlName]="controlName" [nzPlaceHolder]="placeholder">
-      <nz-option *ngFor="let opt of options" [nzValue]="opt.value" [nzLabel]="opt.label"></nz-option>
+    <nz-select *ngIf="type === 'select'" [formControlName]="controlName" [nzPlaceHolder]="placeholder"
+      nzShowSearch="true" nzAllowClear="true">
+      <nz-option *ngFor="let opt of options" [nzValue]="opt.value" [nzLabel]="opt.label">
+      </nz-option>
     </nz-select>
+
 
     <!-- Textarea -->
     <textarea *ngIf="type === 'textarea'" nz-input [formControlName]="controlName" [placeholder]="placeholder"
@@ -27,3 +39,5 @@
 
   </nz-form-control>
 </nz-form-item>
+
+</ng-template>

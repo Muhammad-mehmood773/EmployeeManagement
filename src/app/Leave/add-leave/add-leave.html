@@ -9,72 +9,99 @@
     <div class="grid-3">
 
       <app-form-field [form]="leaveForm" controlName="leaveTypeName" label="Leave Type Name" type="input"
-        [required]="true" placeholder="Enter Name Here" icon="user">
+        [required]="true" placeholder="Enter Name Here" icon="user" 
+        [loading]="isLoading"
+        >
       </app-form-field>
 
       <app-form-field [form]="leaveForm" controlName="leaveCode" label="Leave Code" type="input"
-        placeholder="Auto Generate but editable" icon="user">
+        placeholder="Auto Generate but editable" icon="user"
+        [loading]="isLoading"
+        >
       </app-form-field>
 
 
-      <app-form-field [form]="leaveForm" controlName="accrualMethod" label="Accrual Method" type="select"
+      <app-form-field [form]="leaveForm" controlName="accrualMethodId" label="Accrual Method" type="select"
         [required]="true" placeholder="Select" [options]="[
-    { value: 'monthly', label: 'Monthly' },
-    { value: 'yearly', label: 'Yearly' }
-  ]"></app-form-field>
+        { value: '1', label: 'Monthly' },
+        { value: '2', label: 'Yearly' }
+        ]"
+        [loading]="isLoading"
+        >
+      </app-form-field>
 
     </div>
 
     <div class="grid-3">
 
       <app-form-field [form]="leaveForm" controlName="daysAccrued" label="Days Accrued Per Year/Period" type="input"
-        [required]="true" placeholder="" icon="user"></app-form-field>
+        [required]="true" placeholder="" icon="user"
+        [loading]="isLoading"
+        ></app-form-field>
 
       <app-form-field [form]="leaveForm" controlName="carryForwardLimit" label="Carry Forward Limit (Days)" type="input"
-        [required]="false" icon="global"></app-form-field>
+        [required]="false" icon="global"
+        [loading]="isLoading"
+        ></app-form-field>
 
       <app-form-field [form]="leaveForm" controlName="maxConsecutiveDays" label="Maximum Consecutive Days Allowed"
-        type="input" [required]="false" icon="global"></app-form-field>
+        type="input" [required]="false" icon="global"
+        [loading]="isLoading"
+        ></app-form-field>
 
     </div>
 
     <div class="grid-3">
 
       <app-form-field [form]="leaveForm" controlName="backdated" label="Can Apply Backdated" type="input"
-        icon="user"></app-form-field>
+        icon="user"
+        [loading]="isLoading"
+        ></app-form-field>
 
 
       <app-form-field [form]="leaveForm" controlName="encashment" label="Enable Leave Encashment" type="input"
-        icon="global"></app-form-field>
+        icon="global"
+        [loading]="isLoading"
+        ></app-form-field>
 
 
       <app-form-field [form]="leaveForm" controlName="informBefore" label="Inform Before (Days)" type="input"
-        icon="global"></app-form-field>
+        icon="global"
+        [loading]="isLoading"
+        ></app-form-field>
 
     </div>
 
     <div class="switch-row">
       <div>
         <app-form-field [form]="leaveForm" controlName="isPaidLeave" label="Is Paid Leave"
-          type="switch"></app-form-field>
+          type="switch"
+          [loading]="isLoading"
+          ></app-form-field>
 
       </div>
 
       <div>
-        <app-form-field [form]="leaveForm" controlName="halfDaysAllowed" label="Half-Days Allowed"
-          type="switch"></app-form-field>
+        <app-form-field [form]="leaveForm" controlName="isHalfDaysAllowed" label="Half-Days Allowed"
+          type="switch"
+          [loading]="isLoading"
+          ></app-form-field>
 
       </div>
 
       <div>
-        <app-form-field [form]="leaveForm" controlName="proofRequired" label="Proof Required"
-          type="switch"></app-form-field>
+        <app-form-field [form]="leaveForm" controlName="isProofRequired" label="Proof Required"
+          type="switch"
+          [loading]="isLoading"
+          ></app-form-field>
 
       </div>
     </div>
 
     <app-form-field [form]="leaveForm" controlName="description" label="Description" type="textarea"
-      placeholder="Optional description..."></app-form-field>
+      placeholder="Optional description..."
+      [loading]="isLoading"
+      ></app-form-field>
 
 
   </form>

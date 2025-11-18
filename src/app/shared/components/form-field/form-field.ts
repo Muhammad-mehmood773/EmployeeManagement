@@ -8,7 +8,7 @@ import { ValidationMessageService } from '../../Services/form-error-helper.servi
 @Component({
   selector: 'app-form-field',
   standalone: true,
-  imports: [SHARED_IMPORTS, CommonModule, ReactiveFormsModule],
+  imports: [SHARED_IMPORTS, CommonModule, ReactiveFormsModule  ],
   templateUrl: './form-field.html',
   styleUrls: ['./form-field.css']
 })
@@ -23,6 +23,7 @@ export class FormFieldComponent {
   @Input() rows = 4;
   @Input() required = false;
   @Input() icon = '';
+  @Input() loading: boolean = false;
 
   constructor(private validationService: ValidationMessageService) { }
 

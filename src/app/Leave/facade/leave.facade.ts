@@ -1,23 +1,19 @@
 // leave.facade.ts
-import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Injectable } from '@angular/core'; 
+import { LeaveFormPayload } from '../models/leave-form.payload'  
+import { LeaveService } from '../services/leave.service';
 
 @Injectable({ providedIn: 'root' })
 export class LeaveFacade {
 
-  constructor() {}
+  constructor(private service: LeaveService) {}
 
-  saveLeave(form: FormGroup): { valid: boolean; payload?: any } {
-    if (form.invalid) {
-      form.markAllAsTouched();
-      return { valid: false };
-    }
+  save(payload: LeaveFormPayload) {
+    return this.service.createLeave(payload);
+  }
 
-    const payload = form.value;
-
-    // Here you can call your API instead of console.log
-    console.log('Payload:', payload);
-
-    return { valid: true, payload };
+  getAll() {
+    return this.service.getAll();
   }
 }
+

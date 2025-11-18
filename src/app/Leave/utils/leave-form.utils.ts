@@ -5,17 +5,19 @@ export function createLeaveForm(fb: FormBuilder): FormGroup {
   return fb.group({
     leaveTypeName: ['', Validators.required],
     leaveCode: [''],
-    accrualMethod: ['', Validators.required],
-    daysAccrued: ['', Validators.required],
-    carryForwardLimit: [''],
-    maxConsecutiveDays: [''],
-    backdated: [''],
-    encashment: [''],
-    informBefore: [''],
+
+    accrualMethodId: [null, Validators.required],
+    daysAccrued: [null, Validators.required],
+
+    carryForwardLimit: [null],
+    maxConsecutiveDays: [null],
+    backdated: [null],
+    encashment: [null],
+    informBefore: [null],
 
     isPaidLeave: [false],
-    halfDaysAllowed: [false],
-    proofRequired: [false],
+    isHalfDaysAllowed: [false],
+    isProofRequired: [false],
 
     description: ['']
   });
