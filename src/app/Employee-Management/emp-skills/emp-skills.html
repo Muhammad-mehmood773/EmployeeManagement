@@ -152,7 +152,9 @@
             </form>
         </nz-card>
         <ng-template #cardTemplate>
-            <button nz-button nzType="primary" (click)="submitForm()">Add
+            <button nz-button nzType="primary" (click)="submitForm()">
+                 <i nz-icon nzType="plus-circle" [nzTheme]="'fill'"></i>
+                Add
                 Skill</button>
         </ng-template>
     </div>
