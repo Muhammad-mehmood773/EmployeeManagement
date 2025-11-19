@@ -9,7 +9,6 @@ export class JobDetailsBridge {
   private getDataFnSubject = new BehaviorSubject<(() => any) | null>(null);
   private hasUnsavedFnSubject = new BehaviorSubject<(() => boolean) | null>(null);
 
-  // register methods from child
   registerValidateFn(fn: () => boolean) {
     this.validateFnSubject.next(fn);
   }
@@ -22,7 +21,6 @@ export class JobDetailsBridge {
     this.hasUnsavedFnSubject.next(fn);
   }
 
-  // getters for parent
   getValidateFn() {
     return this.validateFnSubject.getValue();
   }

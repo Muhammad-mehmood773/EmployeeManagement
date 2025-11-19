@@ -74,13 +74,16 @@ export class EmpDocuments implements OnInit {
     const fileType = file.name.split('.').pop()?.toLowerCase() ?? 'default';
     const icon = this.fileIcons[fileType] || this.fileIcons.default;
 
+    const objectURL = URL.createObjectURL(file);
+
     const record = {
       name: file.name,
       size: file.size,
       type: controlName,
       fileType: fileType,
       icon: icon,
-      originFileObj: file
+      originFileObj: file,
+      previewUrl: objectURL
     };
 
     this.uploadedFiles[controlName] = record;
@@ -93,6 +96,7 @@ export class EmpDocuments implements OnInit {
 
     return false;
   }
+
 
 
   download(file: any) {
@@ -165,45 +169,21 @@ export class EmpDocuments implements OnInit {
             );
           }
 
-          if (file.fileType === 'csv') {
-            this.parseCSV(file).then(rows => this.previewTable = rows);
-          }
-
-          if (file.fileType === 'xls' || file.fileType === 'xlsx') {
-            this.parseExcel(file).then(rows => this.previewTable = rows);
-          }
         });
       });
     });
   }
 
-
-
-
-  parseExcel(file: any) {
-    return new Promise<any[]>((resolve) => {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: "array" });
-        const sheet = workbook.Sheets[workbook.SheetNames[0]];
-        const json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-        resolve(json);
-      };
-      reader.readAsArrayBuffer(file.originFileObj);
-    });
-  }
-
   getFilePreview(file: any): string {
-    return URL.createObjectURL(file.originFileObj);
+    return file.previewUrl;
   }
+
 
   isImage(fileType: string): boolean {
     return ['jpg', 'jpeg', 'png', 'gif'].includes(fileType);
   }
 
   isPreviewTable(fileType: string): boolean {
-    //|| fileType === 'xls' || fileType === 'xlsx' || fileType === 'csv'
     return this.isImage(fileType) || fileType === 'pdf';
   }
 
@@ -217,6 +197,8 @@ export class EmpDocuments implements OnInit {
 
 
   removeDocument(doc: any) {
+    URL.revokeObjectURL(doc.previewUrl);
+
     this.allDocumentsList = this.allDocumentsList.filter(d => d !== doc);
 
     if (doc.type === 'governmentIssueDocument') this.govUploaded = false;
@@ -227,42 +209,43 @@ export class EmpDocuments implements OnInit {
     this.uploadedFiles[doc.type] = null;
   }
 
+
   draggedDoc: any = null;
-placeholderIndex: number | null = null;
+  placeholderIndex: number | null = null;
 
-onDragStart(event: DragEvent, doc: any) {
-  this.draggedDoc = doc;
-  event.dataTransfer?.setData('text/plain', doc.name);
-  event.dataTransfer!.effectAllowed = 'move';
-}
-
-onDragOver(event: DragEvent, targetDoc: any) {
-  event.preventDefault();
-  const targetIndex = this.allDocumentsList.indexOf(targetDoc);
-
-  if (this.draggedDoc && this.draggedDoc !== targetDoc) {
-    this.placeholderIndex = targetIndex;
+  onDragStart(event: DragEvent, doc: any) {
+    this.draggedDoc = doc;
+    event.dataTransfer?.setData('text/plain', doc.name);
+    event.dataTransfer!.effectAllowed = 'move';
   }
-}
 
-onDrop(event: DragEvent, targetDoc: any) {
-  event.preventDefault();
-  if (!this.draggedDoc) return;
+  onDragOver(event: DragEvent, targetDoc: any) {
+    event.preventDefault();
+    const targetIndex = this.allDocumentsList.indexOf(targetDoc);
 
-  const draggedIndex = this.allDocumentsList.indexOf(this.draggedDoc);
-  const targetIndex = this.allDocumentsList.indexOf(targetDoc);
+    if (this.draggedDoc && this.draggedDoc !== targetDoc) {
+      this.placeholderIndex = targetIndex;
+    }
+  }
 
-  this.allDocumentsList.splice(draggedIndex, 1); // remove from old
-  this.allDocumentsList.splice(targetIndex, 0, this.draggedDoc); // insert at new
+  onDrop(event: DragEvent, targetDoc: any) {
+    event.preventDefault();
+    if (!this.draggedDoc) return;
 
-  this.draggedDoc = null;
-  this.placeholderIndex = null;
-}
+    const draggedIndex = this.allDocumentsList.indexOf(this.draggedDoc);
+    const targetIndex = this.allDocumentsList.indexOf(targetDoc);
 
-onDragEnd() {
-  this.draggedDoc = null;
-  this.placeholderIndex = null;
-}
+    this.allDocumentsList.splice(draggedIndex, 1); // remove from old
+    this.allDocumentsList.splice(targetIndex, 0, this.draggedDoc); // insert at new
+
+    this.draggedDoc = null;
+    this.placeholderIndex = null;
+  }
+
+  onDragEnd() {
+    this.draggedDoc = null;
+    this.placeholderIndex = null;
+  }
 
 
 }

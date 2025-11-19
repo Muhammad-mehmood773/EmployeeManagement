@@ -9,25 +9,17 @@
             [nzAnimated]="false"
             (nzSelectedIndexChange)="onTabChange($event)">
 
-            <!-- 🔹 Personal Info Tab -->
-            <nz-tab [nzTitle]="tabRoutes[0].title">
-              <app-personal-information
-                [hidden]="selectedIndex !== 0">
-              </app-personal-information>
-            </nz-tab>
+            @for (tab of tabRoutes; track tab.title) {
+            <nz-tab [nzTitle]="tab.title">
+              @if (tab.component) {
+              <ng-container [ngComponentOutlet]="tab.component"></ng-container>
+              <div class="row mb-5"></div>
+              <div class="row mb-5"></div>
+              }
+              @if (!tab.component) { <span>Unknown tab</span>
+              } </nz-tab>
+            }
 
-            <!-- 🔹 Job Details Tab -->
-            <nz-tab [nzTitle]="tabRoutes[1].title">
-              <app-emp-job-details
-                [hidden]="selectedIndex !== 1">
-              </app-emp-job-details>
-            </nz-tab>
-            <nz-tab [nzTitle]="tabRoutes[2].title">
-               <app-emp-skills [hidden]="selectedIndex !== 2"></app-emp-skills>
-            </nz-tab>
-            <nz-tab [nzTitle]="tabRoutes[3].title">
-              <app-emp-access-permissions [hidden]="selectedIndex !== 3"></app-emp-access-permissions>
-            </nz-tab>
           </nz-tabset>
 
         </div>

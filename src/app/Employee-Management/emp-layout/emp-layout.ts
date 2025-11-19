@@ -3,8 +3,6 @@ import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { HasUnsavedChanges } from '../../core/guards/unsaved-guard';
 import { PersonalInfoBridge } from '../services/personal-info-bridge';
 
-import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { filter } from 'rxjs';
 import { JobDetailsBridge } from '../services/job-details-bridge';
 import { PersonalInformation } from "../personal-information/personal-information";
 import { EmpJobDetails } from "../emp-job-details/emp-job-details";
@@ -16,7 +14,7 @@ import { SkillBridge } from '../services/skill-bridge';
 
 @Component({
   selector: 'app-emp-layout',
-  imports: [SHARED_IMPORTS, PersonalInformation, EmpJobDetails, EmpAccessPermissions, CommonModule, EmpSkills],
+  imports: [SHARED_IMPORTS,CommonModule],
   templateUrl: './emp-layout.html',
   styleUrl: './emp-layout.css',
   standalone: true,
@@ -25,13 +23,12 @@ import { SkillBridge } from '../services/skill-bridge';
 export class EmpLayout implements HasUnsavedChanges, OnInit {
 
   selectedIndex = 0;
-  tabRoutes = [
-    { title: 'Personal Information', route: 'personal-information' },
-    { title: 'Job Details', route: 'job-details' },
-    { title: 'Skills & Documents', route: 'skills-and-documents' },
-    { title: 'Access & Permissions', route: 'access-and-permission' },
-  ];
-
+tabRoutes = [
+  { title: 'Employee Personal Information', component: PersonalInformation },
+  { title: 'Employee Job Details', component: EmpJobDetails },
+  { title: 'Employee Skills & Documentation', component: EmpSkills },
+  { title: 'Employee Assign Permissions', component: EmpAccessPermissions },
+];
   hasError = false;
   constructor(
     private personalBridge: PersonalInfoBridge,
@@ -49,7 +46,7 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
     const unsaved =
       this.selectedIndex === 0 ? this.personalBridge.getUnsavedFn()?.() :
         this.selectedIndex === 1 ? this.jobBridge.getUnsavedFn()?.() :
-          this.selectedIndex === 2 ? false :  
+          this.selectedIndex === 2 ? false :
             this.selectedIndex === 3 ? this.accessBridge.getUnsavedFn()?.() :
               false;
 
@@ -68,41 +65,48 @@ export class EmpLayout implements HasUnsavedChanges, OnInit {
   }
 
 
+
   saveAll() {
-    let validateFn, getDataFn;
+    const tabs = [
+      { bridge: this.personalBridge, validate: true },
+      { bridge: this.jobBridge, validate: true },
+      { bridge: this.skillBridge, validate: false },
+      { bridge: this.accessBridge, validate: true }
+    ];
 
-    if (this.selectedIndex === 0) {
-      validateFn = this.personalBridge.getValidateFn();
-      getDataFn = this.personalBridge.getDataFn();
-    }
-    else if (this.selectedIndex === 1) {
-      validateFn = this.jobBridge.getValidateFn();
-      getDataFn = this.jobBridge.getDataFn();
-    }
-    else if (this.selectedIndex === 2) {
-      getDataFn = this.skillBridge.getDataFn();
-    }
-    else if (this.selectedIndex === 3) {
-      validateFn = this.accessBridge.getValidateFn();
-      getDataFn = this.accessBridge.getDataFn();
-    }
+    const finalData: any = {};
+    let hasAnyError = false;
 
-    // ⭐ SKIP VALIDATION FOR SKILLS TAB
-    if (this.selectedIndex !== 2) {
-      if (!validateFn) {
-        console.error('Validation function missing!');
-        return;
+    tabs.forEach((tab, index) => {
+      let validateFn: (() => boolean) | null = null;
+      let dataFn: (() => any) | null = null;
+
+      if (tab.validate && 'getValidateFn' in tab.bridge) {
+        validateFn = (tab.bridge as any).getValidateFn?.();
+      }
+      if ('getDataFn' in tab.bridge) {
+        dataFn = (tab.bridge as any).getDataFn?.();
       }
 
-      if (!validateFn()) {
-        console.warn('Form invalid!');
-        return;
+      if (validateFn) {
+        const valid = validateFn();
+        if (!valid) hasAnyError = true;
       }
-    }
 
-    this.hasError = false;
-    console.log("Final Submitted Data:", getDataFn ? getDataFn() : {});
+      finalData[index] = dataFn ? dataFn() : {};
+    });
+
+    console.log("Aggregate Employee Data:", finalData);
+
+    if (hasAnyError) {
+      this.hasError = true; 
+      console.warn("Some tabs have validation errors.");
+    } else {
+      this.hasError = false;
+      console.log("All tabs valid!");
+    }
   }
+
 
 
   hasUnsavedChanges(): boolean {

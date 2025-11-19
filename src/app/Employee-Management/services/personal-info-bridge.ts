@@ -10,7 +10,6 @@ export class PersonalInfoBridge {
   private getDataFnSubject = new BehaviorSubject<(() => any) | null>(null);
   private hasUnsavedFnSubject = new BehaviorSubject<(() => boolean) | null>(null);
 
-  // register methods from child
   registerValidateFn(fn: () => boolean) {
     this.validateFnSubject.next(fn);
   }
