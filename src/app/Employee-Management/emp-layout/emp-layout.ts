@@ -12,10 +12,11 @@ import { AccessPermissionBridge } from '../services/access-permission-bridge';
 import { EmpSkills } from "../emp-skills/emp-skills";
 import { SkillBridge } from '../services/skill-bridge';
 import { EmpAcademic } from '../emp-academic/emp-academic';
+import { AcademicBridge } from '../services/academic-bridge';
 
 @Component({
   selector: 'app-emp-layout',
-  imports: [SHARED_IMPORTS,CommonModule],
+  imports: [SHARED_IMPORTS, CommonModule],
   templateUrl: './emp-layout.html',
   styleUrl: './emp-layout.css',
   standalone: true,
@@ -24,13 +25,13 @@ import { EmpAcademic } from '../emp-academic/emp-academic';
 export class EmpLayout implements HasUnsavedChanges, OnInit {
 
   selectedIndex = 0;
-tabRoutes = [
-  { title: 'Employee Personal Information', component: PersonalInformation },
-  { title: 'Employee Job Details', component: EmpJobDetails },
-  { title: 'Employee Skills & Documentation', component: EmpSkills },
-  { title: 'Employee Academic`s', component: EmpAcademic },
-  { title: 'Employee Assign Permissions', component: EmpAccessPermissions },
-];
+  tabRoutes = [
+    { title: 'Employee Personal Information', component: PersonalInformation },
+    { title: 'Employee Job Details', component: EmpJobDetails },
+    { title: 'Employee Skills & Documentation', component: EmpSkills },
+    { title: 'Employee Academic`s', component: EmpAcademic },
+    { title: 'Employee Assign Permissions', component: EmpAccessPermissions },
+  ];
   hasError = false;
   constructor(
     private personalBridge: PersonalInfoBridge,
@@ -38,6 +39,7 @@ tabRoutes = [
     private jobBridge: JobDetailsBridge,
     private accessBridge: AccessPermissionBridge,
     private skillBridge: SkillBridge,
+    private academicBridge: AcademicBridge,
   ) { }
 
   ngOnInit() {
@@ -49,8 +51,9 @@ tabRoutes = [
       this.selectedIndex === 0 ? this.personalBridge.getUnsavedFn()?.() :
         this.selectedIndex === 1 ? this.jobBridge.getUnsavedFn()?.() :
           this.selectedIndex === 2 ? false :
-            this.selectedIndex === 3 ? this.accessBridge.getUnsavedFn()?.() :
-              false;
+            this.selectedIndex === 3 ? false :
+              this.selectedIndex === 4 ? this.accessBridge.getUnsavedFn()?.() :
+                false;
 
     if (unsaved) {
       this.hasError = true;
@@ -69,6 +72,7 @@ tabRoutes = [
       { bridge: this.personalBridge, validate: true },
       { bridge: this.jobBridge, validate: true },
       { bridge: this.skillBridge, validate: false },
+      { bridge: this.academicBridge, validate: false },
       { bridge: this.accessBridge, validate: true }
     ];
 
@@ -97,7 +101,7 @@ tabRoutes = [
     console.log("Aggregate Employee Data:", finalData);
 
     if (hasAnyError) {
-      this.hasError = true; 
+      this.hasError = true;
       console.warn("Some tabs have validation errors.");
     } else {
       this.hasError = false;
@@ -114,5 +118,5 @@ tabRoutes = [
   }
 
 
-  
+
 }

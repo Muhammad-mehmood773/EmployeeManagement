@@ -4,6 +4,7 @@ import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
 import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { CommonModule, DatePipe } from '@angular/common';
+import { AcademicBridge } from '../services/academic-bridge';
 
 export interface UploadedFile {
   uid: string;
@@ -44,7 +45,7 @@ export class EmpAcademic implements OnInit {
 
   tableData = signal<EmpAcademicModel[]>([]);
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private academicBridge: AcademicBridge) { }
 
   ngOnInit(): void {
     this.empAcademicForm = this.fb.group({
@@ -59,6 +60,8 @@ export class EmpAcademic implements OnInit {
       currentStudyingHere: [false],
       document: [],
     });
+
+     this.academicBridge.registerDataFn(() => this.tableData());
   }
 
   // ------------------------------------------
@@ -107,7 +110,7 @@ export class EmpAcademic implements OnInit {
       name: f.name,
       size: f.size ?? 0,
       type: f.type ?? 'application/octet-stream',
-      lastModified: f.lastModified ?? '',   // <-- FIXED
+      lastModified: f.lastModified ?? '',   
       originFileObj: f.originFileObj ?? null
     })) as UploadedFile[];
 
