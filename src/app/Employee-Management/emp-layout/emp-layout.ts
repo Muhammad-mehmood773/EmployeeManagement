@@ -11,6 +11,7 @@ import { EmpAccessPermissions } from '../emp-access-permissions/emp-access-permi
 import { AccessPermissionBridge } from '../services/access-permission-bridge';
 import { EmpSkills } from "../emp-skills/emp-skills";
 import { SkillBridge } from '../services/skill-bridge';
+import { EmpAcademic } from '../emp-academic/emp-academic';
 
 @Component({
   selector: 'app-emp-layout',
@@ -27,6 +28,7 @@ tabRoutes = [
   { title: 'Employee Personal Information', component: PersonalInformation },
   { title: 'Employee Job Details', component: EmpJobDetails },
   { title: 'Employee Skills & Documentation', component: EmpSkills },
+  { title: 'Employee Academic`s', component: EmpAcademic },
   { title: 'Employee Assign Permissions', component: EmpAccessPermissions },
 ];
   hasError = false;
@@ -58,13 +60,9 @@ tabRoutes = [
     this.selectedIndex = index;
   }
 
-
-
   ngAfterViewInit() {
     this.cdr.detectChanges();
   }
-
-
 
   saveAll() {
     const tabs = [
@@ -107,8 +105,6 @@ tabRoutes = [
     }
   }
 
-
-
   hasUnsavedChanges(): boolean {
     return (
       (this.personalBridge.getUnsavedFn()?.() ?? false) ||
@@ -117,4 +113,6 @@ tabRoutes = [
     );
   }
 
+
+  
 }

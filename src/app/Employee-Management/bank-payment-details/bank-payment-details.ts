@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { getNzErrorMessage } from '../shared/helpers/validation-messages';
 import { CommonModule } from '@angular/common';
-import { SHARED_IMPORTS } from '../shared/theme/ng-zorro-imports';
+import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
+import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
 
 @Component({
   selector: 'app-bank-payment-details',

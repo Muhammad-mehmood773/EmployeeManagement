@@ -1,0 +1,260 @@
+
+<div nz-row [nzGutter]="8">
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="12"
+        [nzXl]="12" [nzXXl]="12">
+        <nz-card nzTitle="Add Employee Academic" [nzExtra]="cardTemplate">
+            <form [formGroup]="empAcademicForm" nz-form nzLayout="vertical">
+                <div nz-row [nzGutter]="8">
+
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('institutionName')">
+                                <nz-form-label nzRequired
+                                    nzFor="institutionName">Institution Name
+                                </nz-form-label>
+                                <input nz-input
+                                    formControlName="institutionName"
+                                    id="institutionName"
+                                    name="institutionName" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('degree')">
+                                <nz-form-label nzRequired
+                                    nzFor="degree">Degree
+                                </nz-form-label>
+                                <input nz-input formControlName="degree"
+                                    id="degree" name="degree" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('fieldOfStudy')">
+                                <nz-form-label nzRequired
+                                    nzFor="fieldOfStudy">Field Of Study
+                                </nz-form-label>
+                                <input nz-input formControlName="fieldOfStudy"
+                                    id="fieldOfStudy" name="fieldOfStudy" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('startDate')">
+                                <nz-form-label nzRequired
+                                    nzFor="startDate">Start Date
+                                </nz-form-label>
+                                <nz-date-picker
+                                    style="width: 100%;" [nzPlaceHolder]="' '"
+                                    formControlName="startDate"
+                                     nzFormat="MMM d, yyyy"
+                                    name="startDate"
+                                    id="startDate"></nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('startYear')">
+                                <nz-form-label nzRequired
+                                    nzFor="startYear">Year
+                                </nz-form-label>
+                                <nz-date-picker nzMode="year"
+                                    style="width: 100%;" [nzPlaceHolder]="' '"
+                                    formControlName="startYear"
+                                    name="startYear"
+                                    id="startYear"></nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('endDate')">
+                                <nz-form-label
+                                    nzFor="endDate">End Date
+                                </nz-form-label>
+                                <nz-date-picker
+                                    style="width: 100%;" [nzPlaceHolder]="' '"
+                                    formControlName="endDate"
+                                    name="endDate"
+                                     nzFormat="MMM d, yyyy"
+                                    id="endDate"></nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('endYear')">
+                                <nz-form-label
+                                    nzFor="endYear">Year
+                                </nz-form-label>
+                                <nz-date-picker nzMode="year"
+                                    style="width: 100%;" [nzPlaceHolder]="' '"
+                                    formControlName="endYear"
+                                    name="endYear"
+                                    id="endYear"></nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('gradeOrPercentage')">
+                                <nz-form-label
+                                    nzFor="gradeOrPercentage">Grade Or %
+                                </nz-form-label>
+                                <input nz-input
+                                    formControlName="gradeOrPercentage"
+                                    id="gradeOrPercentage"
+                                    name="gradeOrPercentage" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="6"
+                        [nzXl]="6" [nzXXl]="6">
+                        <nz-form-item>
+                            <nz-form-control
+                                [nzErrorTip]="getError('currentStudyingHere')">
+                                <label nz-checkbox
+                                    formControlName="currentStudyingHere"
+                                    id="currentStudyingHere"
+                                    name="currentStudyingHere">Current Studying
+                                    Here</label>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24"
+                        [nzXl]="24" [nzXXl]="24">
+                        <nz-upload
+                            nzType="drag"
+                            [nzMultiple]="true"
+                            [nzBeforeUpload]="beforeUpload"
+                            [nzFileList]="fileList"
+                            nzAction=" "
+                            (nzChange)="handleChange($event)">
+                            <p class="ant-upload-drag-icon">
+                                <nz-icon nzType="inbox"></nz-icon>
+                            </p>
+                            <p class="ant-upload-text">Click or drag files to
+                                this area to upload</p>
+                        </nz-upload>
+                    </div>
+                </div>
+            </form>
+        </nz-card>
+        <ng-template #cardTemplate>
+            <button nz-button nzType="primary" (click)="submitForm()">
+                <i nz-icon nzType="plus-circle" [nzTheme]="'fill'"></i>
+                Add
+                Record</button>
+        </ng-template>
+    </div>
+
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="12"
+        [nzXl]="12" [nzXXl]="12">
+        <nz-card nzTitle="All Skills">
+            @if (tableData().length) {
+            <nz-table nzShowPagination="false" nzSize="small" #basicTable
+                [nzData]="tableData()"
+                [nzBordered]="false">
+                <thead>
+                    <tr>
+                        <th>Institution</th>
+                        <th>Degree</th>
+                        <th>Field of Study</th>
+                        <th>Start Date</th>
+                        <th>Start Year</th>
+                        <th>End Date</th>
+                        <th>End Year</th>
+                        <th>Grade / %</th>
+                        <th>Documents</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (item of tableData(); track $index) {
+                    <tr>
+                        <td>{{ item.institutionName }}</td>
+                        <td>{{ item.degree }}</td>
+                        <td>{{ item.fieldOfStudy }}</td>
+                        <td>{{ item.startDate | date: 'MMM d, yyyy' }}</td>
+                        <td>{{ item.startYear }}</td>
+                        <td>
+                            {{ item.endDate ? (item.endDate | date:
+                            'MMM d, yyyy') : '-' }}
+                        </td>
+                        <td>{{ item.endYear || '-' }}</td>
+                        <td>{{ item.gradeOrPercentage || '-' }}</td>
+
+                        <!-- Documents Column -->
+                        <td>
+                            @if (item.document.length) {
+
+                            <button nz-button nz-dropdown nzTrigger="click"
+                                [nzDropdownMenu]="fileMenu" nzArrow>
+                                {{ item.document.length }} Attachment(s)
+                                <i nz-icon nzType="down"></i>
+                            </button>
+
+                            <nz-dropdown-menu #fileMenu="nzDropdownMenu">
+                                <ul nz-menu>
+                                    @for (f of item.document; track f.uid) {
+                                    <li nz-menu-item
+                                        (click)="downloadFile(f)"
+                                        class="d-flex align-items-center justify-content-between">
+                                        <i nz-icon nzType="file"
+                                            nzTheme="twotone"
+                                            class="fs-6 me-1"></i>
+                                        {{ f.name }}
+                                        <i nz-icon nzType="download"></i>
+                                    </li>
+                                    }
+                                </ul>
+                            </nz-dropdown-menu>
+
+                            } @else {
+                            <span>No File</span>
+                            }
+                        </td>
+
+                        <!-- Action -->
+                        <td class="text-center">
+                            <i nz-icon nzType="delete" nzTheme="fill"
+                                nzSize="md" class="text-danger fs-6"
+                                (click)="onDelete(item)">
+                            </i>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+
+            </nz-table>
+
+            } @else {
+            <nz-empty
+                nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                nzNotFoundContent="No Personal Skills added yet">
+            </nz-empty>
+            }
+        </nz-card>
+    </div>
+</div>

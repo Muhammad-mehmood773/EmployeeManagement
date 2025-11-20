@@ -6,8 +6,8 @@ import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
 import { addMonths } from 'date-fns';
 import { SalaryAllowancesBenefits } from "../salary-allowances-benefits/salary-allowances-benefits";
 import { AllowancesAndBenefits } from "../allowances-and-benefits/allowances-and-benefits";
-import { BankPaymentDetails } from "../../bank-payment-details/bank-payment-details";
 import { JobDetailsBridge } from '../services/job-details-bridge';
+import { BankPaymentDetails } from '../bank-payment-details/bank-payment-details';
 
 @Component({
   selector: 'app-emp-job-details',
