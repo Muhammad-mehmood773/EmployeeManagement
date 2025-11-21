@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { SHARED_IMPORTS } from '../../../shared/theme/ng-zorro-imports';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { getNzErrorMessage } from '../../../shared/helpers/validation-messages';
+import { Skeleton } from "../../../shared/components/skeleten/skeleten";
 
 @Component({
   selector: 'app-quick-add-emp-info',
-  imports: [SHARED_IMPORTS, ReactiveFormsModule],
+  imports: [SHARED_IMPORTS, ReactiveFormsModule, Skeleton],
   templateUrl: './quick-add-emp-info.html',
   styleUrl: './quick-add-emp-info.css',
 })
