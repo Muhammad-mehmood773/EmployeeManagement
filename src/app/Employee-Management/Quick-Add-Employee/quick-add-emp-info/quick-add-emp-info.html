@@ -1,0 +1,53 @@
+<nz-card nzTitle="Employee Info">
+    <form [formGroup]="employeeForm" nz-form nzLayout="vertical">
+        <div nz-row [nzGutter]="8">
+
+            <!-- First Name -->
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24"
+                [nzXl]="24" [nzXXl]="24">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('firstName')">
+                        <nz-form-label nzRequired
+                            nzFor="firstName">First
+                            Name</nz-form-label>
+                        <input nz-input formControlName="firstName"
+                            id="firstName" name="firstName" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <!-- Last Name -->
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24"
+                [nzXl]="24" [nzXXl]="24">
+                <nz-form-item>
+                    <nz-form-control
+                        [nzErrorTip]="getError('lastName')">
+                        <nz-form-label nzRequired
+                            nzFor="lastName">Last
+                            Name</nz-form-label>
+                        <input nz-input formControlName="lastName"
+                            id="lastName"
+                            name="lastName" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <!-- Email -->
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24"
+                [nzXl]="24" [nzXXl]="24">
+                <nz-form-item>
+                    <nz-form-control 
+                        [nzErrorTip]="getError('personalEmail')">
+                        <nz-form-label nzFor="email" nzRequired>
+                            E-mail</nz-form-label>
+                        <input nz-input formControlName="personalEmail"
+                            id="email" name="email" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+        </div>
+    </form>
+
+</nz-card>

@@ -3,8 +3,9 @@
         <div nz-row [nzGutter]="8">
 
             <!-- HRMS User Name -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="8" [nzXXl]="8">
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="isQuickAdd ? 24 : 8" 
+     [nzXl]="isQuickAdd ? 24 : 8"
+     [nzXXl]="isQuickAdd ? 24 : 8">
                 <nz-form-item>
                     <nz-form-control
                         [nzErrorTip]="getError('hrmsUserName')">
@@ -17,8 +18,9 @@
                 </nz-form-item>
             </div>
             <!-- Work Email -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="8" [nzXXl]="8">
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="isQuickAdd ? 24 : 8" 
+     [nzXl]="isQuickAdd ? 24 : 8"
+     [nzXXl]="isQuickAdd ? 24 : 8">
                 <nz-form-item>
                     <nz-form-control
                         [nzErrorTip]="getError('workEmail')">
@@ -31,8 +33,9 @@
             </div>
 
             <!-- Role  -->
-            <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8"
-                [nzXl]="8" [nzXXl]="8">
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="isQuickAdd ? 24 : 8" 
+     [nzXl]="isQuickAdd ? 24 : 8"
+     [nzXXl]="isQuickAdd ? 24 : 8">
                 <nz-form-item>
                     <nz-form-control
                         [nzErrorTip]="getError('roleId')">

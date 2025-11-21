@@ -1,4 +1,14 @@
 
+.card-container {
+  display: flex;
+  flex-direction: column;
+  background: #f1f4fa;
+  padding: 10px;
+}
+
+nz-content{
+  min-height: 80vh;
+}
 
 nz-footer {
   position: fixed;

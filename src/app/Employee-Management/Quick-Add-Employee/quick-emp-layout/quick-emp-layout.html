@@ -1,11 +1,31 @@
+<app-emp-quick-add-breadcrumb></app-emp-quick-add-breadcrumb>
 <nz-layout>
     <nz-content class="scrollable-content">
-        <div nz-row [nzGutter]="16">
-            <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24"
-                [nzXl]="24">
-                <app-emp-quick-add-breadcrumb></app-emp-quick-add-breadcrumb>
+        <div class="card-container">
+            <div nz-row [nzGutter]="8" class="mb-2">
+                <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="8"
+                    [nzXl]="8">
+                    <app-quick-add-emp-info></app-quick-add-emp-info>
+                </div>
+                <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="16"
+                    [nzXl]="16">
+                    <app-quick-add-emp-job-detail></app-quick-add-emp-job-detail>
+                </div>
+            </div>
+
+            <div nz-row [nzGutter]="8">
+                <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="14"
+                    [nzXl]="14">
+                   <app-salary-allowances-benefits></app-salary-allowances-benefits>
+                </div>
+                 <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="10"
+                    [nzXl]="10">
+                  <app-emp-access-permissions [isQuickAdd]="true"></app-emp-access-permissions>
+                </div>
+
             </div>
         </div>
+
     </nz-content>
 
     <nz-footer class="custom-footer">

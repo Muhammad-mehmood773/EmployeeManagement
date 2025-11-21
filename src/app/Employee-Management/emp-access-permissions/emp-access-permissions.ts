@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
@@ -11,6 +11,8 @@ import { AccessPermissionBridge } from '../services/access-permission-bridge';
   styleUrl: './emp-access-permissions.css',
 })
 export class EmpAccessPermissions implements OnInit {
+
+  @Input() isQuickAdd: boolean = false;
 
   roleAccessForm!: FormGroup;
 

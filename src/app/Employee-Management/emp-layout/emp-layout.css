@@ -4,6 +4,9 @@
   flex-direction: column;
   background: #f1f4fa;
 }
+nz-content{
+  min-height: 90vh;
+}
 
 .card-container ::ng-deep .ant-tabs-nav {
   position: sticky;
