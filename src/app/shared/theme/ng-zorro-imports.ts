@@ -29,7 +29,6 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzListModule } from 'ng-zorro-antd/list';
 
-
 export const SHARED_IMPORTS = [
   // Form controls
   NzInputModule,

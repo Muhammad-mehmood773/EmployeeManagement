@@ -278,3 +278,43 @@ label {
 }
 
 
+.page-header {
+  padding: 10px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+
+  border-bottom: 1px solid #f0f0f0;
+
+  .app-breadcrumb {
+    margin-bottom: 8px;
+
+    ::ng-deep .ant-breadcrumb-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      span[nz-icon] {
+        font-size: 16px;
+        margin-right: 4px;
+      }
+    }
+  }
+
+  .page-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    span[nz-icon] {
+      font-size: 20px;
+      color: #052346;
+    }
+
+    h4 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+}
