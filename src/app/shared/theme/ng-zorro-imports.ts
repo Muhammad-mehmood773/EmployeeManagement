@@ -28,6 +28,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 export const SHARED_IMPORTS = [
   // Form controls
@@ -63,6 +64,7 @@ export const SHARED_IMPORTS = [
   NzAlertModule,
   NzSpinModule,
   NzDropDownModule,
+  NzSkeletonModule,
 
   // Actions
   NzButtonModule,

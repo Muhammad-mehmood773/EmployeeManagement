@@ -203,11 +203,11 @@ label {
   height: 40px;
 }
 
-.card-container > .ant-tabs-card .ant-tabs-tab-active {
-    border-color: #f1f4fa;
-    background: #f1f4fa;
-    font-size: 14px;
-    font-weight: 700;
+.card-container>.ant-tabs-card .ant-tabs-tab-active {
+  border-color: #f1f4fa;
+  background: #f1f4fa;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 // =============================
@@ -215,7 +215,7 @@ label {
 // =============================
 
 // Table header styling
-.ant-table-thead > tr > th {
+.ant-table-thead>tr>th {
   background-color: #f5f7fa !important;
   color: #333;
   font-weight: 600;
@@ -224,25 +224,25 @@ label {
 }
 
 // Table header hover (optional subtle effect)
-.ant-table-thead > tr > th:hover {
+.ant-table-thead>tr>th:hover {
   background-color: fade(@primary-color, 10%) !important;
   color: @primary-color !important;
 }
 
 // Table rows
-.ant-table-tbody > tr {
+.ant-table-tbody>tr {
   transition: all 0.25s ease-in-out;
   cursor: pointer;
 }
 
 // Hover effect for table rows
-.ant-table-tbody > tr:hover > td {
+.ant-table-tbody>tr:hover>td {
   background-color: fade(@primary-color, 10%) !important;
   color: #000 !important;
 }
 
 // Active (selected) row look (optional)
-.ant-table-tbody > tr.ant-table-row-selected > td {
+.ant-table-tbody>tr.ant-table-row-selected>td {
   background-color: fade(@primary-color, 18%) !important;
   color: #000;
   font-weight: 500;
@@ -252,44 +252,34 @@ label {
 
 /* Close button container (the X) */
 .ant-modal-close {
-  border-radius: 50%;             // circular button
-  width: 32px;                    // optional size
+  border-radius: 50%; // circular button
+  width: 32px; // optional size
   height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease;
-  
+
   &:hover {
-    background-color: #f1f4fa;    // hover background color
+    background-color: #f1f4fa; // hover background color
   }
 }
 
 /* The X icon itself */
 .ant-modal-close-x {
-  color: #000;                    // X color
-  font-size: 16px;                // size of the X
+  color: #000; // X color
+  font-size: 16px; // size of the X
   font-weight: bold;
 }
 
 /* Suppress harmless NG Zorro tab animation warnings */
-.nz-tab-body{
+.nz-tab-body {
   transition: none !important;
 }
 
 
 .page-header {
-  padding: 10px;
-  background: #ffffff;
-  border-bottom: 1px solid #f0f0f0;
-
- /* Strong downward shadow */
-box-shadow:
-  0 8px 14px -2px rgba(0, 0, 0, 0.18),
-  0 16px 28px -4px rgba(0, 0, 0, 0.15),
-  0 24px 40px -6px rgba(0, 0, 0, 0.12);
-
-
+  width: 100%;
   .app-breadcrumb {
     margin-bottom: 8px;
 
@@ -301,6 +291,7 @@ box-shadow:
       span[nz-icon] {
         font-size: 16px;
         margin-right: 4px;
+        
       }
     }
   }
@@ -311,16 +302,15 @@ box-shadow:
     gap: 8px;
 
     span[nz-icon] {
-      font-size: 20px;
+      font-size: 18px;
       color: #052346;
     }
 
     h4 {
       margin: 0;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 600;
       color: #333;
     }
   }
 }
-

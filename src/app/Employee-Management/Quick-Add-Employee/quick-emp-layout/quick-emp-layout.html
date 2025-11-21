@@ -1,5 +1,7 @@
-<app-emp-quick-add-breadcrumb></app-emp-quick-add-breadcrumb>
 <nz-layout>
+    <nz-header>
+        <app-emp-quick-add-breadcrumb></app-emp-quick-add-breadcrumb>
+    </nz-header>
     <nz-content class="scrollable-content">
         <div class="card-container">
             <div nz-row [nzGutter]="8" class="mb-2">
@@ -16,16 +18,18 @@
             <div nz-row [nzGutter]="8">
                 <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="14"
                     [nzXl]="14">
-                   <app-salary-allowances-benefits></app-salary-allowances-benefits>
+                    <app-salary-allowances-benefits></app-salary-allowances-benefits>
                 </div>
-                 <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="10"
+                <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="10"
                     [nzXl]="10">
-                  <app-emp-access-permissions [isQuickAdd]="true"></app-emp-access-permissions>
+                    <app-emp-access-permissions
+                        [isQuickAdd]="true"></app-emp-access-permissions>
                 </div>
-
             </div>
         </div>
 
+        <div class="row mb-5"></div>
+        <div class="row mb-5"></div>
     </nz-content>
 
     <nz-footer class="custom-footer">
