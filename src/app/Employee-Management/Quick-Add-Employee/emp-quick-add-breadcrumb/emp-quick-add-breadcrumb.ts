@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { SHARED_IMPORTS } from '../../../shared/theme/ng-zorro-imports';
 
 @Component({
   selector: 'app-emp-quick-add-breadcrumb',
-  imports: [NzBreadCrumbModule,NzIconModule,NzTypographyModule],
+  imports: [SHARED_IMPORTS],
   templateUrl: './emp-quick-add-breadcrumb.html',
   styleUrl: './emp-quick-add-breadcrumb.css',
 })
