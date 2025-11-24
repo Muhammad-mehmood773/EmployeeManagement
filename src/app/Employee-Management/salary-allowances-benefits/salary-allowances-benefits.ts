@@ -88,11 +88,36 @@ export class SalaryAllowancesBenefits implements OnInit {
 
 
   openBenefitsModal() {
-    this.modal.create({
+     const modalRef = this.modal.create({
       nzTitle: 'Mark Benefits to Employee',
       nzContent: AddMapBenefitsModal,
       nzWidth: 650,
-      nzFooter: null
+      nzBodyStyle: {
+        background: '#f1f4fa',
+        padding: '10px',
+        maxHeight: '70vh',
+        overflowY: 'auto',
+        top: '0px'
+      },
+      nzFooter: [
+        {
+          label: 'Cancel',
+          onClick: (componentInstance) => modalRef.destroy()
+        },
+        {
+          label: 'Map Allowance',
+          type: 'primary',
+          onClick: (componentInstance) => {
+            modalRef.close(componentInstance?.form.value); 
+          }
+        }
+      ]
+    });
+
+    modalRef.afterClose.subscribe(result => {
+      if (result) {
+        console.log('Selected Allowances:', result);
+      }
     });
   }
 

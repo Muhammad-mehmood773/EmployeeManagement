@@ -1,1 +1,43 @@
-<p>add-map-benefits-modal works!</p>
+<nz-card nzTitle="Choose Benefits for Mapping">
+  <form nz-form [formGroup]="form">
+
+    <nz-collapse>
+      <nz-collapse-panel
+        *ngFor="let cat of categories.controls; let i = index"
+        [nzHeader]="cat.get('name')?.value"
+        [style]="customStyle"
+        nzActive nzShowArrow>
+
+        <!-- Category Group -->
+        <div formArrayName="categories">
+          <div [formGroupName]="i">
+
+            <!-- LAYERS ARRAY -->
+            <div formArrayName="layers">
+              <nz-list>
+                <nz-list-item
+                  *ngFor="let layer of getLayers(i).controls; let j = index"
+                  [formGroupName]="j">
+
+                  <div class="d-flex justify-content-between align-items-center w-100">
+                    <label nz-checkbox nzAnimation formControlName="isChecked">
+                      {{ layer.get('name')?.value }}
+                    </label>
+
+                    <strong class="text-muted">
+                      {{ layer.get('amount')?.value }}
+                    </strong>
+                  </div>
+
+                </nz-list-item>
+              </nz-list>
+            </div>
+
+          </div>
+        </div>
+
+      </nz-collapse-panel>
+    </nz-collapse>
+
+  </form>
+</nz-card>

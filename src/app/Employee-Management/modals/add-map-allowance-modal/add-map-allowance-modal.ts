@@ -3,14 +3,14 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { SHARED_IMPORTS } from '../../../shared/theme/ng-zorro-imports';
 
-interface AllowanceLayer {
+export interface AllowanceLayer {
   id: number;
   name: string;
   amount: string;
   isChecked: boolean;
 }
 
-interface AllowanceCategory {
+export interface AllowanceCategory {
   id: number;
   name: string;
   layers: AllowanceLayer[];
@@ -21,7 +21,6 @@ interface AllowanceCategory {
   templateUrl: './add-map-allowance-modal.html',
   imports: [SHARED_IMPORTS, ReactiveFormsModule, CommonModule],
   styleUrls: ['./add-map-allowance-modal.css'],
-  encapsulation: ViewEncapsulation.None 
 })
 export class AddMapAllowanceModal implements OnInit {
 
