@@ -94,7 +94,7 @@ export class EmpJobDetails implements OnInit {
   getJobInfoData() {
     return {
       jobDetails:this.jobDetailForm.value,
-      salaryAllowancesBenefits: this.salaryAllowancesBenefitsComp?.salrayPackForm?.value,
+      salaryAllowancesBenefits: this.salaryAllowancesBenefitsComp?.salaryPackForm?.value,
       allowancesAndBenefits: this.allowancesAndBenefitsComp?.allowanceBenefitsForm?.value,
       bankPaymentDetails: this.bankPaymentDetailsComp?.bankDetailForm?.value,
     };
@@ -102,7 +102,7 @@ export class EmpJobDetails implements OnInit {
 
   hasUnsavedChanges(): boolean {
     const mainDirty = this.jobDetailForm.dirty;
-    const salaryAllowancesBenefitsDirty = this.salaryAllowancesBenefitsComp?.salrayPackForm?.dirty ?? false;
+    const salaryAllowancesBenefitsDirty = this.salaryAllowancesBenefitsComp?.salaryPackForm?.dirty ?? false;
     const allowancesAndBenefitsDirty = this.allowancesAndBenefitsComp?.allowanceBenefitsForm?.dirty ?? false;
     const bankPaymentDetailsDirty = this.bankPaymentDetailsComp?.bankDetailForm?.dirty ?? false;
     return mainDirty || salaryAllowancesBenefitsDirty || allowancesAndBenefitsDirty || bankPaymentDetailsDirty;

@@ -1,14 +1,14 @@
 <nz-card nzTitle="Salary & Compensation">
-    <form [formGroup]="salrayPackForm" nz-form nzLayout="vertical">
+    <form [formGroup]="salaryPackForm" nz-form nzLayout="vertical">
         <div nz-row [nzGutter]="8">
 
-             <!-- Basic Salary -->
+            <!-- Basic Salary -->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
                 [nzXl]="12" [nzXXl]="12">
                 <nz-form-item>
                     <nz-form-control
                         [nzErrorTip]="getError('basicSalary')">
-                        <nz-form-label  nzRequired
+                        <nz-form-label nzRequired
                             nzFor="basicSalary">Basic Salary
                         </nz-form-label>
                         <input nz-input formControlName="basicSalary"
@@ -16,16 +16,16 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
-             <!-- Gross Salary -->
+            <!-- Gross Salary -->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
                 [nzXl]="12" [nzXXl]="12">
                 <nz-form-item>
-                    <nz-form-control 
+                    <nz-form-control
                         [nzErrorTip]="getError('grossSalary')">
                         <nz-form-label nzRequired
                             nzFor="grossSalary">Gross Salary
                         </nz-form-label>
-                        <input nz-input formControlName="grossSalary" 
+                        <input nz-input formControlName="grossSalary"
                             id="grossSalary" name="grossSalary" />
                     </nz-form-control>
                 </nz-form-item>
@@ -54,26 +54,37 @@
                 </nz-form-item>
             </div>
 
-             <!-- AllowancesMapId -->
+            <!-- AllowancesMapId -->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12"
                 [nzXl]="12" [nzXXl]="12">
                 <nz-form-item>
-                    <nz-form-control
-                        [nzErrorTip]="getError('allowancesMapId')">
-                        <nz-form-label 
-                            nzFor="allowancesMap">Allowance(s)
+                    <nz-form-control [nzErrorTip]="getError('allowancesMapId')">
+                         <nz-form-label 
+                            nzFor="allowancesMap">Allowances(s)
                         </nz-form-label>
-                        <nz-select nzShowSearch nzAllowClear
-                            id="allowancesMap"
-                            formControlName="allowancesMapId"
-                            name="allowancesMap">
-                            <nz-option nzLabel="Jack"
-                                nzValue="jack"></nz-option>
-                            <nz-option nzLabel="Lucy"
-                                nzValue="lucy"></nz-option>
-                            <nz-option nzLabel="Tom"
-                                nzValue="tom"></nz-option>
-                        </nz-select>
+                        <div nz-row nzGutter="8" >
+                            <div nz-col [nzSpan]="17"> <nz-select nzShowSearch
+                                    nzAllowClear
+                                    name="allowancesMap"
+                                    id="allowancesMap"
+                                    formControlName="allowancesMapId">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option> </nz-select>
+                            </div>
+                            <div nz-col [nzSpan]="7">
+                                <button
+                                    nz-button
+                                    nzType="dashed"
+                                    (click)="openAllowanceModal()"
+                                    class="d-flex align-items-center justify-content-center w-100 gap-1 py-0">
+
+                                    <span nz-icon nzType="plus-circle"
+                                        nzTheme="fill"></span>
+                                    <span>Map Allowances</span>
+                                </button>
+                            </div>
+
+                        </div>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -82,15 +93,26 @@
                 [nzXl]="12" [nzXXl]="12">
                 <nz-form-item>
                     <nz-form-control
-                        [nzErrorTip]="getError('totalAllowances')">
-                        <nz-form-label 
-                            nzFor="SalaryFrequency">Total Allowances
+                        [nzErrorTip]="getError('benefitsId')">
+                        <nz-form-label
+                            nzFor="benefits">Benefits
                         </nz-form-label>
-                        <input nz-input formControlName="totalAllowances"
-                            id="totalAllowances" name="totalAllowances" />
+                        <input nz-input formControlName="benefitsId"
+                            id="benefits" name="benefits" />
                     </nz-form-control>
                 </nz-form-item>
             </div>
         </div>
     </form>
 </nz-card>
+
+<nz-modal
+    [(nzVisible)]="isAllowanceModalVisible"
+    nzTitle="Map Employee Allowances"
+    (nzOnCancel)="closeAllowanceModal()"
+    (nzOnOk)="closeAllowanceModal()">
+    <div *nzModalContent>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil,
+            perferendis?</p>
+    </div>
+</nz-modal>

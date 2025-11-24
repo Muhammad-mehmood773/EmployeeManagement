@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SHARED_IMPORTS } from '../../../shared/theme/ng-zorro-imports';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { getNzErrorMessage } from '../../../shared/helpers/validation-messages';
@@ -10,12 +10,12 @@ import { getNzErrorMessage } from '../../../shared/helpers/validation-messages';
   styleUrl: './quick-add-emp-job-detail.css',
 })
 export class QuickAddEmpJobDetail implements OnInit {
-
+  @Output() formReady = new EventEmitter<FormGroup>();
   employeeJobDetail!: FormGroup;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-     this.employeeJobDetail = this.fb.group({
+    this.employeeJobDetail = this.fb.group({
       departmentId: [null, [Validators.required]],
       designationId: [null, [Validators.required]],
       locationId: [null, [Validators.required]],
@@ -25,6 +25,7 @@ export class QuickAddEmpJobDetail implements OnInit {
       employeeTypeId: [null, [Validators.required]],
 
     });
+    this.formReady.emit(this.employeeJobDetail);
   }
 
   getError(controlName: string): string {

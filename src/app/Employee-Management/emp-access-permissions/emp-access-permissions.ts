@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
@@ -11,6 +11,7 @@ import { AccessPermissionBridge } from '../services/access-permission-bridge';
   styleUrl: './emp-access-permissions.css',
 })
 export class EmpAccessPermissions implements OnInit {
+  @Output() formReady = new EventEmitter<FormGroup>();
 
   @Input() isQuickAdd: boolean = false;
 
@@ -24,6 +25,7 @@ export class EmpAccessPermissions implements OnInit {
       workEmail: ['', [Validators.required, Validators.maxLength(100)]],
       roleId: [null, [Validators.required]]
     });
+     this.formReady.emit(this.roleAccessForm);
 
     this.bridge.registerValidateFn(() => this.validateForm());
     this.bridge.registerDataFn(() => this.getPermissionData());

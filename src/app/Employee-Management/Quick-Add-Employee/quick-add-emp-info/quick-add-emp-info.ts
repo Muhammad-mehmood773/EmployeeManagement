@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SHARED_IMPORTS } from '../../../shared/theme/ng-zorro-imports';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { getNzErrorMessage } from '../../../shared/helpers/validation-messages';
-import { Skeleton } from "../../../shared/components/skeleton/skeleten";
 
 @Component({
   selector: 'app-quick-add-emp-info',
-  imports: [SHARED_IMPORTS, ReactiveFormsModule, Skeleton],
+  imports: [SHARED_IMPORTS, ReactiveFormsModule],
   templateUrl: './quick-add-emp-info.html',
   styleUrl: './quick-add-emp-info.css',
 })
 export class QuickAddEmpInfo implements OnInit {
+  @Output() formReady = new EventEmitter<FormGroup>();
 
   employeeForm!: FormGroup;
   constructor(private fb: FormBuilder) { }
@@ -21,6 +21,8 @@ export class QuickAddEmpInfo implements OnInit {
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(75)]],
       personalEmail: ['', [Validators.required ,Validators.email, Validators.maxLength(100)]],
     });
+
+     this.formReady.emit(this.employeeForm);
   }
 
   getError(controlName: string): string {
