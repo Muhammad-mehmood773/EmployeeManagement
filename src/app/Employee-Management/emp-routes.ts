@@ -18,6 +18,14 @@ export const employeeRoutes: Route[] = [
         (m) => m.QuickEmpLayout
       ),
     canDeactivate: [UnsavedGuard],
+  },
+  {
+    path: 'scan-add-employee',
+    loadComponent: () =>
+      import('../Employee-Management/scan-add-employee/scan-employee/scan-employee').then(
+        (m) => m.ScanEmployee
+      ),
+    canDeactivate: [UnsavedGuard],
   }
 
 ];

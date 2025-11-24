@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Camera Connect</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    textarea { width: 100%; height: 120px; margin-bottom: 10px; }
+    button { padding: 10px 15px; font-size: 16px; }
+    video { border: 1px solid #000; margin-top: 10px; width: 100%; max-width: 400px; }
+  </style>
+</head>
+<body>
+
+<h2>Paste Laptop QR JSON here:</h2>
+<textarea id="offerInput" placeholder="Paste Laptop QR JSON"></textarea>
+<button id="connectBtn">Start Camera & Connect</button>
+
+<h3>Mobile Camera Preview:</h3>
+<video id="mobileVideo" autoplay playsinline></video>
+
+<script>
+  const pc = new RTCPeerConnection();
+
+  document.getElementById('connectBtn').onclick = async () => {
+    const offerJSON = document.getElementById('offerInput').value.trim();
+    if(!offerJSON) {
+      alert("Please paste the QR JSON from Laptop first!");
+      return;
+    }
+
+    const offer = JSON.parse(offerJSON);
+
+    // 1️⃣ Get mobile camera
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    document.getElementById('mobileVideo').srcObject = stream;
+
+    // 2️⃣ Add tracks to peer connection
+    stream.getTracks().forEach(track => pc.addTrack(track, stream));
+
+    // 3️⃣ Set remote description from Laptop Offer
+    await pc.setRemoteDescription(offer);
+
+    // 4️⃣ Create answer & set local description
+    const answer = await pc.createAnswer();
+    await pc.setLocalDescription(answer);
+
+    // 5️⃣ Show JSON to paste back on laptop
+    alert("Copy this Answer JSON and paste it in Laptop console to see mobile video");
+    console.log("Answer JSON:", JSON.stringify(answer));
+  };
+</script>
+
+</body>
+</html>
