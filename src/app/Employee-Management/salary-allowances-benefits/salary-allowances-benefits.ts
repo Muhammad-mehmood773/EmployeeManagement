@@ -3,6 +3,9 @@ import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { getNzErrorMessage } from '../../shared/helpers/validation-messages';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { AddMapAllowanceModal } from '../modals/add-map-allowance-modal/add-map-allowance-modal';
+import { AddMapBenefitsModal } from '../modals/add-map-benefits-modal/add-map-benefits-modal';
 
 @Component({
   selector: 'app-salary-allowances-benefits',
@@ -15,7 +18,7 @@ export class SalaryAllowancesBenefits implements OnInit {
 
   salaryPackForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private modal: NzModalService) { }
 
   ngOnInit(): void {
     this.salaryPackForm = this.fb.group({
@@ -25,7 +28,7 @@ export class SalaryAllowancesBenefits implements OnInit {
       allowancesMapId: [null],
       benefitsId: [null],
     });
-     this.formReady.emit(this.salaryPackForm);
+    this.formReady.emit(this.salaryPackForm);
 
   }
 
@@ -48,14 +51,49 @@ export class SalaryAllowancesBenefits implements OnInit {
     return this.salaryPackForm.valid;
   }
 
-  isAllowanceModalVisible = false;
 
   openAllowanceModal() {
-    this.isAllowanceModalVisible = true;
+    const modalRef = this.modal.create({
+      nzTitle: 'Map Employee Allowances',
+      nzContent: AddMapAllowanceModal,
+      nzWidth: 650,
+      nzBodyStyle: {
+        background: '#f1f4fa',
+        padding: '10px',
+        maxHeight: '70vh',
+        overflowY: 'auto',
+        top: '0px'
+      },
+      nzFooter: [
+        {
+          label: 'Cancel',
+          onClick: (componentInstance) => modalRef.destroy()
+        },
+        {
+          label: 'Map Allowance',
+          type: 'primary',
+          onClick: (componentInstance) => {
+            modalRef.close(componentInstance?.form.value); 
+          }
+        }
+      ]
+    });
+
+    modalRef.afterClose.subscribe(result => {
+      if (result) {
+        console.log('Selected Allowances:', result);
+      }
+    });
   }
 
-  closeAllowanceModal() {
-    this.isAllowanceModalVisible = false;
+
+  openBenefitsModal() {
+    this.modal.create({
+      nzTitle: 'Mark Benefits to Employee',
+      nzContent: AddMapBenefitsModal,
+      nzWidth: 650,
+      nzFooter: null
+    });
   }
 
 }

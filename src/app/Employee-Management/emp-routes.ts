@@ -1,4 +1,3 @@
-import { QuickEmpLayout } from './Quick-Add-Employee/quick-emp-layout/quick-emp-layout';
 import { Route } from '@angular/router';
 import { UnsavedGuard } from '../core/guards/unsaved-guard';
 

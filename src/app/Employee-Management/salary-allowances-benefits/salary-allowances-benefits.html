@@ -59,11 +59,12 @@
                 [nzXl]="12" [nzXXl]="12">
                 <nz-form-item>
                     <nz-form-control [nzErrorTip]="getError('allowancesMapId')">
-                         <nz-form-label 
+                        <nz-form-label
                             nzFor="allowancesMap">Allowances(s)
                         </nz-form-label>
-                        <div nz-row nzGutter="8" >
-                            <div nz-col [nzSpan]="17"> <nz-select nzShowSearch
+                        <div nz-row nzGutter="8">
+                            <div nz-col [nzSpan]="18">
+                                <nz-select nzShowSearch
                                     nzAllowClear
                                     name="allowancesMap"
                                     id="allowancesMap"
@@ -71,16 +72,16 @@
                                     <nz-option nzLabel="Jack"
                                         nzValue="jack"></nz-option> </nz-select>
                             </div>
-                            <div nz-col [nzSpan]="7">
+                            <div nz-col [nzSpan]="6">
                                 <button
                                     nz-button
                                     nzType="dashed"
                                     (click)="openAllowanceModal()"
-                                    class="d-flex align-items-center justify-content-center w-100 gap-1 py-0">
+                                    class="d-flex align-items-center border-2 text-primary justify-content-center w-100  py-0">
 
                                     <span nz-icon nzType="plus-circle"
                                         nzTheme="fill"></span>
-                                    <span>Map Allowances</span>
+                                    <span>Map</span>
                                 </button>
                             </div>
 
@@ -97,22 +98,33 @@
                         <nz-form-label
                             nzFor="benefits">Benefits
                         </nz-form-label>
-                        <input nz-input formControlName="benefitsId"
-                            id="benefits" name="benefits" />
+                        <div nz-row nzGutter="8">
+                            <div nz-col [nzSpan]="18">
+                                <nz-select nzShowSearch
+                                    nzAllowClear
+                                    name="benefits"
+                                    id="benefits"
+                                    formControlName="benefitsId">
+                                    <nz-option nzLabel="Jack"
+                                        nzValue="jack"></nz-option> </nz-select>
+                            </div>
+                            <div nz-col [nzSpan]="6">
+                                <button
+                                    nz-button
+                                    nzType="dashed"
+                                    (click)="openBenefitsModal()"
+                                    class="d-flex align-items-center border-2 text-primary justify-content-center w-100  py-0">
+
+                                    <span nz-icon nzType="plus-circle"
+                                        nzTheme="fill"></span>
+                                    <span>Map </span>
+                                </button>
+                            </div>
+                        </div>
+
                     </nz-form-control>
                 </nz-form-item>
             </div>
         </div>
     </form>
 </nz-card>
-
-<nz-modal
-    [(nzVisible)]="isAllowanceModalVisible"
-    nzTitle="Map Employee Allowances"
-    (nzOnCancel)="closeAllowanceModal()"
-    (nzOnOk)="closeAllowanceModal()">
-    <div *nzModalContent>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil,
-            perferendis?</p>
-    </div>
-</nz-modal>
