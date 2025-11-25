@@ -20,10 +20,10 @@ export const employeeRoutes: Route[] = [
     canDeactivate: [UnsavedGuard],
   },
   {
-    path: 'scan-add-employee',
+    path: 'profile-approval',
     loadComponent: () =>
-      import('../Employee-Management/scan-add-employee/scan-employee/scan-employee').then(
-        (m) => m.ScanEmployee
+      import('../Profile-Status/profile-request/profile-request').then(
+        (m) => m.ProfileRequest
       ),
     canDeactivate: [UnsavedGuard],
   }

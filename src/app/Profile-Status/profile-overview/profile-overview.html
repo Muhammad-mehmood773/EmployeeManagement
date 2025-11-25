@@ -1,0 +1,139 @@
+<nz-card
+    nzTitle="Information Update on Newly Added Employee Profiles"
+    [nzExtra]="extraTemplate">
+
+    <!-- Toggle Buttons (GRID / CARD) -->
+    <ng-template #extraTemplate>
+        <button
+            class="d-flex align-items-center justify-content-center border-2"
+            nz-button nzType="dashed" (click)="toggleView()">
+            <span nz-icon [nzType]="viewMode === 'grid' ? 'appstore' : 'menu'"
+                nzTheme="outline"></span>
+            {{ viewMode === 'grid' ? 'Card View' : 'Grid View' }}
+        </button>
+    </ng-template>
+
+    <!-- GRID VIEW -->
+    @if (viewMode === 'grid') {
+
+    <nz-table
+        [nzData]="listOfData"
+        [nzFrontPagination]="false"
+        nzSize="small"
+        [nzScroll]="{y: '300px'}"
+        [nzOuterBordered]="true">
+
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Submission Date</th>
+                <th>Status</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (emp of listOfData; track emp.employeeId) {
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center gap-2">
+                        @if (emp.avatar) {
+                        <nz-avatar nzSize="default"
+                            [nzSrc]="emp.avatar"></nz-avatar>
+                        }
+                        @else {
+                        <nz-avatar nzSize="default"
+                            [nzText]="emp.initials"></nz-avatar>
+                        }
+
+                        <div>
+                            <div class="fw-bold">{{ emp.employeeName
+                                }}</div>
+                            <small style="color: gray;">ID: {{
+                                emp.employeeId }}</small>
+                        </div>
+                    </div>
+                </td>
+
+                <td>{{ emp.submissionDate | date : 'MMM d, yyyy' }}</td>
+
+                <td>
+                    <nz-tag
+                        [nzColor]="getStatusStyle(emp.status).bg"
+                        [ngStyle]="{
+                        'color': getStatusStyle(emp.status).color,
+                        'font-weight': '600'
+                    }">
+                        {{ emp.status }}
+                    </nz-tag>
+                </td>
+
+                <td class="text-center">
+                    <button nz-button nzShape="circle">
+                        <span nz-icon nzType="eye"></span>
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+
+    </nz-table>
+
+    }
+
+    <!-- CARD VIEW -->
+    @if (viewMode === 'card') {
+    <div class="card-grid" style="max-height: 500px; overflow-y: auto;">
+
+        @for (emp of listOfData; track emp.employeeId) {
+
+        <nz-card [nzTitle]="emp.employeeName" [nzBordered]="true"
+            class="shadow">
+
+            <div class="d-flex align-items-center gap-2">
+
+                @if (emp.avatar) {
+                <nz-avatar [nzSize]="68" [nzSrc]="emp.avatar"></nz-avatar>
+                }
+                @else {
+                <nz-avatar [nzSize]="68" [nzText]="emp.initials"></nz-avatar>
+                }
+
+                <div>
+                    <div class="emp-id">ID: {{ emp.employeeId }}</div>
+                </div>
+
+            </div>
+
+            <div class="mt-2">
+                <strong>Date:</strong>
+                {{ emp.submissionDate | date:'MMM d, yyyy' }}
+            </div>
+
+            <div class="mt-2">
+                <nz-tag [nzColor]="getStatusStyle(emp.status).bg"
+                    [ngStyle]="{
+                        'background-color': getStatusStyle(emp.status).bg,
+                        'color': getStatusStyle(emp.status).color,
+                        'font-weight': '600'
+                    }">
+                    {{ emp.status }}
+                </nz-tag>
+
+            </div>
+
+            <div class=" text-end">
+                <button nz-button nzSize="small" nzType="default"
+                    nzShape="circle">
+                    <span nz-icon nzType="eye"></span>
+                </button>
+            </div>
+
+        </nz-card>
+
+        }
+
+    </div>
+    }
+
+</nz-card>
