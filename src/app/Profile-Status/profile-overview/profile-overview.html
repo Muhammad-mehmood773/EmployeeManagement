@@ -1,87 +1,92 @@
 <nz-card
-    nzTitle="Information Update on Newly Added Employee Profiles"
-    [nzExtra]="extraTemplate">
-
-    <!-- Toggle Buttons (GRID / CARD) -->
-    <ng-template #extraTemplate>
-        <button
-            class="d-flex align-items-center justify-content-center border-2"
-            nz-button nzType="dashed" (click)="toggleView()">
-            <span nz-icon [nzType]="viewMode === 'grid' ? 'appstore' : 'menu'"
-                nzTheme="outline"></span>
-            {{ viewMode === 'grid' ? 'Card View' : 'Grid View' }}
-        </button>
-    </ng-template>
-
-    <!-- GRID VIEW -->
+    nzTitle="Information Update on Newly Added Employee Profiles">
     @if (viewMode === 'grid') {
+    <div style="max-height: 320px; overflow-y: auto;">
+        <nz-table
+            #simpleTable
+            [nzData]="listOfData"
+            [nzFrontPagination]="false"
+            [nzSize]="'small'"
+            [nzOuterBordered]="true">
 
-    <nz-table
-        [nzData]="listOfData"
-        [nzFrontPagination]="false"
-        nzSize="small"
-        [nzScroll]="{y: '300px'}"
-        [nzOuterBordered]="true">
+            <thead>
+                <tr>
+                    <th>
+                        <span class="d-flex align-items-center gap-1">
+                            <span nz-icon nzType="user"
+                                nzTheme="outline"></span>
+                            Employee
+                        </span>
+                    </th>
+                    <th>
+                        <span class="d-flex align-items-center gap-1">
+                            <span nz-icon nzType="calendar"
+                                nzTheme="outline"></span>
+                            Submission Date
+                        </span>
+                    </th>
+                    <th>
+                        <span class="d-flex align-items-center gap-1">
+                            <span nz-icon nzType="info-circle"
+                                nzTheme="outline"></span>
+                            Status
+                        </span>
+                    </th>
+                    <th class="text-center">
+                        <span nz-icon nzType="eye" nzTheme="outline"></span>
+                        Action
+                    </th>
+                </tr>
+            </thead>
 
-        <thead>
-            <tr>
-                <th>Employee</th>
-                <th>Submission Date</th>
-                <th>Status</th>
-                <th class="text-center">Action</th>
-            </tr>
-        </thead>
+            <tbody>
+                @for (emp of listOfData; track emp.employeeId) {
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            @if (emp.avatar) {
+                            <nz-avatar nzSize="default"
+                                [nzSrc]="emp.avatar"></nz-avatar>
+                            }
+                            @else {
+                            <nz-avatar nzSize="default"
+                                [nzText]="emp.initials"></nz-avatar>
+                            }
 
-        <tbody>
-            @for (emp of listOfData; track emp.employeeId) {
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center gap-2">
-                        @if (emp.avatar) {
-                        <nz-avatar nzSize="default"
-                            [nzSrc]="emp.avatar"></nz-avatar>
-                        }
-                        @else {
-                        <nz-avatar nzSize="default"
-                            [nzText]="emp.initials"></nz-avatar>
-                        }
-
-                        <div>
-                            <div class="fw-bold">{{ emp.employeeName
-                                }}</div>
-                            <small style="color: gray;">ID: {{
-                                emp.employeeId }}</small>
+                            <div>
+                                <div class="fw-bold">{{ emp.employeeName
+                                    }}</div>
+                                <small style="color: gray;">ID: {{
+                                    emp.employeeId }}</small>
+                            </div>
                         </div>
-                    </div>
-                </td>
+                    </td>
 
-                <td>{{ emp.submissionDate | date : 'MMM d, yyyy' }}</td>
+                    <td>{{ emp.submissionDate | date : 'MMM d, yyyy' }}</td>
 
-                <td>
-                    <nz-tag
-                        [nzColor]="getStatusStyle(emp.status).bg"
-                        [ngStyle]="{
+                    <td>
+                        <nz-tag
+                            [nzColor]="getStatusStyle(emp.status).bg"
+                            [ngStyle]="{
                         'color': getStatusStyle(emp.status).color,
                         'font-weight': '600'
                     }">
-                        {{ emp.status }}
-                    </nz-tag>
-                </td>
+                            {{ emp.status }}
+                        </nz-tag>
+                    </td>
 
-                <td class="text-center">
-                    <button nz-button nzShape="circle">
-                        <span nz-icon nzType="eye"></span>
-                    </button>
-                </td>
-            </tr>
-            }
-        </tbody>
+                    <td class="text-center">
+                        <button nz-button nzShape="circle">
+                            <span nz-icon nzType="eye"></span>
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
 
-    </nz-table>
-
+        </nz-table>
+    </div>
     }
-
-    <!-- CARD VIEW -->
     @if (viewMode === 'card') {
     <div class="card-grid" style="max-height: 500px; overflow-y: auto;">
 
@@ -134,6 +139,58 @@
         }
 
     </div>
+    }
+    @if (viewMode === 'list') {
+  <div  class="list-container">
+
+  <nz-list [nzDataSource]="listOfData" [nzRenderItem]="item" nzItemLayout="horizontal">
+
+    <ng-template #item let-emp>
+
+      <nz-list-item class="emp-item d-flex align-items-center justify-content-between">
+
+        <!-- LEFT: Avatar + Name + ID -->
+        <div class="d-flex align-items-center gap-2">
+          <nz-avatar nzSize="large" *ngIf="emp.avatar" [nzSrc]="emp.avatar"></nz-avatar>
+          <nz-avatar nzSize="large" *ngIf="!emp.avatar" [nzText]="emp.initials"></nz-avatar>
+          <div>
+            <div class="fw-bold emp-name">{{ emp.employeeName }}</div>
+            <small class="text-muted emp-id">ID: {{ emp.employeeId }}</small>
+          </div>
+        </div>
+
+        <!-- CENTER: Date + Status -->
+        <div class="d-flex ">
+          <div class="emp-date me-2   ">
+            <span nz-icon nzType="calendar"></span>
+            {{ emp.submissionDate | date : 'MMM d, yyyy' }}
+          </div>
+
+          <nz-tag class="emp-status"
+                  [nzColor]="getStatusStyle(emp.status).bg"
+                  [ngStyle]="{
+                    'color': getStatusStyle(emp.status).color,
+                    'font-weight': '600'
+                  }">
+            {{ emp.status }}
+          </nz-tag>
+        </div>
+
+        <!-- RIGHT: Action Button -->
+        <div>
+          <button nz-button nzShape="circle" nzType="default" class="action-btn">
+            <span nz-icon nzType="eye"></span>
+          </button>
+        </div>
+
+      </nz-list-item>
+
+    </ng-template>
+
+  </nz-list>
+
+</div>
+
     }
 
 </nz-card>

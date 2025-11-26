@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
+export type ProfileViewMode = 'grid' | 'card' | 'list';
 @Injectable({
   providedIn: 'root',
 })
@@ -35,5 +35,21 @@ export class AccessPermissionBridge {
 
 
 
+  private viewModeSubject = new BehaviorSubject<ProfileViewMode>('grid');
+  viewMode$ = this.viewModeSubject.asObservable();
+
+  setView(view: ProfileViewMode) {
+    this.viewModeSubject.next(view);
+  }
+
+  toggleNext() {
+    const current = this.viewModeSubject.getValue();
+    const next: ProfileViewMode = current === 'grid' ? 'card' : current === 'card' ? 'list' : 'grid';
+    this.viewModeSubject.next(next);
+  }
+
+  getView() {
+    return this.viewModeSubject.getValue();
+  }
 
 }

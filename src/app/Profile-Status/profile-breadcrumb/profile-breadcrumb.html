@@ -1,0 +1,56 @@
+<div class="page-header p-2">
+
+  <div class="header-row">
+
+    <div class="col-left">
+      <nz-breadcrumb class="app-breadcrumb">
+        <nz-breadcrumb-item>
+          <span nz-icon nzType="appstore" class="fs-5"
+            style="color:#03489b !important"></span>
+          <span class="text-info fw-medium">Employee</span>
+        </nz-breadcrumb-item>
+
+        <nz-breadcrumb-item>
+          <span nz-icon nzType="user-switch" class="fs-5"
+            style="color:#03489b !important"></span>
+          <span class="text-info fw-medium">Profile Review</span>
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
+    </div>
+
+    <div class="col-center ">
+      <div class="page-title-center ">
+        <span nz-icon nzType="profile" class="fs-4 mb-2"
+          style="color:#03489b !important"></span>
+        <h4 nz-typography>Employee Information Update Requests</h4>
+      </div>
+    </div>
+
+    <div class="col-right">
+      <button nz-button nzType="dashed" class="border-2" nz-dropdown [nzDropdownMenu]="menu">
+        <span nz-icon nzType="down"></span>
+       {{ currentView + ' View'  | titlecase }}
+
+      </button>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item (click)="setView('grid')">
+            <span nz-icon nzType="appstore" nzTheme="outline"
+              class="me-1"></span> Grid View
+          </li>
+          <li nz-menu-item (click)="setView('card')">
+            <span nz-icon nzType="menu" nzTheme="outline" class="me-1"></span>
+            Card View
+          </li>
+          <li nz-menu-item (click)="setView('list')">
+            <span nz-icon nzType="unordered-list" nzTheme="outline"
+              class="me-1"></span> List View
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+    </div>
+
+  </div>
+
+</div>

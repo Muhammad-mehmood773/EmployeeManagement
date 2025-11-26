@@ -340,3 +340,96 @@ label {
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
   opacity: 10;
 }
+
+
+.page-header {
+  width: 100%;
+}
+
+.header-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* 3 columns */
+  align-items: center;
+}
+
+.col-left {
+  display: flex;
+  align-items: center;
+}
+
+.col-center {
+  display: flex;
+  justify-content: center; /* Title center */
+}
+
+
+.page-title-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.col-right {
+  display: flex;
+  justify-content: flex-end; /* Button right corner */
+}
+
+h4 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+
+
+
+// Table header
+.ant-table-thead > tr > th {
+  background: linear-gradient(135deg, #076cfa, #4facfe);
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 1px solid #03489b !important;
+  letter-spacing: 0.5px;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.2);
+  position: sticky;  // sticky header
+  top: 0;
+  z-index: 2;
+}
+
+.ant-table-tbody > tr {
+  transition: all 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+  cursor: pointer;
+  border-bottom: 1px solid #03489b !important;
+}
+
+
+.ant-table {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border: 1px solid #03489b !important;
+}
+
+
+// Pagination
+.ant-pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 0;
+}
+
+/* Global icon color */
+// .nz-icon, .anticon {
+//   color: #03489b !important;
+//   transition: color 0.3s ease;
+//   font-weight: 600 !important;
+// }
+
+// /* Hover effect */
+// .nz-icon:hover, .anticon:hover {
+//   color: lighten(#03489b, 70%);  // ✅ works in LESS
+//   font-weight: 600 !important;
+// }
+
+
