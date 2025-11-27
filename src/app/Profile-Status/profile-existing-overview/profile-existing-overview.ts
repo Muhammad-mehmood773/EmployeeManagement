@@ -29,8 +29,7 @@ export class ProfileExistingOverview {
       fieldsUpdated: '4 Fields',
       approved: 2,
       rejected: 2,
-      pending: 5,
-      status: 'In Review'
+      pending: 5
     },
     {
       employeeId: 'EMP-1002',
@@ -42,8 +41,7 @@ export class ProfileExistingOverview {
       fieldsUpdated: '2 Fields',
       approved: 3,
       rejected: 3,
-      pending: 2,
-      status: 'In Review'
+      pending: 2
     }
   ];
 

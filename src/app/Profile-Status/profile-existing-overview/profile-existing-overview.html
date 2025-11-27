@@ -50,13 +50,6 @@
                             Pending
                         </span>
                     </th>
-                    <th>
-                        <span class="d-flex align-items-center gap-1">
-                            <span nz-icon nzType="info-circle"
-                                nzTheme="outline"></span>
-                            Status
-                        </span>
-                    </th>
                     <th class="text-center">
                         <span nz-icon nzType="eye" nzTheme="outline"></span>
                         Action
@@ -91,14 +84,6 @@
                     <td>{{ emp.approved }}</td>
                     <td>{{ emp.rejected }}</td>
                     <td>{{ emp.pending }}</td>
-
-                    <td>
-                        <nz-tag
-                            [nzColor]="getStatusStyle(emp.status).bg"
-                            [ngStyle]="{'color': getStatusStyle(emp.status).color,'font-weight':'600'}">
-                            {{ emp.status }}
-                        </nz-tag>
-                    </td>
 
                     <td class="text-center">
                         <button nz-button nzShape="circle">
@@ -150,16 +135,6 @@
                 <nz-tag [nzColor]="'orange'">Pending: {{ emp.pending }}</nz-tag>
             </div>
 
-            <div class="mt-2">
-                <nz-tag [nzColor]="getStatusStyle(emp.status).bg"
-                    [ngStyle]="{
-        'background-color': getStatusStyle(emp.status).bg,
-        'color': getStatusStyle(emp.status).color,
-        'font-weight': '600'
-      }">
-                    {{ emp.status }}
-                </nz-tag>
-            </div>
 
             <div class="text-end mt-2">
                 <button nz-button nzSize="small" nzType="default"
@@ -175,67 +150,65 @@
     </div>
 
     }
-    @if (viewMode === 'list') {
-    <div class="list-container" style="max-height: 500px; overflow-y: auto;">
+   @if (viewMode === 'list') {
+<div class="list-container custom-emp-list">
 
-        <nz-list [nzDataSource]="listOfData" [nzRenderItem]="item"
-            nzItemLayout="horizontal">
-            <ng-template #item let-emp> <nz-list-item
-                    class="emp-item d-flex align-items-start justify-content-between py-2">
-                    <!-- LEFT: Avatar + Name + ID -->
-                    <div class="d-flex align-items-center gap-2">
-                        <nz-avatar nzSize="large" *ngIf="emp.avatar"
-                            [nzSrc]="emp.avatar"></nz-avatar>
-                        <nz-avatar nzSize="large" *ngIf="!emp.avatar"
-                            [nzText]="emp.initials"></nz-avatar>
-                        <div>
-                            <div class="fw-bold emp-name">{{ emp.employeeName
-                                }}</div>
-                            <small class="text-muted emp-id">ID: {{
-                                emp.employeeId }}</small>
-                        </div>
-                    </div>
+  <nz-list [nzDataSource]="listOfData" [nzRenderItem]="item" nzItemLayout="horizontal">
+    <ng-template #item let-emp>
 
-                    <!-- CENTER: Details -->
-                    <div class="d-flex flex-column align-items-start gap-1">
-                        <div class="emp-date">
-                            <span nz-icon nzType="calendar"></span> {{
-                            emp.submissionDate | date:'MMM d, yyyy' }}
-                        </div>
-                        <div><strong>Sections Updated:</strong> {{
-                            emp.sectionsUpdated }}</div>
-                        <div><strong>Fields Updated:</strong> {{
-                            emp.fieldsUpdated }}</div>
-                        <div class="d-flex gap-1 mt-1">
-                            <nz-tag [nzColor]="'green'">Approved: {{
-                                emp.approved }}</nz-tag>
-                            <nz-tag [nzColor]="'red'">Rejected: {{ emp.rejected
-                                }}</nz-tag>
-                            <nz-tag [nzColor]="'orange'">Pending: {{ emp.pending
-                                }}</nz-tag>
-                        </div>
-                        <div class="mt-1">
-                            <nz-tag [nzColor]="getStatusStyle(emp.status).bg"
-                                [ngStyle]="{'color': getStatusStyle(emp.status).color,'font-weight':'600'}">
-                                {{ emp.status }}
-                            </nz-tag>
-                        </div>
-                    </div>
+      <nz-list-item class="emp-item">
 
-                    <!-- RIGHT: Action Button -->
-                    <div class="ms-auto">
-                        <button nz-button nzShape="circle" nzType="default">
-                            <span nz-icon nzType="eye"></span>
-                        </button>
-                    </div>
+        <!-- LEFT SECTION -->
+        <div class="emp-left">
+          @if (emp.avatar) {
+            <nz-avatar [nzSize]="80" *ngIf="emp.avatar" [nzSrc]="emp.avatar"></nz-avatar>
+          }
+          @else {
+              <nz-avatar [nzSize]="80"  [nzText]="emp.initials"></nz-avatar>
+          }
 
-                </nz-list-item>
-            </ng-template>
+          <div class="emp-info">
+            <div class="emp-name">{{ emp.employeeName }}</div>
+            <small class="text-muted">ID: {{ emp.employeeId }}</small>
+          </div>
+        </div>
 
-        </nz-list>
+        <!-- CENTER SECTION -->
+        <div class="emp-center">
+          <div class="row-item">
+            <span nz-icon nzType="calendar"></span>
+            {{ emp.submissionDate | date:'MMM d, yyyy' }}
+          </div>
 
-    </div>
+          <div class="row-item">
+            <strong>Sections:</strong> {{ emp.sectionsUpdated }}
+          </div>
 
-    }
+          <div class="row-item">
+            <strong>Fields:</strong> {{ emp.fieldsUpdated }}
+          </div>
+
+          <div class="tag-row">
+            <nz-tag nzColor="green">Approved: {{ emp.approved }}</nz-tag>
+            <nz-tag nzColor="red">Rejected: {{ emp.rejected }}</nz-tag>
+            <nz-tag nzColor="orange">Pending: {{ emp.pending }}</nz-tag>
+          </div>
+        </div>
+
+        <!-- RIGHT SECTION -->
+        <div class="emp-right">
+          <button nz-button nzShape="circle" nzType="default">
+            <span nz-icon nzType="eye"></span>
+          </button>
+        </div>
+
+      </nz-list-item>
+
+    </ng-template>
+  </nz-list>
+
+</div>
+}
+
 
 </nz-card>

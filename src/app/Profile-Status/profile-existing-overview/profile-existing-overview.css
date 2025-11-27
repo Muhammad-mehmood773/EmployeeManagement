@@ -1,0 +1,54 @@
+.custom-emp-list {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.emp-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.emp-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 200px;
+}
+
+.emp-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #002b45;
+}
+
+.emp-center {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 260px;
+}
+
+.row-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.tag-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 3px;
+}
+
+.status-tag {
+  margin-top: 5px;
+  width: fit-content;
+}
+
+.emp-right {
+  margin-left: auto;
+}
