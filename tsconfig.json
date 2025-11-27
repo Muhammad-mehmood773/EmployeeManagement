@@ -34,12 +34,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/test/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/test/tsconfig.spec.json"
     }
+    // {
+    //   "path": "./projects/test/tsconfig.lib.json"
+    // },
+    // {
+    //   "path": "./projects/test/tsconfig.spec.json"
+    // }
   ]
 }
