@@ -27,11 +27,17 @@
     </div>
 
     <div class="col-right">
-      <button nz-button nzType="dashed" class="border-2" nz-dropdown [nzDropdownMenu]="menu">
-        <span nz-icon nzType="down"></span>
-       {{ currentView + ' View'  | titlecase }}
+      <button nz-button nzType="dashed" class="border-2" nz-dropdown ngSkipHydration
+        [nzDropdownMenu]="menu">
+
+        <span nz-icon nzType="down" class="me-1"></span>
+
+        <span class="view-text">
+          {{ currentView + ' View' | titlecase }}
+        </span>
 
       </button>
+
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <ul nz-menu>
           <li nz-menu-item (click)="setView('grid')">

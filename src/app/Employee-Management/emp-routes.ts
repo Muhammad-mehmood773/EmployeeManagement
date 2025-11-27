@@ -20,12 +20,20 @@ export const employeeRoutes: Route[] = [
     canDeactivate: [UnsavedGuard],
   },
   {
-    path: 'profile-approval',
+    path: 'profile-request',
     loadComponent: () =>
       import('../Profile-Status/profile-request/profile-request').then(
         (m) => m.ProfileRequest
       ),
     canDeactivate: [UnsavedGuard],
-  }
+  },
+  {
+    path: 'profile-request/:id/reviews',
+    loadComponent: () =>
+      import('../Profile-Status/profile-request-reviews/profile-request-reviews').then(
+        (m) => m.ProfileRequestReviews
+      ),
+    canDeactivate: [UnsavedGuard],
+  },
 
 ];

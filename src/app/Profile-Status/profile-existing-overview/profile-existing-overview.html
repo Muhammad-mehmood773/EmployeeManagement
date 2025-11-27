@@ -1,214 +1,227 @@
 <nz-card
     nzTitle="Information Update on Existing Employee Profiles">
-    @if (viewMode === 'grid') {
-    <div style="max-height: 320px; overflow-y: auto;">
-        <nz-table
-            #simpleTable
-            [nzData]="listOfData"
-            [nzFrontPagination]="false"
-            [nzSize]="'small'"
-            [nzOuterBordered]="true">
+    <ng-container ngSkipHydration>
+        @if (viewMode === 'grid') {
+        <div style="max-height: 320px; overflow-y: auto;">
+            <nz-table
+                #simpleTable
+                [nzData]="listOfData"
+                [nzFrontPagination]="false"
+                [nzSize]="'small'"
+                [nzOuterBordered]="true">
 
-            <thead>
-                <tr>
-                    <th>
-                        <span class="d-flex align-items-center gap-1">
-                            <span nz-icon nzType="user"
-                                nzTheme="outline"></span>
-                            Employee
-                        </span>
-                    </th>
-                    <th>
-                        <span class="d-flex align-items-center gap-1">
-                            <span nz-icon nzType="calendar"
-                                nzTheme="outline"></span>
-                            Submission Date
-                        </span>
-                    </th>
-                    <th>
-                        <span class="d-flex align-items-center gap-1">
-                            Sections Updated
-                        </span>
-                    </th>
-                    <th>
-                        <span class="d-flex align-items-center gap-1">
-                            Fields Updated
-                        </span>
-                    </th>
-                    <th>
-                        <span class="d-flex align-items-center gap-1">
-                            Approved
-                        </span>
-                    </th>
-                    <th>
-                        <span class="d-flex align-items-center gap-1">
-                            Rejected
-                        </span>
-                    </th>
-                    <th>
-                        <span class="d-flex align-items-center gap-1">
-                            Pending
-                        </span>
-                    </th>
-                    <th class="text-center">
-                        <span nz-icon nzType="eye" nzTheme="outline"></span>
-                        Action
-                    </th>
-                </tr>
-            </thead>
+                <thead>
+                    <tr>
+                        <th>
+                            <span class="d-flex align-items-center gap-1">
+                                <span nz-icon nzType="user"
+                                    nzTheme="outline"></span>
+                                Employee
+                            </span>
+                        </th>
+                        <th>
+                            <span class="d-flex align-items-center gap-1">
+                                <span nz-icon nzType="calendar"
+                                    nzTheme="outline"></span>
+                                Submission Date
+                            </span>
+                        </th>
+                        <th>
+                            <span class="d-flex align-items-center gap-1">
+                                Sections Updated
+                            </span>
+                        </th>
+                        <th>
+                            <span class="d-flex align-items-center gap-1">
+                                Fields Updated
+                            </span>
+                        </th>
+                        <th>
+                            <span class="d-flex align-items-center gap-1">
+                                Approved
+                            </span>
+                        </th>
+                        <th>
+                            <span class="d-flex align-items-center gap-1">
+                                Rejected
+                            </span>
+                        </th>
+                        <th>
+                            <span class="d-flex align-items-center gap-1">
+                                Pending
+                            </span>
+                        </th>
+                        <th class="text-center">
+                            <span nz-icon nzType="eye" nzTheme="outline"></span>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                @for (emp of listOfData; track emp.employeeId) {
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center gap-2">
+                <tbody>
+                    @for (emp of listOfData; track emp.employeeId) {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                @if (emp.avatar) {
+                                <nz-avatar nzSize="default"
+                                    [nzSrc]="emp.avatar"></nz-avatar>
+                                }
+                                @else {
+                                <nz-avatar nzSize="default"
+                                    [nzText]="emp.initials"></nz-avatar>
+                                }
+                                <div>
+                                    <div class="fw-bold">{{ emp.employeeName
+                                        }}</div>
+                                    <small style="color: gray;">ID: {{
+                                        emp.employeeId }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ emp.submissionDate | date:'MMM d, yyyy' }}</td>
+                        <td>{{ emp.sectionsUpdated }}</td>
+                        <td>{{ emp.fieldsUpdated }}</td>
+                        <td>{{ emp.approved }}</td>
+                        <td>{{ emp.rejected }}</td>
+                        <td>{{ emp.pending }}</td>
+
+                        <td class="text-center">
+                            <button nz-button nzShape="circle">
+                                <span nz-icon nzType="eye"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+
+            </nz-table>
+
+        </div>
+        }
+        @if (viewMode === 'card') {
+        <div class="card-grid"
+            style="max-height: 500px; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+
+            @for (emp of listOfData; track emp.employeeId) {
+
+            <nz-card class="shadow" [nzTitle]="emp.employeeName"
+                [nzBordered]="true"
+                class="shadow">
+
+                <div class="d-flex align-items-center gap-2">
+                    @if (emp.avatar) {
+                    <nz-avatar [nzSize]="68" [nzSrc]="emp.avatar"></nz-avatar>
+                    }
+                    @else {
+                    <nz-avatar [nzSize]="68"
+                        [nzText]="emp.initials"></nz-avatar>
+                    }
+                    <div>
+                        <div class="emp-id">ID: {{ emp.employeeId }}</div>
+                    </div>
+                </div>
+
+                <div class="mt-2"><strong>Date:</strong> {{ emp.submissionDate |
+                    date:'MMM d, yyyy' }}</div>
+
+                <div class="mt-2"><strong>Sections Updated:</strong> {{
+                    emp.sectionsUpdated }}</div>
+                <div class="mt-1"><strong>Fields Updated:</strong> {{
+                    emp.fieldsUpdated }}</div>
+
+                <div class="mt-2 d-flex gap-2">
+                    <nz-tag [nzColor]="'green'">Approved: {{ emp.approved
+                        }}</nz-tag>
+                    <nz-tag [nzColor]="'red'">Rejected: {{ emp.rejected
+                        }}</nz-tag>
+                    <nz-tag [nzColor]="'orange'">Pending: {{ emp.pending
+                        }}</nz-tag>
+                </div>
+
+                <div class="text-end mt-2">
+                    <button nz-button nzSize="small" nzType="default"
+                        nzShape="circle">
+                        <span nz-icon nzType="eye"></span>
+                    </button>
+                </div>
+
+            </nz-card>
+
+            }
+
+        </div>
+        }
+        @if (viewMode === 'list') {
+        <div class="list-container custom-emp-list">
+
+            <nz-list [nzDataSource]="listOfData" [nzRenderItem]="item"
+                nzItemLayout="horizontal">
+                <ng-template #item let-emp>
+
+                    <nz-list-item class="emp-item">
+
+                        <!-- LEFT SECTION -->
+                        <div class="emp-left">
                             @if (emp.avatar) {
-                            <nz-avatar nzSize="default"
+                            <nz-avatar [nzSize]="80" *ngIf="emp.avatar"
                                 [nzSrc]="emp.avatar"></nz-avatar>
                             }
                             @else {
-                            <nz-avatar nzSize="default"
+                            <nz-avatar [nzSize]="80"
                                 [nzText]="emp.initials"></nz-avatar>
                             }
-                            <div>
-                                <div class="fw-bold">{{ emp.employeeName
+
+                            <div class="emp-info">
+                                <div class="emp-name">{{ emp.employeeName
                                     }}</div>
-                                <small style="color: gray;">ID: {{
-                                    emp.employeeId }}</small>
+                                <small class="text-muted">ID: {{ emp.employeeId
+                                    }}</small>
                             </div>
                         </div>
-                    </td>
-                    <td>{{ emp.submissionDate | date:'MMM d, yyyy' }}</td>
-                    <td>{{ emp.sectionsUpdated }}</td>
-                    <td>{{ emp.fieldsUpdated }}</td>
-                    <td>{{ emp.approved }}</td>
-                    <td>{{ emp.rejected }}</td>
-                    <td>{{ emp.pending }}</td>
 
-                    <td class="text-center">
-                        <button nz-button nzShape="circle">
-                            <span nz-icon nzType="eye"></span>
-                        </button>
-                    </td>
-                </tr>
-                }
+                        <!-- CENTER SECTION -->
+                        <div class="emp-center">
+                            <div class="row-item">
+                                <span nz-icon nzType="calendar"></span>
+                                {{ emp.submissionDate | date:'MMM d, yyyy' }}
+                            </div>
 
-            </tbody>
+                            <div class="row-item">
+                                <strong>Sections:</strong> {{
+                                emp.sectionsUpdated }}
+                            </div>
 
-        </nz-table>
+                            <div class="row-item">
+                                <strong>Fields:</strong> {{ emp.fieldsUpdated }}
+                            </div>
 
-    </div>
-    }
-    @if (viewMode === 'card') {
-    <div class="card-grid"
-        style="max-height: 500px; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+                            <div class="tag-row">
+                                <nz-tag nzColor="green">Approved: {{
+                                    emp.approved
+                                    }}</nz-tag>
+                                <nz-tag nzColor="red">Rejected: {{ emp.rejected
+                                    }}</nz-tag>
+                                <nz-tag nzColor="orange">Pending: {{ emp.pending
+                                    }}</nz-tag>
+                            </div>
+                        </div>
 
-        @for (emp of listOfData; track emp.employeeId) {
+                        <!-- RIGHT SECTION -->
+                        <div class="emp-right">
+                            <button nz-button nzShape="circle" nzType="default">
+                                <span nz-icon nzType="eye"></span>
+                            </button>
+                        </div>
 
-        <nz-card [nzTitle]="emp.employeeName" [nzBordered]="true"
-            class="shadow">
+                    </nz-list-item>
 
-            <div class="d-flex align-items-center gap-2">
-                @if (emp.avatar) {
-                <nz-avatar [nzSize]="68" [nzSrc]="emp.avatar"></nz-avatar>
-                }
-                @else {
-                <nz-avatar [nzSize]="68" [nzText]="emp.initials"></nz-avatar>
-                }
-                <div>
-                    <div class="emp-id">ID: {{ emp.employeeId }}</div>
-                </div>
-            </div>
+                </ng-template>
+            </nz-list>
 
-            <div class="mt-2"><strong>Date:</strong> {{ emp.submissionDate |
-                date:'MMM d, yyyy' }}</div>
-
-            <div class="mt-2"><strong>Sections Updated:</strong> {{
-                emp.sectionsUpdated }}</div>
-            <div class="mt-1"><strong>Fields Updated:</strong> {{
-                emp.fieldsUpdated }}</div>
-
-            <div class="mt-2 d-flex gap-2">
-                <nz-tag [nzColor]="'green'">Approved: {{ emp.approved
-                    }}</nz-tag>
-                <nz-tag [nzColor]="'red'">Rejected: {{ emp.rejected }}</nz-tag>
-                <nz-tag [nzColor]="'orange'">Pending: {{ emp.pending }}</nz-tag>
-            </div>
-
-
-            <div class="text-end mt-2">
-                <button nz-button nzSize="small" nzType="default"
-                    nzShape="circle">
-                    <span nz-icon nzType="eye"></span>
-                </button>
-            </div>
-
-        </nz-card>
-
+        </div>
         }
-
-    </div>
-
-    }
-   @if (viewMode === 'list') {
-<div class="list-container custom-emp-list">
-
-  <nz-list [nzDataSource]="listOfData" [nzRenderItem]="item" nzItemLayout="horizontal">
-    <ng-template #item let-emp>
-
-      <nz-list-item class="emp-item">
-
-        <!-- LEFT SECTION -->
-        <div class="emp-left">
-          @if (emp.avatar) {
-            <nz-avatar [nzSize]="80" *ngIf="emp.avatar" [nzSrc]="emp.avatar"></nz-avatar>
-          }
-          @else {
-              <nz-avatar [nzSize]="80"  [nzText]="emp.initials"></nz-avatar>
-          }
-
-          <div class="emp-info">
-            <div class="emp-name">{{ emp.employeeName }}</div>
-            <small class="text-muted">ID: {{ emp.employeeId }}</small>
-          </div>
-        </div>
-
-        <!-- CENTER SECTION -->
-        <div class="emp-center">
-          <div class="row-item">
-            <span nz-icon nzType="calendar"></span>
-            {{ emp.submissionDate | date:'MMM d, yyyy' }}
-          </div>
-
-          <div class="row-item">
-            <strong>Sections:</strong> {{ emp.sectionsUpdated }}
-          </div>
-
-          <div class="row-item">
-            <strong>Fields:</strong> {{ emp.fieldsUpdated }}
-          </div>
-
-          <div class="tag-row">
-            <nz-tag nzColor="green">Approved: {{ emp.approved }}</nz-tag>
-            <nz-tag nzColor="red">Rejected: {{ emp.rejected }}</nz-tag>
-            <nz-tag nzColor="orange">Pending: {{ emp.pending }}</nz-tag>
-          </div>
-        </div>
-
-        <!-- RIGHT SECTION -->
-        <div class="emp-right">
-          <button nz-button nzShape="circle" nzType="default">
-            <span nz-icon nzType="eye"></span>
-          </button>
-        </div>
-
-      </nz-list-item>
-
-    </ng-template>
-  </nz-list>
-
-</div>
-}
-
+    </ng-container>
 
 </nz-card>
