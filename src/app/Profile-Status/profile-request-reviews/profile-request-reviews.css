@@ -15,3 +15,8 @@ nz-content{
   min-height: 90vh;
 }
 
+strong {
+  color: #555;
+  margin-right: 4px;
+}
+

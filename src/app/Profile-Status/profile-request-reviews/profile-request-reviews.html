@@ -2,8 +2,42 @@
     <nz-content class="scrollable-content">
         <div class="card-container">
             <div nz-row>
-                <div nz-col nzSpan="24" class="mb-2">
-                    
+                <div nz-col nzSpan="16" class="mb-2">
+                    <nz-card nzBordered="true" class="shadow">
+                        <div class="d-flex align-items-center gap-3">
+
+                            <!-- LEFT: Avatar -->
+                            <nz-avatar style="border-radius: 49% !important;"
+                                [nzSize]="70"
+                                [nzSrc]="employee.image">
+                            </nz-avatar>
+
+                            <!-- RIGHT: Details -->
+                            <div class="w-100 d-flex justify-content-between">
+
+                                <!-- Column 1 -->
+                                <div>
+                                    <div><strong>Employee Name :</strong> {{
+                                        employee.name }}</div>
+                                    <div><strong>Employee Code :</strong> {{
+                                        employee.code }}</div>
+                                </div>
+
+                                <!-- Column 2 -->
+                                <div>
+                                    <div><strong>Submitted On :</strong> {{
+                                        employee.submittedOn }}</div>
+                                    <div>
+                                        <strong>Requested Sections :</strong>
+                                        {{ employee.requestedSections.join(', ')
+                                        }}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </nz-card>
+
                 </div>
             </div>
         </div>
