@@ -1,0 +1,72 @@
+ <nz-card [nzBodyStyle]="{'background-color': '#f1f4fa'}"
+                        nzTitle="Academic Info updates"
+                        [nzBordered]="true" class="shadow">
+
+                        <nz-table [nzShowPagination]="false"
+                            [nzOuterBordered]="false"
+                            [nzData]="academicInfoUpdates"
+                            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+                            [nzBordered] nzSize="small">
+
+                            <thead>
+                                <tr>
+                                    <th nzLeft
+                                        [(nzChecked)]="checked"
+                                        [nzIndeterminate]="indeterminate"
+                                        (nzCheckedChange)="onAllChecked($event)"></th>
+
+                                    <th>Field</th>
+                                    <th>Old Value</th>
+                                    <th>New Value</th>
+                                    <th class="text-center">Status</th>
+                                    <th>Comment</th>
+                                    <th nzRight class="text-center">Admin Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @for (row of academicInfoUpdates; track row.id)
+                                {
+                                <tr>
+                                    <td nzLeft
+                                        [nzChecked]="setOfCheckedId.has(row.id)"
+                                        (nzCheckedChange)="onItemChecked(row.id, $event)"></td>
+
+                                    <td>{{ row.field }}</td>
+                                    <td>{{ row.oldValue }}</td>
+                                    <td>{{ row.newValue }}</td>
+                                    <td class="text-center">
+                                        <nz-tag class="emp-status"
+                                            [nzColor]="getStatusStyle(row.status).bg"
+                                            [ngStyle]="{
+                                                'color': getStatusStyle(row.status).color,
+                                                'font-weight': '600'
+                                            }">
+                                            {{ row.status }}
+                                        </nz-tag>
+
+                                    </td>
+
+                                    
+                                    <td>
+                                        <input nz-input
+                                        [(ngModel)]="row.comment" />
+                                    </td>
+                                    <td nzRight class="text-center">
+                                        <nz-space>
+                                            <button nz-button nzType="primary"  
+                                            nzSize="small" >
+                                            <span>Save</span>
+                                        </button>
+                                        <button nz-button nzType="primary"
+                                            nzSize="small" nzDanger>
+                                            <span>Delete</span>
+                                        </button>
+                                        </nz-space>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </nz-table>
+
+                    </nz-card>

@@ -76,7 +76,7 @@
                     </td>
 
                     <td class="text-center">
-                        <button nz-button nzShape="circle">
+                        <button nz-button nzShape="circle" (click)="goToReviews(emp.employeeId)">
                             <span nz-icon nzType="eye"></span>
                         </button>
                     </td>
@@ -128,68 +128,74 @@
             </div>
 
             <div class=" text-end">
-                <button nz-button nzSize="small" nzType="default"
+                <button nz-button nzSize="small" nzType="default" (click)="goToReviews(emp.employeeId)"
                     nzShape="circle">
                     <span nz-icon nzType="eye"></span>
                 </button>
             </div>
 
         </nz-card>
-
         }
 
     </div>
     }
     @if (viewMode === 'list') {
-  <div  class="list-container">
+    <div class="list-container">
 
-  <nz-list [nzDataSource]="listOfData" [nzRenderItem]="item" nzItemLayout="horizontal">
+        <nz-list [nzDataSource]="listOfData" [nzRenderItem]="item"
+            nzItemLayout="horizontal">
 
-    <ng-template #item let-emp>
+            <ng-template #item let-emp>
 
-      <nz-list-item class="emp-item d-flex align-items-center justify-content-between">
+                <nz-list-item
+                    class="emp-item d-flex align-items-center justify-content-between">
 
-        <!-- LEFT: Avatar + Name + ID -->
-        <div class="d-flex align-items-center gap-2">
-          <nz-avatar nzSize="large" *ngIf="emp.avatar" [nzSrc]="emp.avatar"></nz-avatar>
-          <nz-avatar nzSize="large" *ngIf="!emp.avatar" [nzText]="emp.initials"></nz-avatar>
-          <div>
-            <div class="fw-bold emp-name">{{ emp.employeeName }}</div>
-            <small class="text-muted emp-id">ID: {{ emp.employeeId }}</small>
-          </div>
-        </div>
+                    <!-- LEFT: Avatar + Name + ID -->
+                    <div class="d-flex align-items-center gap-2">
+                        <nz-avatar nzSize="large" *ngIf="emp.avatar"
+                            [nzSrc]="emp.avatar"></nz-avatar>
+                        <nz-avatar nzSize="large" *ngIf="!emp.avatar"
+                            [nzText]="emp.initials"></nz-avatar>
+                        <div>
+                            <div class="fw-bold emp-name">{{ emp.employeeName
+                                }}</div>
+                            <small class="text-muted emp-id">ID: {{
+                                emp.employeeId }}</small>
+                        </div>
+                    </div>
 
-        <!-- CENTER: Date + Status -->
-        <div class="d-flex ">
-          <div class="emp-date me-2   ">
-            <span nz-icon nzType="calendar"></span>
-            {{ emp.submissionDate | date : 'MMM d, yyyy' }}
-          </div>
+                    <!-- CENTER: Date + Status -->
+                    <div class="d-flex ">
+                        <div class="emp-date me-2   ">
+                            <span nz-icon nzType="calendar"></span>
+                            {{ emp.submissionDate | date : 'MMM d, yyyy' }}
+                        </div>
 
-          <nz-tag class="emp-status"
-                  [nzColor]="getStatusStyle(emp.status).bg"
-                  [ngStyle]="{
+                        <nz-tag class="emp-status"
+                            [nzColor]="getStatusStyle(emp.status).bg"
+                            [ngStyle]="{
                     'color': getStatusStyle(emp.status).color,
                     'font-weight': '600'
                   }">
-            {{ emp.status }}
-          </nz-tag>
-        </div>
+                            {{ emp.status }}
+                        </nz-tag>
+                    </div>
 
-        <!-- RIGHT: Action Button -->
-        <div>
-          <button nz-button nzShape="circle" nzType="default" class="action-btn">
-            <span nz-icon nzType="eye"></span>
-          </button>
-        </div>
+                    <!-- RIGHT: Action Button -->
+                    <div>
+                        <button nz-button nzShape="circle" nzType="default" (click)="goToReviews(emp.employeeId)"
+                            class="action-btn">
+                            <span nz-icon nzType="eye"></span>
+                        </button>
+                    </div>
 
-      </nz-list-item>
+                </nz-list-item>
 
-    </ng-template>
+            </ng-template>
 
-  </nz-list>
+        </nz-list>
 
-</div>
+    </div>
 
     }
 

@@ -389,18 +389,18 @@ h4 {
   color: #fff;
   font-weight: 700;
   text-transform: uppercase;
-  border-bottom: 1px solid #03489b !important;
   letter-spacing: 0.5px;
   box-shadow: inset 0 -1px 0 rgba(255,255,255,0.2);
-  position: sticky;  // sticky header
+  
+  position: sticky; 
   top: 0;
-  z-index: 2;
+  z-index: 1000;
 }
 
 .ant-table-tbody > tr {
   transition: all 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
   cursor: pointer;
-  border-bottom: 1px solid #03489b !important;
+  // border-bottom: 1px solid #03489b !important;
 }
 
 
@@ -408,7 +408,7 @@ h4 {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  border: 1px solid #03489b !important;
+  // border: 1px solid #03489b !important;
 }
 
 
@@ -432,4 +432,12 @@ h4 {
 //   font-weight: 600 !important;
 // }
 
+
+
+.ant-table-thead > tr > th:not(:last-child)::before {
+  background-color: rgba(255, 255, 255, 0.18) !important;
+  height: 60% !important;
+  width: 1px !important;
+  border-radius: 10px;
+}
 
