@@ -1,13 +1,16 @@
 <nz-layout>
     <nz-content class="scrollable-content">
         <div class="card-container">
-            <div nz-row nzJustify="center" >
-                <div nz-col nzSpan="16" class="mb-2" >
-                    <nz-card 
+            <div nz-row nzJustify="center">
+                <div nz-col nzSpan="16" class="mb-2">
+                    <nz-card
                         [nzBordered]="true" class="shadow">
                         <div class="d-flex align-items-center gap-3">
-                            <nz-avatar style="border-radius: 49% !important;"
-                                [nzSize]="70"
+                            <nz-avatar 
+                                style="border-radius: 100% !important;
+                                    width: 78px;
+                                    height: 74px;
+                                    line-height: 74px; "
                                 [nzSrc]="employee.image">
                             </nz-avatar>
                             <div class="w-100 d-flex justify-content-between">
@@ -18,7 +21,8 @@
                                         employee.code }}</div>
                                 </div>
                                 <div>
-                                    <div><strong class="text-success">Submitted On :</strong> {{
+                                    <div><strong class="text-success">Submitted
+                                            On :</strong> {{
                                         employee.submittedOn }}</div>
                                     <div>
                                         <strong>Requested Sections :</strong>
@@ -37,7 +41,7 @@
 
                 </div>
                 <div nz-col nzSpan="24" class="mb-2">
-                   <app-profile-view-academic-infoupdates></app-profile-view-academic-infoupdates>
+                    <app-profile-view-academic-infoupdates></app-profile-view-academic-infoupdates>
 
                 </div>
                 <div nz-col nzSpan="24" class="mb-2">

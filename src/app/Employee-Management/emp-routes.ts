@@ -35,5 +35,13 @@ export const employeeRoutes: Route[] = [
       ),
     canDeactivate: [UnsavedGuard],
   },
+  {
+    path: 'emp-profile-view',
+    loadComponent: () =>
+      import('../Employee-Profile-View/employee-profile-view-layout/employee-profile-view-layout').then(
+        (m) => m.EmployeeProfileViewLayout
+      ),
+    canDeactivate: [UnsavedGuard],
+  },
 
 ];
