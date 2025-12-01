@@ -23,6 +23,8 @@ export interface EmployeeReview {
   imports: [SHARED_IMPORTS, CommonModule, ProfileViewPersonalInformationUpdate, ProfileViewAcademicInfoupdates, ProfileViewDocumentUpdates],
   templateUrl: './profile-request-reviews.html',
   styleUrl: './profile-request-reviews.css',
+  host: { ngSkipHydration: 'true' },
+
 })
 export class ProfileRequestReviews implements OnInit {
   

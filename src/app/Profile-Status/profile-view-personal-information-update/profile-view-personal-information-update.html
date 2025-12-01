@@ -1,72 +1,102 @@
 <nz-card [nzBodyStyle]="{'background-color': '#f1f4fa'}"
-                        nzTitle="Personal Information Update"
-                        [nzBordered]="true" class="shadow">
+    nzTitle="Personal Information Update"
+    [nzBordered]="true" class="shadow" [nzExtra]="headerTemplate">
 
-                        <nz-table [nzShowPagination]="false"
-                            [nzOuterBordered]="false"
-                            [nzData]="personalInfoUpdates"
-                            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
-                            [nzBordered]
-                            nzSize="small">
+    <nz-table [nzShowPagination]="false"
+        [nzOuterBordered]="false"
+        [nzData]="personalInfoUpdates"
+        (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+        [nzBordered]
+        nzSize="small">
 
-                            <thead>
-                                <tr>
-                                    <th nzLeft
-                                        [(nzChecked)]="checked"
-                                        [nzIndeterminate]="indeterminate"
-                                        (nzCheckedChange)="onAllChecked($event)"></th>
+        <thead>
+            <tr>
+                <th nzLeft
+                    [(nzChecked)]="checked"
+                    [nzIndeterminate]="indeterminate"
+                    (nzCheckedChange)="onAllChecked($event)"></th>
 
-                                    <th>Field</th>
-                                    <th>Old Value</th>
-                                    <th>New Value</th>
-                                    <th class="text-center">Status</th>
-                                    <th>Comment</th>
-                                    <th nzRight class="text-center">Action</th>
-                                </tr>
-                            </thead>
+                <th>Field</th>
+                <th>Old Value</th>
+                <th>New Value</th>
+                <th class="text-center">Status</th>
+                <th>Comment</th>
+                <th nzRight class="text-center">Action</th>
+            </tr>
+        </thead>
 
-                            <tbody>
-                                @for (row of personalInfoUpdates; track row.id)
-                                {
-                                <tr>
-                                    <td nzLeft
-                                        [nzChecked]="setOfCheckedId.has(row.id)"
-                                        (nzCheckedChange)="onItemChecked(row.id, $event)"></td>
+        <tbody>
+            @for (row of personalInfoUpdates; track row.id)
+            {
+            <tr class="editable-row">
+                <td nzLeft
+                    [nzChecked]="setOfCheckedId.has(row.id)"
+                    (nzCheckedChange)="onItemChecked(row.id, $event)"></td>
 
-                                    <td>{{ row.field }}</td>
-                                    <td>{{ row.oldValue }}</td>
-                                    <td>{{ row.newValue }}</td>
-                                    <td class="text-center">
-                                        <nz-tag class="emp-status"
-                                            [nzColor]="getStatusStyle(row.status).bg"
-                                            [ngStyle]="{
+                <td>{{ row.field }}</td>
+                <td>{{ row.oldValue }}</td>
+                <td>{{ row.newValue }}</td>
+                <td class="text-center">
+                    <nz-tag class="emp-status"
+                        [nzColor]="getStatusStyle(row.status).bg"
+                        [ngStyle]="{
                                                 'color': getStatusStyle(row.status).color,
                                                 'font-weight': '600'
                                             }">
-                                            {{ row.status }}
-                                        </nz-tag>
-                                    </td>
+                        {{ row.status }}
+                    </nz-tag>
+                </td>
 
-                                    
-                                    <td>
-                                        <input nz-input
-                                        [(ngModel)]="row.comment" />
-                                    </td>
-                                    <td class="text-center" nzRight>
-                                        <nz-space>
-                                            <button nz-button nzType="primary"  
-                                            nzSize="small" >
-                                            <span>Save</span>
-                                        </button>
-                                        <button nz-button nzType="primary"
-                                            nzSize="small" nzDanger>
-                                            <span>Delete</span>
-                                        </button>
-                                        </nz-space>
-                                    </td>
-                                </tr>
-                                }
-                            </tbody>
-                        </nz-table>
+                <td>
+                    <div class="editable-cell" [hidden]="editId === row.id"
+                        (click)="startEdit(row.id)">
+                        {{ row.comment || '--' }}
+                    </div>
 
-                    </nz-card>
+                    <input nz-input [hidden]="editId !== row.id" type="text"
+                        [(ngModel)]="row.comment"
+                        (blur)="stopEdit()" />
+                </td>
+                <td class="text-center" nzRight>
+                    <nz-space>
+                        <button nz-button nzType="primary"
+                            nzSize="small"
+                            (click)="approveRow(row)">
+                            <span>Approved</span>
+                        </button>
+
+                        <button nz-button nzType="primary" nzDanger
+                            nzSize="small"
+                            (click)="rejectRow(row)">
+                            <span>Rejected</span>
+                        </button>
+                    </nz-space>
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </nz-table>
+
+</nz-card>
+
+<ng-template #headerTemplate>
+    <ng-container *ngIf="setOfCheckedId.size > 0">
+        <nz-space>
+            <button nz-button nzType="primary"
+                class="d-flex align-items-center justify-content-center"
+                (click)="approveSelected()">
+                <span nz-icon nzType="check"></span>
+                <span>Approved All ({{ setOfCheckedId.size }})</span>
+            </button>
+
+            <button nz-button nzType="primary" nzDanger
+                class="d-flex align-items-center justify-content-center"
+                (click)="rejectSelected()">
+                <span nz-icon nzType="close"></span>
+                <span>Reject All ({{ setOfCheckedId.size }})</span>
+            </button>
+
+        </nz-space>
+    </ng-container>
+</ng-template>

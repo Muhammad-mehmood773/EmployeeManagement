@@ -18,6 +18,8 @@ export interface EmployeeProfileOverview {
   imports: [SHARED_IMPORTS, CommonModule],
   templateUrl: './profile-overview.html',
   styleUrl: './profile-overview.css',
+  host: { ngSkipHydration: 'true' },
+
 })
 export class ProfileOverview implements OnInit{
 

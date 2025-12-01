@@ -16,6 +16,8 @@ export interface DocumentUpdate {
   imports: [SHARED_IMPORTS,CommonModule],
   templateUrl: './profile-view-document-updates.html',
   styleUrl: './profile-view-document-updates.css',
+  host: { ngSkipHydration: 'true' },
+
 })
 export class ProfileViewDocumentUpdates {
  
