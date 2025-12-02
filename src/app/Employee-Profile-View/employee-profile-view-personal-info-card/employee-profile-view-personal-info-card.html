@@ -1,0 +1,70 @@
+<nz-ribbon class="shadow" nzText="Employee Personal Info" nzColor="blue"
+    nzPlacement="end">
+    <nz-card [nzTitle]="extraTemplate" class="shadow">
+        <nz-descriptions
+            nzBordered
+            nzTitle="Employee Personal Info"
+            [nzColumn]="2"
+            nzSize="small">
+
+            <!-- ROW 1 -->
+            <nz-descriptions-item nzTitle="DOB" [nzSpan]="2">
+                {{ employee.dob }}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="CNIC">
+                {{ employee.cnic }}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Exp Date">
+                {{ employee.cnicExpDate }}
+            </nz-descriptions-item>
+
+            <!-- ROW 2 -->
+            <nz-descriptions-item nzTitle="Passport#" [nzSpan]="2">
+                {{ employee.passportNumber }}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Passport Exp" [nzSpan]="2">
+                {{ employee.passportExpDate }}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Nationality">
+                {{ employee.nationality }}
+            </nz-descriptions-item>
+
+            <!-- ROW 3 -->
+            <nz-descriptions-item nzTitle="Religion">
+                {{ employee.religion }}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Marital Status" [nzSpan]="2">
+                {{ employee.maritalStatus }}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Gender">
+                {{ employee.gender }}
+            </nz-descriptions-item>
+
+            <!-- ROW 4 -->
+            <nz-descriptions-item nzTitle="Phone">
+                {{ employee.phone }}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Email" [nzSpan]="2">
+                <a [href]="'mailto:' + employee.email" style="color:#1d4ed8;">
+                    {{ employee.email }}
+                </a>
+            </nz-descriptions-item>
+
+        </nz-descriptions>
+
+    </nz-card>
+</nz-ribbon>
+
+<ng-template #extraTemplate>
+    <button nz-button nzType="dashed"
+        class="d-flex align-items-center justify-content-center border-2">
+        <span nz-icon nzType="edit" nzTheme="twotone"></span>
+    </button>
+</ng-template>

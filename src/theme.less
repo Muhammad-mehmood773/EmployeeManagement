@@ -80,8 +80,8 @@ label {
 
 .ant-card,
 .ant-card-head {
-  border-radius: 6px !important;
-  border-bottom: @primary-color 3px solid !important;
+  border-radius: 0px !important;
+  border-bottom: @primary-color 4px solid !important;
 
 }
 
@@ -441,3 +441,44 @@ h4 {
   border-radius: 10px;
 }
 
+.ant-badge-status-processing {
+    position: relative;
+}
+
+.ant-badge-status-dot {
+    width: 10px !important;
+    height: 10px !important;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+
+.ant-badge-status-processing::after {
+    border: 3px solid transparent; 
+}
+
+
+.ant-badge-status-text {
+    margin-left: 8px;
+    color: #ffffff !important;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.ant-descriptions-bordered .ant-descriptions-row {
+    border: 1px solid #c9c5c5 !important;
+}
+
+.ant-descriptions-bordered.ant-descriptions-small .ant-descriptions-item-label, .ant-descriptions-bordered.ant-descriptions-small .ant-descriptions-item-content {
+  border: 1px solid #c9c5c5 !important;
+}
+
+// .ant-descriptions-bordered.ant-descriptions-small .ant-descriptions-item-label, .ant-descriptions-bordered.ant-descriptions-small .ant-descriptions-item-content {
+//     padding: 4px 8px;
+//     font-weight: 600;
+// }
+
+.ant-descriptions-item-label{
+    color: cadetblue !important;
+    font-weight: 600 !important;
+
+}

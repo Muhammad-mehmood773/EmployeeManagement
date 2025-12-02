@@ -1,31 +1,75 @@
+<nz-ribbon class="shadow" [nzText]="ActiveTemplate" nzColor="blue" nzPlacement="end">
+    <nz-card [nzTitle]="extraTemplate" class="shadow">
 
-<nz-ribbon [nzText]="ActiveTemplate" nzColor="cyan" nzPlacement="end">
-    <nz-card [nzTitle]="extraTemplate">
-        <nz-descriptions nzTitle="Employee Basic Info" [nzColumn]="1" nzBordered
+        <!-- ⭐ Top Header: Avatar + Name + Designation -->
+        <div class="d-flex gap-3 align-items-center mb-3">
+
+            <!-- Avatar -->
+            <nz-avatar
+                [nzSrc]="employee.avatar"
+                [nzSize]="70"
+                class="shadow-sm">
+            </nz-avatar>
+
+            <!-- Name + Designation -->
+            <div>
+                <div class="fw-bold" style="font-size: 18px;">
+                    {{ employee.name }}
+                </div>
+
+                <div class="text-muted fw-bolder" style="margin-top: -3px;">
+                    {{ employee.designation }}
+                </div>
+            </div>
+        </div>
+
+        <nz-descriptions nzBordered
+            nzTitle="Employee Basic Info"
+            [nzColumn]="1"
             nzSize="small">
-            <nz-descriptions-item nzTitle="Employee ID">John
-                Doe</nz-descriptions-item>
-            <nz-descriptions-item
-                nzTitle="Department">Development</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="Date of Joining">Software
-                Engineer</nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Employee ID">
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>{{ employee.employeeId }}</span>
+                    <nz-tag
+                        [nzColor]="getStatusStyle(employee.status).bg"
+                        [ngStyle]="{
+                        'color': getStatusStyle(employee.status).color,
+                        'font-weight': '600'
+                    }">
+                        {{ employee.status }}
+                    </nz-tag>
+                </div>
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Department">
+                {{ employee.department }}
+            </nz-descriptions-item>
+
             <nz-descriptions-item nzTitle="Grade">
-                muhammadmehmood@gmail.com</nz-descriptions-item>
-            <nz-descriptions-item
-                nzTitle="Reporting">John</nz-descriptions-item>
+                {{ employee.grade }}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Reporting">
+                {{ employee.reporting }}
+            </nz-descriptions-item>
 
         </nz-descriptions>
 
     </nz-card>
 </nz-ribbon>
-
 <ng-template #extraTemplate>
-    <button nz-button nzType="dashed"
-        class="d-flex align-items-center border-2">
-        <span nz-icon nzType="edit" nzSize="1" nzTheme="twotone"></span>
+    <button
+        nz-button
+        nzType="dashed"
+        class="d-flex align-items-center justify-content-center border-2">
+        <span nz-icon nzType="edit" nzTheme="twotone"></span>
     </button>
 </ng-template>
 <ng-template #ActiveTemplate>
-    <nz-badge nzStatus="processing" [nzColor]="'cyan'"
-        nzText="Active"></nz-badge>
+    <nz-badge
+        [nzStatus]="badgeStatus"
+        [nzColor]="badgeColor"
+        [nzText]="badgeText">
+    </nz-badge>
 </ng-template>
