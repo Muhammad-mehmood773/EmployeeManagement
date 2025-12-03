@@ -1,8 +1,8 @@
-<nz-ribbon class="shadow" nzText="Employee Details" nzColor="blue" nzPlacement="end">
+<nz-ribbon class="shadow" nzText="Employee Details" nzColor="#000080" nzPlacement="end">
   <nz-card [nzTitle]="extraTemplate" class="shadow">
-    <nz-descriptions nzBordered nzTitle="Employee Details" [nzColumn]="1" nzSize="small">
-      <nz-descriptions-item nzTitle="Phone">{{ employee.phone }}</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="Email"><a [href]="'mailto:' + employee.email">{{ employee.email }}</a></nz-descriptions-item>
+    <nz-descriptions nzBordered nzTitle="Employee Details" [nzColumn]="2" nzSize="small">
+      <nz-descriptions-item nzTitle="Phone" [nzSpan]="2">{{ employee.phone }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Email" [nzSpan]="2"><a [href]="'mailto:' + employee.email">{{ employee.email }}</a></nz-descriptions-item>
       <nz-descriptions-item nzTitle="Ext">{{ employee.ext }}</nz-descriptions-item>
       <nz-descriptions-item nzTitle="Location">{{ employee.location }}</nz-descriptions-item>
       <nz-descriptions-item nzTitle="Floor no">{{ employee.floorNo }}</nz-descriptions-item>

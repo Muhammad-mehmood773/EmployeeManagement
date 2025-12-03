@@ -1,4 +1,4 @@
-<nz-ribbon class="shadow" nzText="Employee Personal Info" nzColor="blue"
+<nz-ribbon class="shadow" nzText="Employee Personal Info" nzColor="#000080"
     nzPlacement="end">
     <nz-card [nzTitle]="extraTemplate" class="shadow">
         <nz-descriptions
@@ -12,11 +12,11 @@
                 {{ employee.dob }}
             </nz-descriptions-item>
 
-            <nz-descriptions-item nzTitle="CNIC">
+            <nz-descriptions-item nzTitle="CNIC" [nzSpan]="2">
                 {{ employee.cnic }}
             </nz-descriptions-item>
 
-            <nz-descriptions-item nzTitle="Exp Date">
+            <nz-descriptions-item nzTitle="Exp Date" [nzSpan]="2">
                 {{ employee.cnicExpDate }}
             </nz-descriptions-item>
 

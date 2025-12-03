@@ -33,6 +33,7 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 
 export const SHARED_IMPORTS = [
   // Form controls
@@ -43,6 +44,7 @@ export const SHARED_IMPORTS = [
   NzSwitchModule,
   FormsModule,
   NzFormModule,
+  NzTimelineModule,
 
   // Layout & display
   NzGridModule,

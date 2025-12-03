@@ -1,0 +1,45 @@
+<nz-ribbon class="shadow" nzText="Bank Details" nzColor="#5C4033" nzPlacement="start">
+
+  <nz-collapse nzBordered="true"   [nzExpandIconPosition]="'end'" nzOpenedIcon="minus-circle" nzClosedIcon="plus-circle">
+    <nz-collapse-panel nzActive nzHeader="Bank Details" nzTabScrollList="true">
+
+      <nz-card class="shadow" nzTitle="Employee Bank Detail" [nzExtra]="extraTemplate">
+
+        @if (bankDetails) {
+          <nz-descriptions [nzColumn]="2" nzBordered nzSize="small">
+            <nz-descriptions-item nzTitle="Account Name" nzSpan="2">
+              {{ bankDetails.accountName }}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Account Number">
+              {{ bankDetails.accountNumber }}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Bank Name">
+              {{ bankDetails.bankName }}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="IFSC Code">
+              {{ bankDetails.ifscCode }}
+            </nz-descriptions-item>
+          </nz-descriptions>
+        } @else {
+          <nz-empty
+            nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+            nzNotFoundContent="No Bank Details added yet">
+          </nz-empty>
+        }
+
+      </nz-card>
+
+    </nz-collapse-panel>
+  </nz-collapse>
+
+</nz-ribbon>
+
+<ng-template #extraTemplate>
+  <button nz-button nzType="dashed"
+    class="d-flex align-items-center justify-content-center border-2">
+    <span nz-icon nzType="edit" nzTheme="twotone"></span>
+  </button>
+</ng-template>

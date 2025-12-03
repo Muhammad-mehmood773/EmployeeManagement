@@ -441,8 +441,20 @@ h4 {
   border-radius: 10px;
 }
 
+
+
+.ant-badge-status-text {
+    margin-left: 8px;
+    color: #ffffff !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+
+
 .ant-badge-status-processing {
     position: relative;
+    display: inline-flex;
+    align-items: center;
 }
 
 .ant-badge-status-dot {
@@ -450,19 +462,52 @@ h4 {
     height: 10px !important;
     vertical-align: middle;
     border-radius: 50%;
+    background: #1890ff !important;
+    position: relative;
+    z-index: 2;
 }
 
+/* Ripple Animation */
 .ant-badge-status-processing::after {
-    border: 3px solid transparent; 
+    content: "";
+    position: absolute;
+    top: 5px !important;
+    left: 5px !important;
+    width: 12px  !important;
+    height: 12px !important;
+    border: 3px solid #1890ff !important;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(3);
+    animation: pulseRipple 1.5s ease-out infinite !important;
+    opacity: 0.7;
+}
+
+/* Smooth Ripple */
+@keyframes pulseRipple {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+    60% {
+        transform: translate(-50%, -50%) scale(2.4);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+    }
 }
 
 
-.ant-badge-status-text {
-    margin-left: 8px;
-    color: #ffffff !important;
-    font-size: 13px;
-    font-weight: 600;
+
+
+
+.ant-ribbon {
+    box-shadow: 10px 14px 10px rgba(10, 10, 10, 0.15) !important;
 }
+
+
+
 
 .ant-descriptions-bordered .ant-descriptions-row {
     border: 1px solid #c9c5c5 !important;
@@ -481,4 +526,11 @@ h4 {
     color: cadetblue !important;
     font-weight: 600 !important;
 
+}
+
+
+.ant-collapse-borderless
+ {
+    background-color: #ffffff !important;
+    border: 0;
 }
