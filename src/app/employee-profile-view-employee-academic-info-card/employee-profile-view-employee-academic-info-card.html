@@ -1,0 +1,92 @@
+<nz-ribbon class="shadow" nzText="Employee Education Details" nzColor="#5C4033"
+  nzPlacement="start">
+
+  <nz-collapse nzBordered="true" [nzExpandIconPosition]="'end'"
+    nzOpenedIcon="minus-circle" nzClosedIcon="plus-circle">
+
+    <nz-collapse-panel nzActive nzHeader="Employee Education">
+
+         <nz-card nzTitle="All Employee Academic" class="shadow "  [nzExtra]="extraTemplate">
+            @if (tableData.length) {
+            <nz-table nzShowPagination="false" nzSize="small" #basicTable
+                [nzData]="tableData"
+                [nzBordered]="false">
+                <thead>
+                    <tr>
+                        <th>Institution</th>
+                        <th>Degree</th>
+                        <th>Field of Study</th>
+                        <th>Start Date</th>
+                        <th>Start Year</th>
+                        <th>Grade / %</th>
+                        <th>Documents</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (item of tableData; track $index) {
+                    <tr>
+                        <td>{{ item.institutionName }}</td>
+                        <td>{{ item.degree }}</td>
+                        <td>{{ item.fieldOfStudy }}</td>
+                        <td>{{ item.startDate | date: 'MMM d, yyyy' }}</td>
+                        <td>{{ item.startYear }}</td>
+                        <td>{{ item.gradeOrPercentage || '-' }}</td>
+
+                        <!-- Documents Column -->
+                        <td>
+                            @if (item.document.length) {
+
+                            <button nz-button nz-dropdown nzTrigger="click"
+                                [nzDropdownMenu]="fileMenu" nzArrow>
+                                {{ item.document.length }} Attachment(s)
+                                <i nz-icon nzType="down"></i>
+                            </button>
+
+                            <nz-dropdown-menu #fileMenu="nzDropdownMenu">
+                                <ul nz-menu>
+                                    @for (f of item.document; track f.uid) {
+                                    <li nz-menu-item
+                                        (click)="downloadFile(f)"
+                                        class="d-flex align-items-center justify-content-between">
+                                        <i nz-icon nzType="file"
+                                            nzTheme="twotone"
+                                            class="fs-6 me-1"></i>
+                                        {{ f.name }}
+                                        <i nz-icon nzType="download"></i>
+                                    </li>
+                                    }
+                                </ul>
+                            </nz-dropdown-menu>
+
+                            } @else {
+                            <span>No File</span>
+                            }
+                        </td>
+
+                    </tr>
+                    }
+                </tbody>
+
+            </nz-table>
+
+            } @else {
+            <nz-empty
+                nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                nzNotFoundContent="No Academic Records added yet">
+            </nz-empty>
+            }
+        </nz-card>
+
+    </nz-collapse-panel>
+
+  </nz-collapse>
+
+</nz-ribbon>
+
+<ng-template #extraTemplate>
+  <button nz-button nzType="dashed"
+    class="d-flex align-items-center justify-content-center border-2">
+    <span nz-icon nzType="edit" nzTheme="twotone"></span>
+  </button>
+</ng-template>

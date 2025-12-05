@@ -1,47 +1,49 @@
-<nz-ribbon class="shadow" nzText="Family Information Details" nzColor="#5C4033" nzPlacement="start">
+<nz-ribbon class="shadow" nzText="Family Information Details" nzColor="#5C4033"
+  nzPlacement="start">
 
-  <nz-collapse nzBordered="true" [nzExpandIconPosition]="'end'" nzOpenedIcon="minus-circle" nzClosedIcon="plus-circle">
+  <nz-collapse nzBordered="true" [nzExpandIconPosition]="'end'"
+    nzOpenedIcon="minus-circle" nzClosedIcon="plus-circle">
 
     <nz-collapse-panel nzActive nzHeader="Family Members">
 
-      <nz-card class="shadow" nzTitle="Family Information" [nzExtra]="extraTemplate">
+      <nz-card class="shadow" nzTitle="Family Information"
+        [nzExtra]="extraTemplate">
 
         @if (familyList.length > 0) {
 
-          @for (f of familyList; track f.name) {
+        @for (f of familyList; track f.name) {
 
-            <nz-descriptions nzBordered nzSize="small" [nzColumn]="5" class="mb-3">
+        <nz-descriptions [nzTitle]="f.relationship" nzBordered nzSize="small" [nzColumn]="5" class="mb-3">
 
-              <nz-descriptions-item nzTitle="Name">
-                {{ f.name }}
-              </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Name">
+            {{ f.name }}
+          </nz-descriptions-item>
 
-              <nz-descriptions-item nzTitle="Relationship">
-                {{ f.relationship }}
-              </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Relationship">
+            {{ f.relationship }}
+          </nz-descriptions-item>
 
-              <nz-descriptions-item nzTitle="Date of birth">
-                {{ f.dateOfBirth }}
-              </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Date of birth">
+            {{ f.dateOfBirth }}
+          </nz-descriptions-item>
 
-              <nz-descriptions-item nzTitle="Phone">
-                {{ f.phone }}
-              </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Phone">
+            {{ f.phone }}
+          </nz-descriptions-item>
 
-              <nz-descriptions-item nzTitle="ID Card">
-                {{ f.idCard }}
-              </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="ID Card">
+            {{ f.idCard }}
+          </nz-descriptions-item>
 
-            </nz-descriptions>
+        </nz-descriptions>
 
-          }
+        }
 
         } @else {
 
-          <nz-empty
-            nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-            nzNotFoundContent="No Family Details Added"
-          ></nz-empty>
+        <nz-empty
+          nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          nzNotFoundContent="No Family Details Added"></nz-empty>
 
         }
 
@@ -53,9 +55,9 @@
 
 </nz-ribbon>
 
-
 <ng-template #extraTemplate>
-  <button nz-button nzType="dashed" class="d-flex align-items-center justify-content-center border-2">
+  <button nz-button nzType="dashed"
+    class="d-flex align-items-center justify-content-center border-2">
     <span nz-icon nzType="edit" nzTheme="twotone"></span>
   </button>
 </ng-template>
