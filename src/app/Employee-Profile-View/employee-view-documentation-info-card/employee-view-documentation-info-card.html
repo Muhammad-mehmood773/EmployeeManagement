@@ -1,0 +1,89 @@
+<nz-ribbon class="shadow" nzText="Employee Documentation Details" nzColor="#5C4033"
+    nzPlacement="start">
+
+    <nz-collapse nzBordered="true" [nzExpandIconPosition]="'end'"
+        nzOpenedIcon="minus-circle" nzClosedIcon="plus-circle">
+
+        <nz-collapse-panel nzActive nzHeader="Documentation">
+            <nz-card nzTitle="Employee Documentation" class="shadow "
+                [nzExtra]="extraTemplate">
+
+                <nz-table nzShowPagination="false" nzSize="small"
+                    [nzData]="documentationTableData"
+                    [nzBordered]="false">
+
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Employee Type</th>
+                            <th>Uploaded On</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Documents</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @for (item of documentationTableData; track $index) {
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.employeeType }}</td>
+                            <td>{{ item.uploadedOn | date: 'MMM d, yyyy' }}</td>
+                           <td class="text-center">
+                    <nz-tag class="emp-status" [nzColor]="getStatusStyle(item.status).bg" [ngStyle]="{
+                                                'color': getStatusStyle(item.status).color,
+                                                'font-weight': '600'
+                                            }">
+                        {{ item.status }}
+                    </nz-tag>
+
+                </td>
+
+                            <td>
+                                @if (item.documents.length) {
+
+                                <button nz-button nz-dropdown nzTrigger="click"
+                                    [nzDropdownMenu]="docMenu" nzArrow>
+                                    {{ item.documents.length }} Attachment(s)
+                                    <i nz-icon nzType="down"></i>
+                                </button>
+
+                                <nz-dropdown-menu #docMenu="nzDropdownMenu">
+                                    <ul nz-menu>
+                                        @for (file of item.documents; track
+                                        file.uid) {
+                                        <li nz-menu-item
+                                            (click)="downloadFile(file)"
+                                            class="d-flex align-items-center justify-content-between">
+                                            <i nz-icon nzType="file"
+                                                nzTheme="twotone"
+                                                class="fs-6 me-1"></i>
+                                            {{ file.name }}
+                                            <i nz-icon nzType="download"></i>
+                                        </li>
+                                        }
+                                    </ul>
+                                </nz-dropdown-menu>
+
+                                } @else {
+                                <span>No File</span>
+                                }
+                            </td>
+
+                        </tr>
+                        }
+                    </tbody>
+                </nz-table>
+
+            </nz-card>
+        </nz-collapse-panel>
+
+    </nz-collapse>
+
+</nz-ribbon>
+
+<ng-template #extraTemplate>
+    <button nz-button nzType="dashed"
+        class="d-flex align-items-center justify-content-center border-2">
+        <span nz-icon nzType="edit" nzTheme="twotone"></span>
+    </button>
+</ng-template>

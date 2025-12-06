@@ -11,10 +11,11 @@ import { AddFamilyMembers } from "../../Employee-Management/add-family-members/a
 import { EmployeeProfileViewEmployeeAcademicInfoCard } from '../employee-profile-view-employee-academic-info-card/employee-profile-view-employee-academic-info-card';
 import { EmployeeViewWorkExperienceInfoCard } from "../employee-view-work-experience-info-card/employee-view-work-experience-info-card";
 import { EmployeeViewSkillsInfoCard } from "../employee-view-skills-info-card/employee-view-skills-info-card";
+import { EmployeeViewDocumentationInfoCard } from "../employee-view-documentation-info-card/employee-view-documentation-info-card";
 
 @Component({
   selector: 'app-employee-profile-view-layout',
-  imports: [SHARED_IMPORTS, EmployeeProfileViewCard, CommonModule, EmployeeProfileViewDetailCard, EmployeeProfileViewPersonalInfoCard, EmployeeProfileViewContactInfoCard, EmployeeProfileViewBankDetailsInfoCard, EmployeeProfileViewFamilyInfoCard, EmployeeProfileViewEmployeeAcademicInfoCard, EmployeeViewWorkExperienceInfoCard, EmployeeViewSkillsInfoCard],
+  imports: [SHARED_IMPORTS, EmployeeProfileViewCard, CommonModule, EmployeeProfileViewDetailCard, EmployeeProfileViewPersonalInfoCard, EmployeeProfileViewContactInfoCard, EmployeeProfileViewBankDetailsInfoCard, EmployeeProfileViewFamilyInfoCard, EmployeeProfileViewEmployeeAcademicInfoCard, EmployeeViewWorkExperienceInfoCard, EmployeeViewSkillsInfoCard, EmployeeViewDocumentationInfoCard],
   templateUrl: './employee-profile-view-layout.html',
   styleUrl: './employee-profile-view-layout.css',
 })
