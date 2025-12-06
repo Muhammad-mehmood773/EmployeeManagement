@@ -1,0 +1,76 @@
+<nz-ribbon class="shadow" nzText="Employee Skills Details" nzColor="#5C4033"
+  nzPlacement="start">
+
+  <nz-collapse nzBordered="true" [nzExpandIconPosition]="'end'"
+    nzOpenedIcon="minus-circle" nzClosedIcon="plus-circle">
+
+    <nz-collapse-panel nzActive nzHeader="Skills">
+ <nz-card nzTitle="Employee Skills" class="shadow "  [nzExtra]="extraTemplate">
+<nz-table nzShowPagination="false" nzSize="small"
+  [nzData]="skillsTableData"
+  [nzBordered]="false">
+
+  <thead>
+    <tr>
+      <th>Skill Name</th>
+      <th>Proficiency</th>
+      <th>Years of Experience</th>
+      <th>Certification</th>
+      <th>Documents</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (item of skillsTableData; track $index) {
+    <tr>
+      <td>{{ item.skillName }}</td>
+      <td>{{ item.proficiency }}</td>
+      <td>{{ item.yearsOfExperience }} Year(s)</td>
+      <td>{{ item.certification }}</td>
+
+      <td>
+        @if (item.documents.length) {
+
+          <button nz-button nz-dropdown nzTrigger="click"
+            [nzDropdownMenu]="docMenu" nzArrow>
+            {{ item.documents.length }} Attachment(s)
+            <i nz-icon nzType="down"></i>
+          </button>
+
+          <nz-dropdown-menu #docMenu="nzDropdownMenu">
+            <ul nz-menu>
+              @for (file of item.documents; track file.uid) {
+              <li nz-menu-item
+                  (click)="downloadFile(file)"
+                  class="d-flex align-items-center justify-content-between">
+                <i nz-icon nzType="file" nzTheme="twotone" class="fs-6 me-1"></i>
+                {{ file.name }}
+                <i nz-icon nzType="download"></i>
+              </li>
+              }
+            </ul>
+          </nz-dropdown-menu>
+
+        } @else {
+          <span>No File</span>
+        }
+      </td>
+
+    </tr>
+    }
+  </tbody>
+</nz-table>
+
+</nz-card>
+    </nz-collapse-panel>
+
+  </nz-collapse>
+
+</nz-ribbon>
+
+<ng-template #extraTemplate>
+  <button nz-button nzType="dashed"
+    class="d-flex align-items-center justify-content-center border-2">
+    <span nz-icon nzType="edit" nzTheme="twotone"></span>
+  </button>
+</ng-template>

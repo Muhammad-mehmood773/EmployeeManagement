@@ -8,11 +8,13 @@ import { EmployeeProfileViewContactInfoCard } from "../employee-profile-view-con
 import { EmployeeProfileViewBankDetailsInfoCard } from "../employee-profile-view-bank-details-info-card/employee-profile-view-bank-details-info-card";
 import { EmployeeProfileViewFamilyInfoCard } from "../employee-profile-view-family-info-card/employee-profile-view-family-info-card";
 import { AddFamilyMembers } from "../../Employee-Management/add-family-members/add-family-members";
-import { EmployeeProfileViewEmployeeAcademicInfoCard } from "../../employee-profile-view-employee-academic-info-card/employee-profile-view-employee-academic-info-card";
+import { EmployeeProfileViewEmployeeAcademicInfoCard } from '../employee-profile-view-employee-academic-info-card/employee-profile-view-employee-academic-info-card';
+import { EmployeeViewWorkExperienceInfoCard } from "../employee-view-work-experience-info-card/employee-view-work-experience-info-card";
+import { EmployeeViewSkillsInfoCard } from "../employee-view-skills-info-card/employee-view-skills-info-card";
 
 @Component({
   selector: 'app-employee-profile-view-layout',
-  imports: [SHARED_IMPORTS, EmployeeProfileViewCard, CommonModule, EmployeeProfileViewDetailCard, EmployeeProfileViewPersonalInfoCard, EmployeeProfileViewContactInfoCard, EmployeeProfileViewBankDetailsInfoCard, EmployeeProfileViewFamilyInfoCard, AddFamilyMembers, EmployeeProfileViewEmployeeAcademicInfoCard],
+  imports: [SHARED_IMPORTS, EmployeeProfileViewCard, CommonModule, EmployeeProfileViewDetailCard, EmployeeProfileViewPersonalInfoCard, EmployeeProfileViewContactInfoCard, EmployeeProfileViewBankDetailsInfoCard, EmployeeProfileViewFamilyInfoCard, EmployeeProfileViewEmployeeAcademicInfoCard, EmployeeViewWorkExperienceInfoCard, EmployeeViewSkillsInfoCard],
   templateUrl: './employee-profile-view-layout.html',
   styleUrl: './employee-profile-view-layout.css',
 })

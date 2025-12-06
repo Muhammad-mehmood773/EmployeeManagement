@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { SHARED_IMPORTS } from '../shared/theme/ng-zorro-imports';
 import { CommonModule, DatePipe } from '@angular/common';
-import { UploadedFile } from '../Employee-Management/emp-academic/emp-academic';
+import { UploadedFile } from '../../Employee-Management/emp-academic/emp-academic';
+import { SHARED_IMPORTS } from '../../shared/theme/ng-zorro-imports';
 export interface EmployeeAcademicInfo {
   institutionName: string;
   degree: string;

@@ -1,0 +1,80 @@
+<nz-ribbon class="shadow" nzText="Employee Work Experience Details" nzColor="#5C4033"
+  nzPlacement="start">
+
+  <nz-collapse nzBordered="true" [nzExpandIconPosition]="'end'"
+    nzOpenedIcon="minus-circle" nzClosedIcon="plus-circle">
+
+    <nz-collapse-panel nzActive nzHeader="Work Experience">
+ <nz-card nzTitle="Employee Work Experience" class="shadow "  [nzExtra]="extraTemplate">
+
+       <nz-table nzShowPagination="false" nzSize="small" #basicTable
+  [nzData]="tableData"
+  [nzBordered]="false">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Designation</th>
+      <th>Location</th>
+      <th>Duration</th>
+      <th>Last Salary</th>
+      <th>Documents</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (item of tableData; track $index) {
+    <tr>
+      <td>{{ item.company }}</td>
+      <td>{{ item.designation }}</td>
+      <td>{{ item.location }}</td>
+      <td>{{ item.duration }}</td>
+      <td>{{ item.lastSalary }}</td>
+
+      <td>
+        @if (item.document.length) {
+
+        <button nz-button nz-dropdown nzTrigger="click"
+            [nzDropdownMenu]="fileMenu" nzArrow>
+            {{ item.document.length }} Attachment(s)
+            <i nz-icon nzType="down"></i>
+        </button>
+
+        <nz-dropdown-menu #fileMenu="nzDropdownMenu">
+            <ul nz-menu>
+                @for (f of item.document; track f.uid) {
+                <li nz-menu-item
+                    (click)="downloadFile(f)"
+                    class="d-flex align-items-center justify-content-between">
+                    <i nz-icon nzType="file"
+                        nzTheme="twotone"
+                        class="fs-6 me-1"></i>
+                    {{ f.name }}
+                    <i nz-icon nzType="download"></i>
+                </li>
+                }
+            </ul>
+        </nz-dropdown-menu>
+
+        } @else {
+        <span>No File</span>
+        }
+      </td>
+
+    </tr>
+    }
+  </tbody>
+</nz-table>
+</nz-card>
+
+    </nz-collapse-panel>
+
+  </nz-collapse>
+
+</nz-ribbon>
+
+<ng-template #extraTemplate>
+  <button nz-button nzType="dashed"
+    class="d-flex align-items-center justify-content-center border-2">
+    <span nz-icon nzType="edit" nzTheme="twotone"></span>
+  </button>
+</ng-template>
